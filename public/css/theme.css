@@ -439,20 +439,6 @@ li {
 	border-radius: 0;
 }
 
-#header .header-nav-top .dropdown-menu:before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	right: 5px;
-	width: 0;
-	height: 0;
-	border-left: 7px solid transparent;
-	border-right: 7px solid transparent;
-	border-bottom: 7px solid white;
-	-webkit-transform: translate3d(-7px, -6px, 0);
-	transform: translate3d(-7px, -6px, 0);
-}
 
 #header .header-nav-top .dropdown-menu.dropdow-menu-arrow-right:before {
 	right: auto;

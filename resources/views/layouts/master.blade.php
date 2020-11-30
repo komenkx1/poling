@@ -10,11 +10,11 @@
 
 		<meta name="keywords" content="Musma Teknik 2020" />
 		<meta name="description" content="Musma Teknik 2020">
-		<meta name="author" content="musma.net">
+		<meta name="SMFT" content="smft.unud.id/musma">
 
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
-		<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+		<link rel="shortcut icon" href="/img/apple-icon-precomposed.png" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="/img/apple-icon-precomposed.png">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
@@ -33,13 +33,11 @@
         <link rel="stylesheet" href="/vendor/magnific-popup/magnific-popup.min.css">
     
         
-        
-
+    
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="/css/theme.css">
 		<link rel="stylesheet" href="/css/theme-elements.css">
-		<link rel="stylesheet" href="/css/theme-blog.css">
-		<link rel="stylesheet" href="/css/theme-shop.css">
+
 
 		<!-- Current Page CSS -->
 		<link rel="stylesheet" href="/vendor/rs-plugin/css/settings.css">
@@ -114,6 +112,7 @@
 <script src="/js/views/view.contact.js"></script>
 
 <!-- Theme Custom -->
+<script src="/vendor/chart.js/dist/Chart.min.js"></script>
 <script src="/js/custom.js"></script>
 
 <!-- Theme Initialization Files -->

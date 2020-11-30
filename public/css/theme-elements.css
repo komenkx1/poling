@@ -1113,7 +1113,7 @@ Theme Version:	7.6.0
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	position: relative;
-	border-radius: 25px;
+	border-radius: 0px;
 }
 
 .progress-bar-tooltip {
@@ -9911,10 +9911,10 @@ html.boxed .nav-secondary.sticky-active {
 	clear: both;
 }
 
-.parallax:not(.page-header):not(.match-height):not([class*="section-height-"]) {
+/* .parallax:not(.page-header):not(.match-height):not([class*="section-height-"]) {
 	margin: 70px 0;
 	padding: 50px 0;
-}
+} */
 
 .parallax blockquote {
 	border: 0;

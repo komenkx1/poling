@@ -1773,8 +1773,7 @@ window.theme.fn = {
 	PluginParallax.defaults = {
 		speed: 1.5,
 		horizontalPosition: '50%',
-		offset: 0,
-		parallaxHeight: '180%'
+		offset: 0
 	};
 
 	PluginParallax.prototype = {
@@ -1812,56 +1811,22 @@ window.theme.fn = {
 				$window = $(window),
 				offset,
 				yPos,
-				bgpos,
-				background;
+				bgpos;
 
-			// Create Parallax Element
-			background = $('<div class="parallax-background"></div>');
+			self.options.wrapper.css('background-image', 'url(' + self.options.wrapper.data('image-src') + ')');
 
-			// Set Style for Parallax Element
-			background.css({
-				'background-image' : 'url(' + self.options.wrapper.data('image-src') + ')',
-				'background-size' : 'cover',
-				'position' : 'absolute',
-				'top' : 0,
-				'left' : 0,
-				'width' : '100%',
-				'height' : self.options.parallaxHeight
-			});
-
-			// Add Parallax Element on DOM
-			self.options.wrapper.prepend(background);
-
-			// Set Overlfow Hidden and Position Relative to Parallax Wrapper
-			self.options.wrapper.css({
-				'position' : 'relative',
-				'overflow' : 'hidden'
-			});
-
-			// Parallax Effect on Scroll & Resize
-			var parallaxEffectOnScrolResize = function() {
-				$window.on('scroll resize', function() {
-					offset  = self.options.wrapper.offset();
-					yPos    = -($window.scrollTop() - (offset.top - 100)) / ((self.options.speed + 2 ));
-					plxPos  = (yPos < 0) ? Math.abs(yPos) : -Math.abs(yPos);
-					background.css({
-						'transform' : 'translate3d(0, '+ ( (plxPos - 50) + (self.options.offset) ) +'px, 0)',
-						'background-position-x' : self.options.horizontalPosition
-					});
-				});
-
-				$window.trigger('scroll');
+			if (typeof(Modernizr.touch) == 'undefined') {
+				return this;
 			}
 
-			if (!$.browser.mobile) {
-				parallaxEffectOnScrolResize();
-			} else {
-				if( self.options.enableOnMobile == true ) {
-					parallaxEffectOnScrolResize();
-				} else {
-					self.options.wrapper.addClass('parallax-disabled');
-				}
-			}
+			$window.on('scroll resize', function() {
+				offset = self.options.wrapper.offset();
+				yPos = -($window.scrollTop() - offset.top) / self.options.speed + (self.options.offset);
+				bgpos = self.options.horizontalPosition + ' ' + yPos + 'px';
+				self.options.wrapper.css('background-position', bgpos);
+			});
+
+			$window.trigger('scroll');
 
 			return this;
 		}
