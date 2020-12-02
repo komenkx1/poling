@@ -1,4 +1,4 @@
-@extends('layouts/master')
+@extends('layouts/master',["title"=>"Musma Teknik 2020"])
 @section('content')
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -43,7 +43,7 @@
 			<div class="modal-body">
 				<div class="feature-box feature-box-style-2">
 					<div class="feature-box-icon">
-						<i class="icons icon-support "></i>
+						<i class="icons icon-list "></i>
 					</div>
 					<div class="feature-box-info">
 						<h4 class="font-weight-bold  text-4 mb-2">VISI</h4>
@@ -55,7 +55,7 @@
 				</div>
 				<div class="feature-box feature-box-style-2">
 					<div class="feature-box-icon">
-						<i class="icons icon-support "></i>
+						<i class="icons icon-plus "></i>
 					</div>
 					<div class="feature-box-info">
 						<h4 class="font-weight-bold  text-4 mb-2">MISI</h4>
@@ -352,10 +352,10 @@
 				<div class="col-md-12 p-0">
 
 					<!-- Google Maps - Settings on footer -->
-					<div id="googlemaps" class="google-ma h-100 mb-0 p-0" style="min-height: 400px;">
+					<div id="googlemaps" class="google-ma h-100 mb-0 p-0" style="min-height: 500px;">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63114.03314524725!2d115.21000524619285!3d-8.631753311983303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd241ea9986cc09%3A0xefdc9ad9df39e8f4!2sSEKBER%20FT%20UNUD*21!5e0!3m2!1sid!2sid!4v1604911691204!5m2!1sid!2sid"
-							class="img-fluids" height="450" frameborder="0" style="border:0;width:100%"
+							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%"
 							allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 					</div>
 

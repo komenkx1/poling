@@ -969,8 +969,8 @@ a.list-group-item {
 .pager > .active > a,
 .pager > .active > span {
   color: white !important;
-  background-color: #0cc2aa !important;
-  border-color: #0cc2aa !important; }
+  background-color: #c20c0c !important;
+  border-color: #c20c0c !important; }
 
 .pagination > li {
   display: inline;
@@ -994,7 +994,9 @@ a.list-group-item {
     color: #014c8c;
     background-color: #eceeef;
     border-color: #ddd; }
-
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td.dtr-control::before, table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th.dtr-control::before {
+      background-color: #d80249!important;
+  }
 .pager {
   padding-left: 0;
   margin-top: 1rem;
@@ -1622,8 +1624,7 @@ body {
   bottom: 0;
   z-index: 1;
   margin: inherit; }
-  .app-footer:not(.hide) ~ .app-body {
-    padding-bottom: 3.125rem; }
+
 
 .app-fixed {
   overflow: hidden; }
@@ -1773,7 +1774,7 @@ body {
   padding-right: 1rem; }
   .list-left + .list-body {
     margin-left: 56px; }
-
+ 
 .list-body h3 {
   font-size: 16px;
   margin: 0 0 3px 0;

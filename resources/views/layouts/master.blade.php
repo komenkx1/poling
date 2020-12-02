@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
-		<title>Musma Teknik 2020</title>	
+		<title>{{$title ?? ''}}</title>	
 
 		<meta name="keywords" content="Musma Teknik 2020" />
 		<meta name="description" content="Musma Teknik 2020">

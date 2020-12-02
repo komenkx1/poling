@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>dd</title>
-  <meta name="description" content="Admins, Dashboard, Bootstrap, Bootstrap 4, Angular, AngularJS" />
+  <title>{{$title ?? ''}}</title>
+  <meta name="Admin Musma" content="Admin" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -11,7 +11,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
   <link rel="apple-touch-icon" href="/../assets/images/logo.png">
-  <meta name="apple-mobile-web-app-title" content="Flatkit">
+  <meta name="apple-mobile-web-app-title" content="AdminMusma">
   <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="shortcut icon" sizes="196x196" href="/../assets/images/logo.png">
@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="/../assets/glyphicons/glyphicons.css" type="text/css" />
   <link rel="stylesheet" href="/../assets/font-awesome/css/font-awesome.min.css" type="text/css" />
   <link rel="stylesheet" href="/../assets/material-design-icons/material-design-icons.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css ">
 
   <link rel="stylesheet" href="/../assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
   <!-- build:css ../assets/styles/app.min.css -->
@@ -62,26 +65,51 @@
   <script src="/../libs/jquery/underscore/underscore-min.js"></script>
   <script src="/../libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
   <script src="/../libs/jquery/PACE/pace.min.js"></script>
-
   <script src="/html/scripts/config.lazyload.js"></script>
-
-  <script src="/html/scripts/palette.js"></script>
-  <script src="/html/scripts/ui-load.js"></script>
+  <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>  
+  <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
   <script src="/html/scripts/ui-jp.js"></script>
   <script src="/html/scripts/ui-include.js"></script>
   <script src="/html/scripts/ui-device.js"></script>
   <script src="/html/scripts/ui-form.js"></script>
   <script src="/html/scripts/ui-nav.js"></script>
-  <script src="/html/scripts/ui-screenfull.js"></script>
   <script src="/html/scripts/ui-scroll-to.js"></script>
   <script src="/html/scripts/ui-toggle-class.js"></script>
-
+  <script src="/html/scripts/palette.js"></script>
+  <script src="/html/scripts/ui-load.js"></script>
+  <script src="/vendor/chart.js/dist/Chart.min.js"></script>
   <script src="/html/scripts/app.js"></script>
+  <script src="/js/custom.js"></script>
 
-  <!-- ajax -->
-  <script src="/../libs/jquery/jquery-pjax/jquery.pjax.js"></script>
-  <script src="/html/scripts/ajax.js"></script>
   
+    <script>
+    $(document).ready(function() {
+    $('#example').DataTable( {
+         initComplete: function() {
+        this.api().columns("4").every(function() {
+          var column = this;
+          var select = $('#selectfilter')
+            .appendTo($("#selectfilter"))
+            .on('change', function() {
+              var val = $.fn.dataTable.util.escapeRegex(
+                $(this).val()
+              );
+
+              column
+                .search(val ? '^' + val + '$' : '', true, false)
+                .draw();
+            });
+
+          column.data().unique().sort().each(function(d, j) {
+            select.append('<option value="' + d + '">' + d + '</option>')
+          });
+        });
+         }
+      } );
+} );
+</script>
 <!-- endbuild -->
 </body>
 </html>

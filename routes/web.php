@@ -24,10 +24,11 @@ use Illuminate\Support\Facades\Route;
     
 // });
 // Route::auth()
-Route::view("admin", 'admin/index');
+Route::get("admin", 'DashboardController@index');
+Route::view("admin/mahasiswa", 'admin/mahasiswa/index');
 // Route::get("/register", 'RegisterController@index');
 // Route::get('register', 'RegisterController@index')->name('search');
-Route::get('register', 'Auth\RegisterController@index')->name('register');
+Route::get('auth', 'Auth\RegisterController@index')->name('auth');
 Route::view('visi-misi', 'visi-misi');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('register/fetch', 'Auth\RegisterController@fetch')->name('autocomplete.fetch');

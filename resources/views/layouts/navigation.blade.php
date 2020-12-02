@@ -7,8 +7,8 @@
                 <div class="header-column">
                     <div class="header-row">
                         <div class="header-logo">
-                            <a href="index.html">
-                                <img alt="Porto" width="160" height="70" src="img/logo-musma.png">
+                            <a href="/">
+                                <img alt="Musma" width="160" height="70" src="img/logo-musma.png">
                                
                             </a>
                         </div>
@@ -28,17 +28,17 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a class="dropdown-item" href="index.html">
+                                                    <a class="dropdown-item" href="/">
                                                         Report
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="index.html">
+                                                    <a class="dropdown-item" href="/">
                                                         Akun
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="index.html">
+                                                    <a class="dropdown-item" href="/">
                                                         Logout
                                                     </a>
                                                 </li>

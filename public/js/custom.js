@@ -32,6 +32,12 @@
 	borderColor: 'rgba(54, 162, 235, 1)',
 	borderWidth: 1,
     data: [4, 3, 5, 22,5]
+  },{
+    label: "Paslon 3",
+	backgroundColor: 'rgba(14, 255, 108, 0.2)',
+	borderColor: 'rgba(54, 235, 65)',
+	borderWidth: 1,
+    data: [4, 3, 2, 93,5]
   }]
 };
 
