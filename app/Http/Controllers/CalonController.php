@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Calon;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 
 class CalonController extends Controller
@@ -15,7 +16,11 @@ class CalonController extends Controller
     public function index()
     {
         $calon = Calon::all();
-        return view('calon', ['calon' => $calon]);
+        $prodi = Calon::with('prodi')->get();
+        return view('admin/calon/index', [
+            'calon' => $calon,
+            'prodi' => $prodi
+        ]);
     }
 
     /**
@@ -25,7 +30,7 @@ class CalonController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/calon/create');
     }
 
     /**

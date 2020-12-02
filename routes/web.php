@@ -29,6 +29,11 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::auth();
 Route::get("admin", 'DashboardController@index');
+Route::get("admin/calon", 'CalonController@index');
+Route::get("admin/calon/create", 'CalonController@create');
+Route::post("admin/calon/store", 'CalonController@store');
+Route::get("admin/calon/edit/{calon:id}", 'CalonController@edit');
+Route::put("admin/calon/update", 'CalonController@update');
 Route::view("admin/mahasiswa", 'admin/mahasiswa/index');
 // Route::get("/register", 'RegisterController@index');
 // Route::get('register', 'RegisterController@index')->name('search');
@@ -40,7 +45,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::resource('calons', CalonController::class);
+// Route::resource('calons', CalonController::class);
 Route::resource('mahasiswas', MahasiswaController::class);
 Route::resource('prodis', ProdiController::class);
 Route::resource('suaras', SuaraController::class);

@@ -40,6 +40,16 @@
                     <span class="nav-text ">Mahasiswa</span>
                   </a>
                 </li>
+                <li class="@if($title == 'Calons') active @endif ">
+                  <a href="/calons">
+                    <span class="nav-icon ">
+                      <i class="fa fa-users">
+                        <span ui-include="'../assets/images/i_0.svg'"></span>
+                      </i>
+                    </span>
+                    <span class="nav-text ">Calon</span>
+                  </a>
+                </li>
             
               </ul>
           </nav>
