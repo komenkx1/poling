@@ -152,6 +152,7 @@
   <script src="/vendor/jquery.easing/jquery.easing.min.js"></script>
   <script src="/vendor/jquery.cookie/jquery.cookie.min.js"></script>
   <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
 
   <script>
     $(document).ready(function(){
