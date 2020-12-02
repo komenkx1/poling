@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCalonsTable extends Migration
+class CreateProdisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateCalonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('calons', function (Blueprint $table) {
+        Schema::create('prodis', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_prodi', 5);
+            $table->string('nama_prodi', 50);
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateCalonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('calons');
+        Schema::dropIfExists('prodis');
     }
 }

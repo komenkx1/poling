@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CalonController;
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\SuaraController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +40,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::resource('calons', CalonController::class);
+Route::resource('mahasiswas', MahasiswaController::class);
+Route::resource('prodis', ProdiController::class);
+Route::resource('suaras', SuaraController::class);
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
