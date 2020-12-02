@@ -10,8 +10,9 @@ class Calon extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'prodi_id',
-        'nama',
+        'nama_panggilan',
         'visi',
         'misi',
         'jenis_calon',
