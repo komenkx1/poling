@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Mahasiswa;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Register;
@@ -52,14 +53,14 @@ class RegisterController extends Controller
     {
         if ($request->get('query')) {
             $query = $request->get('query');
-            $data = Register::select("nim", "nama")
+            $data = Mahasiswa::select("nim", "nama")
                 ->where('nim', 'LIKE', "{$query}")
                 ->get();
             $output = '<span>Mahasiswa : </span> <ul class="ids" style="display:block;width:100%;background-color:#f0f0f0;padding:5px;border-radius:5px;margin-bottom:10px;">';
             foreach ($data as $row) {
                 $output .= '
-       <li class="p-2"><a href="#" class="text-danger">' . $row->nim . " - " . $row->nama . '</a></li>
-       ';
+                <li class="p-2"><a href="#" class="text-danger">' . $row->nim . " - " . $row->nama . '</a></li>
+                ';
             }
             $output .= '</ul>';
             echo $output;

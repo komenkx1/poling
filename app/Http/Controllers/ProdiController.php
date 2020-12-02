@@ -14,7 +14,8 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        //
+        $prodi = Prodi::all();
+        return view('prodi', ['prodi' => $prodi]);
     }
 
     /**
@@ -24,7 +25,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        //
+        return view('prodi_tambah');
     }
 
     /**

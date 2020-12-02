@@ -14,7 +14,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $mahasiswa = Mahasiswa::all();
+        return view('mahasiswa', ['mahasiswa' => $mahasiswa]);
     }
 
     /**
@@ -24,7 +25,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('mahasiswa_tambah');
     }
 
     /**
@@ -35,7 +36,27 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required',
+            'prodi_id' => 'required',
+            'visi' => 'required',
+            'misi' => 'required',
+            'jenis_calon' => 'required',
+            'photo_url' => 'required'
+        ]);
+
+        $mahasiswa = new Mahasiswa;
+
+        $mahasiswa->nama = $request->nama;
+        $mahasiswa->prodi_id = $request->prodi_id;
+        $mahasiswa->visi = $request->visi;
+        $mahasiswa->misi = $request->misi;
+        $mahasiswa->jenis_mahasiswa = $request->jenis_mahasiswa;
+        $mahasiswa->photo_url = $request->photo_url;
+
+        $mahasiswa->save();
+
+        return redirect('/mahasiswa');
     }
 
     /**
