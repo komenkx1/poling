@@ -15,14 +15,12 @@ class CreateMahasiswasTable extends Migration
     {
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('prodi_id');
-            $table->string('nim', 5);
-            $table->string('nama', 100);
+            $table->foreignId('user_id');
             $table->enum('status', ['ready', 'terdaftar', 'terverifikasi', 'voted'])->default('ready');
             $table->date('verified_at');
             $table->timestamps();
 
-            $table->foreign('prodi_id')->references('id')->on('prodis');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

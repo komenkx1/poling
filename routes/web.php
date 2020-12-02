@@ -40,10 +40,18 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/test', function () {
+    return substr(1905551028, 4, -3);
+});
+
 Route::resource('calons', CalonController::class);
-Route::resource('mahasiswas', MahasiswaController::class);
+Route::resource('mahasiswas', MahasiswaController::class)->except([
+    'create', 'store', 'destroy'
+]);;
 Route::resource('prodis', ProdiController::class);
-Route::resource('suaras', SuaraController::class);
+Route::resource('suaras', SuaraController::class)->except([
+    'create', 'edit', 'update'
+]);
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

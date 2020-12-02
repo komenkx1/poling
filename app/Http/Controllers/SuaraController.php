@@ -14,7 +14,8 @@ class SuaraController extends Controller
      */
     public function index()
     {
-        //
+        $suara = Suara::all();
+        return view('suara', ['suara' => $suara]);
     }
 
     /**
@@ -24,7 +25,7 @@ class SuaraController extends Controller
      */
     public function create()
     {
-        //
+        return view('mahasiswa_tambah');
     }
 
     /**

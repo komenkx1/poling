@@ -19,8 +19,8 @@ class Prodi extends Model
         return $this->hasMany('App\Models\Calon');
     }
 
-    public function mahasiswas()
+    public function users()
     {
-        return $this->hasMany('App\Models\Mahasiswa');
+        return $this->hasMany('App\Models\User');
     }
 }
