@@ -25,7 +25,7 @@ class SuaraController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa_tambah');
+        //
     }
 
     /**
@@ -70,7 +70,12 @@ class SuaraController extends Controller
      */
     public function update(Request $request, Suara $suara)
     {
-        //
+        $this->validate($request, [
+            'calon' => 'required',
+        ]);
+
+        $suara->calon_id = $request->calon;
+        $suara->save();
     }
 
     /**
@@ -81,6 +86,7 @@ class SuaraController extends Controller
      */
     public function destroy(Suara $suara)
     {
-        //
+        $suara->delete();
+        return redirect('/suara');
     }
 }
