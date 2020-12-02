@@ -45,27 +45,25 @@ class RegisterController extends Controller
 
     function index()
     {
-     return view('register2');
+        return view('register2');
     }
 
     function fetch(Request $request)
     {
-     if($request->get('query'))
-     {
-      $query = $request->get('query');
-      $data = Register::select("nim","nama")
-        ->where('nim', 'LIKE', "{$query}")
-        ->get();
-      $output = '<span>Mahasiswa : </span> <ul class="ids" style="display:block;width:100%;background-color:#f0f0f0;padding:5px;border-radius:5px;margin-bottom:10px;">';
-      foreach($data as $row)
-      {
-       $output .= '
-       <li class="p-2"><a href="#" class="text-danger">'.$row->nim." - ".$row->nama.'</a></li>
+        if ($request->get('query')) {
+            $query = $request->get('query');
+            $data = Register::select("nim", "nama")
+                ->where('nim', 'LIKE', "{$query}")
+                ->get();
+            $output = '<span>Mahasiswa : </span> <ul class="ids" style="display:block;width:100%;background-color:#f0f0f0;padding:5px;border-radius:5px;margin-bottom:10px;">';
+            foreach ($data as $row) {
+                $output .= '
+       <li class="p-2"><a href="#" class="text-danger">' . $row->nim . " - " . $row->nama . '</a></li>
        ';
-      }
-      $output .= '</ul>';
-      echo $output;
-     }
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
     }
     /**
      * Get a validator for an incoming registration request.
