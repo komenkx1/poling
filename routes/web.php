@@ -18,19 +18,19 @@ use Illuminate\Support\Facades\Route;
 //         \Mail::raw('Selamat Akun Telah Di Verifikasi', function ($message) {
 //             $message->to('nowytp@gmail.com');
 //             $message->subject('Pemberitahuan Verifikasi Musma');
-    
+
 //         });
 //     }
-    
+
 // });
-// Route::auth()
+Route::auth();
 Route::get("admin", 'DashboardController@index');
 Route::view("admin/mahasiswa", 'admin/mahasiswa/index');
 // Route::get("/register", 'RegisterController@index');
 // Route::get('register', 'RegisterController@index')->name('search');
-Route::get('auth', 'Auth\RegisterController@index')->name('auth');
+// Route::get('auth', 'Auth\RegisterController@index')->name('auth');
 Route::view('visi-misi', 'visi-misi');
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+// Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('register/fetch', 'Auth\RegisterController@fetch')->name('autocomplete.fetch');
 Route::get('/', function () {
     return view('index');
