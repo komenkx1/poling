@@ -56,7 +56,8 @@
         </div>
 
       </form>
-      <form action="#" method="post" class="sign-up-form" enctype="multipart/form-data" id="myForm1" autocomplete="off">
+      <form method="POST" action="{{ route('register') }}" class="sign-up-form" enctype="multipart/form-data"
+        id="myForm1" autocomplete="off">
         @csrf
         <h2 class="title">Sign Up</h2>
         <div class="row">
@@ -73,14 +74,15 @@
             <label>Email</label>
             <div class="pom-agile">
               <span class="fa fa-envelope-open"></span>
-              <input placeholder="Email" name="Email" type="email" required="">
+              <input placeholder="Email" name="email" type="email" required="">
             </div>
           </div>
           <div class="input-field col-md-6">
             <label>Password</label>
             <div class="pom-agile">
               <span class="fa fa-key"></span>
-              <input type="password" placeholder="Pasword" id="pwdId" class="form" pattern="^[0-9a-zA-Z]{2,30}$" required>
+              <input type="password" name="password" placeholder="Pasword" id="pwdId" class="form"
+                pattern="^[0-9a-zA-Z]{2,30}$" required>
               <div class="valid-feedback text-right">Valid</div>
               <div class="invalid-feedback  text-right">(2 to 30 long)</div>
             </div>
@@ -89,14 +91,13 @@
             <label>Confirm Password</label>
             <div class="pom-agile">
               <span class="fa fa-key"></span>
-              <input type="password" placeholder="Confirm Password" id="cPwdId" class="form myCpwdClass" pattern="^[0-9a-zA-Z]{2,30}$" required>
+              <input type="password" name="password_confirmation" placeholder="Confirm Password" id="cPwdId"
+                class="form myCpwdClass" pattern="^[0-9a-zA-Z]{2,30}$" required>
 
               <div id="cPwdValid" class="valid-feedback text-right">Passwords Match</div>
               <div id="cPwdInvalid" class="invalid-feedback  text-right">a to z only (2 to 6 long)</div>
             </div>
           </div>
-
-
 
           <div class="form-style-agile col-md-12 pb-2">
             <label>Scan KTM/KRM/UKT Ku</label>
