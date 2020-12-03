@@ -47,9 +47,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/logout', [MainController::class, 'logout']);
 
-    Route::get('/chart', [MainController::class, 'chart']);
-    Route::post('/vote', [MainController::class, 'vote']);
-
     // Route::resource('calons', CalonController::class);
     Route::resource('mahasiswas', MahasiswaController::class)->except([
         'create', 'store', 'destroy'
@@ -58,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('suaras', SuaraController::class)->except([
         'create', 'edit', 'update'
     ]);
-    
+
     Route::get("admin", 'DashboardController@index');
     Route::get("admin/calon", 'CalonController@index');
     Route::get("admin/calon/create", 'CalonController@create');

@@ -25,6 +25,8 @@
                                 class="header-nav-main header-nav-main-mobile-dark header-nav-main-square header-nav-main-dropdown-no-borders header-nav-main-effect-2 header-nav-main-sub-effect-1">
                                 <nav class="collapse">
                                     <ul class="nav nav-pills" id="mainNav">
+                                        @auth
+                                        {{-- logined --}}
                                         <li class="dropdown">
                                             <a class="dropdown-item dropdown-toggle d-lg-none border-all" href="#">
                                                 {{ Auth::user()->nim }}
@@ -48,6 +50,15 @@
 
                                             </ul>
                                         </li>
+                                        @endauth
+
+                                        @guest
+                                        <li>
+                                            <a data-hash class="dropdown-item active" href="{{ route('auth') }}">
+                                                Daftar
+                                            </a>
+                                        </li>
+                                        @endguest
                                         <li>
                                             <a data-hash class="dropdown-item active" href="#home">
                                                 Home
@@ -83,6 +94,8 @@
             <nav class="header-nav-top p-1 d-none d-lg-inline-flex">
                 <ul class="nav nav-pills">
 
+                    @auth
+                    {{-- logined --}}
                     <li class="nav-item dropdown nav-item-left-border">
                         <a class="nav-link" href="#" role="button" id="dropdownLanguage" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -95,6 +108,7 @@
                             <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                         </div>
                     </li>
+                    @endauth
                 </ul>
             </nav>
 
