@@ -27,7 +27,7 @@
                                     <ul class="nav nav-pills" id="mainNav">
                                         <li class="dropdown">
                                             <a class="dropdown-item dropdown-toggle d-lg-none border-all" href="#">
-                                                1905551010
+                                                {{ Auth::user()->nim }}
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li>
@@ -41,7 +41,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="/logout">
+                                                    <a class="dropdown-item" href="{{ route('logout') }}">
                                                         Logout
                                                     </a>
                                                 </li>
@@ -86,13 +86,13 @@
                     <li class="nav-item dropdown nav-item-left-border">
                         <a class="nav-link" href="#" role="button" id="dropdownLanguage" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            1905551010
+                            {{ Auth::user()->nim }}
                             <i class="fas fa-angle-down"></i>
                         </a>
                         <div class="dropdown-menu" style="background-color:#212529!important;">
                             <a class="dropdown-item" href="#">Report</a>
                             <a class="dropdown-item" href="#">Akun</a>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                         </div>
                     </li>
                 </ul>

@@ -48,4 +48,10 @@ class MainController extends Controller
 
         return json_encode($arr);
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('auth');
+    }
 }
