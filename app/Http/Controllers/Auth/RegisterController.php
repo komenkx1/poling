@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -100,19 +101,28 @@ class RegisterController extends Controller
         $user->prodi_id = $prodi->id;
         $user->password = Hash::make($request->password);
 
-        Mahasiswa::create([
-            'user_id' => $user->id,
-        ]);
+        $mahasiswa = new Mahasiswa();
+        $mahasiswa->user_id = $user->id;
 
         $slug = Str::slug($request->nim);
         if ($request->file('file_url')) {
             $gambar = $request->file('file_url');
             $urlgambar = $gambar->storeAs("img/mahasiswa", "{$slug}.{$gambar->extension()}");
-            $user->photo_url = $urlgambar;
+            $mahasiswa->file_url = $urlgambar;
         }
 
-        dd($prodi);
+        if (
+            $user->save() &&
+            $mahasiswa->save()
+        ) {
+            echo 'berhasil';
+            $credentials = $request->only('nim', 'password');
 
-        //$user->save();
+            if (Auth::attempt($credentials)) {
+                return redirect()->route('home');
+            }
+
+            echo 'tapi login gagal';
+        }
     }
 }
