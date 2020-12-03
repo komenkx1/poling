@@ -18,6 +18,7 @@ class CreateMahasiswasTable extends Migration
             $table->foreignId('user_id');
             $table->enum('status', ['ready', 'terdaftar', 'terverifikasi', 'voted'])->default('ready');
             $table->date('verified_at');
+            $table->string('file_url');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Register;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -93,15 +94,20 @@ class RegisterController extends Controller
         $kode_prodi = substr($data['nim'], 4, -3);
         $prodi = Prodi::where('kode_prodi', $kode_prodi)->first();
 
-        $user = User::create([
-            'prodi_id' => $prodi->id,
-            'nim' => $data['nim'],
-            'name' => $data['nama'],
-            'password' => Hash::make($data['password']),
-        ]);
+        //buat dapetin user dari nim yang di input
+        $user = User::where('nim', $data['nim'])->first();
+
+        $user->prodi_id = $prodi->id;
+        $user->password = Hash::make($data['password']);
+        $user->save();
 
         Mahasiswa::create([
             'user_id' => $user->id,
         ]);
+
+        if ($data->file('photo_url')) {
+            $photo = $data->file('photo_url');
+            $photo->storeAs("img/calon", "{$data['nim']}.{$photo->extension()}");
+        }
     }
 }

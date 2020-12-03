@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CalonController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\SuaraController;
 use Illuminate\Support\Facades\Auth;
@@ -46,8 +47,13 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/chart', [MainController::class, 'chart']);
+Route::post('/vote', [MainController::class, 'vote']);
+
 // Route::resource('calons', CalonController::class);
-Route::resource('mahasiswas', MahasiswaController::class);
+Route::resource('mahasiswas', MahasiswaController::class)->except([
+    'create', 'store', 'destroy'
+]);;
 Route::resource('prodis', ProdiController::class);
 Route::resource('suaras', SuaraController::class)->except([
     'create', 'edit', 'update'
