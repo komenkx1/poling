@@ -36,4 +36,16 @@ class MainController extends Controller
 
         return "Terima kasih telah memilih";
     }
+
+    public function chart()
+    {
+        $arr['smft'] = Suara::with(['calons' => function ($query) {
+            $query->where('jenis_calon', 'SMFT');
+        }])->get();
+        $arr['bpmft'] = Suara::with(['calons' => function ($query) {
+            $query->where('jenis_calon', 'BPMFT');
+        }])->get();
+
+        return json_encode($arr);
+    }
 }
