@@ -8,7 +8,7 @@
 <div class="padding">
     <div class="box">
       <div class="box-header">
-        <a href="calon/create" class="btn btn-success">Create</a>
+        <a href="/admin/calon/create" class="btn btn-success">Create</a>
         <small>List Mahasiswa</small>
         {{-- <div class="form-group">
             <select class="form-control" name="" id="selectfilter">
@@ -56,15 +56,14 @@
             </div>
           </div>
             <tr>
-                <td>{{$item->user_id}}</td>
                 <td>{{$item->nama_panggilan}}</td>
                 <td>{{$item->visi}}</td>
                 <td>{{$item->misi}}</td>
                 <td>{{$item->jenis_calon}}</td>
-                <td><img src="{{$item->takeimage}}" alt=""></td>
+                <td><img src="{{$item->takeimage}}" alt="avatar" style="width: 100px"></td>
                 <td>{{$item->created_at}}</td>
                 <td>{{$item->updated_at}}</td>
-                <td><a class="btn btn-primary" href="/admin/calon/edit/{{$item->id}}">Edit</a> | <a href="#myModal" class="trash btn btn-danger" data-id="{{$item->id}}" data-nama="{{$item->nama}}" role="button" data-toggle="modal">Hapus</a>
+                <td><a class="btn btn-primary" href="/admin/calon/edit/{{$item->id}}">Edit</a> | <a href="#myModal" class="trash btn btn-danger" data-id="{{$item->id}}" data-nama="{{$item->nama_panggilan}}" role="button" data-toggle="modal">Hapus</a>
                 
             </tr>
             @endforeach
