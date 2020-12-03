@@ -10,8 +10,9 @@ class Calon extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'prodi_id',
-        'nama',
+        'nama_panggilan',
         'visi',
         'misi',
         'jenis_calon',
@@ -26,5 +27,9 @@ class Calon extends Model
     public function suaras()
     {
         return $this->hasMany('App\Models\Suara');
+    }
+    public function getTakeImageAttribute()
+    {
+        return "/storage/". $this->photo_url;
     }
 }

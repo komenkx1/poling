@@ -21,11 +21,9 @@
         <table id="example"  class="table table-striped table-bordered dt-responsive nowrap">
           <thead>
             <tr>
-                <th>Nim</th>
-                <th>Nama</th>
+                <th>Nama Panggilan</th>
                 <th>Visi</th>
                 <th>Misi</th>
-                <th>Prodi</th>
                 <th>Jenis calon</th>
                 <th>Photo</th>
                 <th>Created At</th>
@@ -58,13 +56,12 @@
             </div>
           </div>
             <tr>
-                <td>{{$item->nim}}</td>
-                <td>{{$item->nama}}</td>
+                <td>{{$item->user_id}}</td>
+                <td>{{$item->nama_panggilan}}</td>
                 <td>{{$item->visi}}</td>
                 <td>{{$item->misi}}</td>
-                <td>{{$item->prodi->nama_prodi}}</td>
                 <td>{{$item->jenis_calon}}</td>
-                <td>{{$item->photo_url}}</td>
+                <td><img src="{{$item->takeimage}}" alt=""></td>
                 <td>{{$item->created_at}}</td>
                 <td>{{$item->updated_at}}</td>
                 <td><a class="btn btn-primary" href="/admin/calon/edit/{{$item->id}}">Edit</a> | <a href="#myModal" class="trash btn btn-danger" data-id="{{$item->id}}" data-nama="{{$item->nama}}" role="button" data-toggle="modal">Hapus</a>

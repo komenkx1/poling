@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Calon;
 use App\Models\Prodi;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class CalonController extends Controller
 {
@@ -42,28 +45,52 @@ class CalonController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama' => 'required',
-            'prodi_id' => 'required',
+            'nama_panggilan' => 'required',
             'visi' => 'required',
             'misi' => 'required',
             'jenis_calon' => 'required',
-            'photo_url' => 'required'
+            'photo_url' => 'required|file|max:2000'
         ]);
 
         $calon = new Calon;
 
-        $calon->nama = $request->nama;
-        $calon->prodi_id = $request->prodi_id;
+        $calon->user_id = 1;
+        $calon->nama_panggilan = $request->nama_panggilan;
         $calon->visi = $request->visi;
         $calon->misi = $request->misi;
         $calon->jenis_calon = $request->jenis_calon;
-        $calon->photo_url = $request->photo_url;
 
+        $slug = Str::slug($request->nama_panggilan);
+        if($request->file('photo_url')){
+            $gambar = $request->file('photo_url');
+            $urlgambar = $gambar->storeAs("img/calon", "{$slug}.{$gambar->extension()}");
+            $calon->photo_url = $urlgambar;
+        }else{
+            null;
+        }
+
+        // dd($calon);
         $calon->save();
 
-        return redirect('/calon');
+        // return redirect('/calon');
     }
-
+    function fetch(Request $request)
+    {
+        if ($request->get('query')) {
+            $query = $request->get('query');
+            $data = User::select("nim", "name")
+                ->where('nim', 'LIKE', "{$query}")
+                ->get();
+            $output = '<span>Mahasiswa : </span> <ul class="ids" style="display:block;width:100%;background-color:#f0f0f0;padding:5px;border-radius:5px;margin-bottom:10px;">';
+            foreach ($data as $row) {
+                $output .= '
+                <li class="p-2 d-block"><a href="#" class="text-danger">' . $row->nim . " - " . $row->name . '</a></li>
+                ';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
     /**
      * Display the specified resource.
      *
@@ -72,7 +99,7 @@ class CalonController extends Controller
      */
     public function show(Calon $calon)
     {
-        //
+        return view('calon_show', ['calon' => $calon]);
     }
 
     /**
@@ -83,7 +110,7 @@ class CalonController extends Controller
      */
     public function edit(Calon $calon)
     {
-        //
+        return view('calon_edit', ['calon' => $calon]);
     }
 
     /**
@@ -95,7 +122,31 @@ class CalonController extends Controller
      */
     public function update(Request $request, Calon $calon)
     {
-        //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'nama_panggilan' => 'required',
+            'visi' => 'required',
+            'misi' => 'required',
+            'jenis_calon' => 'required',
+            'photo_url' => 'required|file|max:2000'
+        ]);
+
+        $calon->user_id = $request->user_id;
+        $calon->nama_panggilan = $request->nama_panggilan;
+        $calon->visi = $request->visi;
+        $calon->misi = $request->misi;
+        $calon->jenis_calon = $request->jenis_calon;
+        $calon->photo_url = $request->photo_url;
+
+        $calon->save();
+
+        $slug = Str::slug($request->nama_panggilan);
+        if ($request->file('photo_url')) {
+            $photo = $request->file('photo_url');
+            $photo->storeAs("img/calon", "{$slug}.{$photo->extension()}");
+        }
+
+        return redirect('/calon');
     }
 
     /**
@@ -106,6 +157,7 @@ class CalonController extends Controller
      */
     public function destroy(Calon $calon)
     {
-        //
+        $calon->delete();
+        return redirect('/calon');
     }
 }

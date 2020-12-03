@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Mahasiswa;
+use App\Models\Prodi;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Register;
@@ -52,14 +54,14 @@ class RegisterController extends Controller
     {
         if ($request->get('query')) {
             $query = $request->get('query');
-            $data = Register::select("nim", "nama")
+            $data = User::select("nim", "name")
                 ->where('nim', 'LIKE', "{$query}")
                 ->get();
             $output = '<span>Mahasiswa : </span> <ul class="ids" style="display:block;width:100%;background-color:#f0f0f0;padding:5px;border-radius:5px;margin-bottom:10px;">';
             foreach ($data as $row) {
                 $output .= '
-       <li class="p-2"><a href="#" class="text-danger">' . $row->nim . " - " . $row->nama . '</a></li>
-       ';
+                <li class="p-2"><a href="#" class="text-danger">' . $row->nim . " - " . $row->name . '</a></li>
+                ';
             }
             $output .= '</ul>';
             echo $output;
@@ -88,10 +90,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+        $kode_prodi = substr($data['nim'], 4, -3);
+        $prodi = Prodi::where('kode_prodi', $kode_prodi)->first();
+
+        $user = User::create([
+            'prodi_id' => $prodi->id,
+            'nim' => $data['nim'],
+            'name' => $data['nama'],
             'password' => Hash::make($data['password']),
+        ]);
+
+        Mahasiswa::create([
+            'user_id' => $user->id,
         ]);
     }
 }

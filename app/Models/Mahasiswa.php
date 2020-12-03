@@ -10,17 +10,9 @@ class Mahasiswa extends Model
     use HasFactory;
 
     protected $fillable = [
-        'prodi_id',
-        'nim',
-        'nama',
         'status',
         'verified_at',
     ];
-
-    public function prodi()
-    {
-        return $this->belongsTo('App\Models\Prodi');
-    }
 
     public function suaras()
     {

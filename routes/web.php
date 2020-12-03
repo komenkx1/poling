@@ -37,10 +37,11 @@ Route::put("admin/calon/update", 'CalonController@update');
 Route::view("admin/mahasiswa", 'admin/mahasiswa/index');
 // Route::get("/register", 'RegisterController@index');
 // Route::get('register', 'RegisterController@index')->name('search');
-// Route::get('auth', 'Auth\RegisterController@index')->name('auth');
+Route::get('auth', 'Auth\RegisterController@index')->name('auth');
 Route::view('visi-misi', 'visi-misi');
 // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('register/fetch', 'Auth\RegisterController@fetch')->name('autocomplete.fetch');
+Route::post('calon/fetch', 'CalonController@fetch')->name('calon.fetch');
 Route::get('/', function () {
     return view('index');
 });
@@ -48,7 +49,9 @@ Route::get('/', function () {
 // Route::resource('calons', CalonController::class);
 Route::resource('mahasiswas', MahasiswaController::class);
 Route::resource('prodis', ProdiController::class);
-Route::resource('suaras', SuaraController::class);
+Route::resource('suaras', SuaraController::class)->except([
+    'create', 'edit', 'update'
+]);
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

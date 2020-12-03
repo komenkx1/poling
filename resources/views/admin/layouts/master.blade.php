@@ -128,6 +128,33 @@ $('#modalDelete').attr('action', '/admin/calon/delete/' + id);
   // instance, using default configuration.
   CKEDITOR.replace( 'editor1' );
 </script>
+<script>
+  $(document).ready(function(){
+    
+      $('#nim').keyup(function(){ 
+  var query = $(this).val();
+  if(query != '')
+  {
+   var _token = $('input[name="_token"]').val();
+   $.ajax({
+    url:"{{ route('calon.fetch') }}",
+    method:"POST",
+    data:{query:query, _token:_token},
+    success:function(data){
+     $('#nimList').fadeIn();  
+              $('#nimList').html(data);
+    }
+   });
+  }
+});
+
+$(document).on('click', 'li', function(){  
+  $('#nim').val($(this).text().replace(/[^0-9\.]/g, ''));  
+  $('#nimList').fadeOut();  
+});
+    
+    });
+</script>
 <!-- endbuild -->
 </body>
 </html>
