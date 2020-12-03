@@ -29,20 +29,13 @@ use Illuminate\Support\Facades\Route;
 
 // });
 Route::auth();
-Route::get("admin", 'DashboardController@index');
-Route::get("admin/calon", 'CalonController@index');
-Route::get("admin/calon/create", 'CalonController@create');
-Route::post("admin/calon/store", 'CalonController@store');
-Route::get("admin/calon/edit/{calon:id}", 'CalonController@edit');
-Route::put("admin/calon/update/{calon:id}", 'CalonController@update');
-Route::delete("admin/calon/delete/{calon:id}", 'CalonController@destroy');
-Route::view("admin/mahasiswa", 'admin/mahasiswa/index');
 // Route::get("/register", 'RegisterController@index');
 // Route::get('register', 'RegisterController@index')->name('search');
 Route::get('auth', 'Auth\RegisterController@index')->name('auth');
 Route::view('visi-misi', 'visi-misi');
 // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('register/fetch', 'Auth\RegisterController@fetch')->name('autocomplete.fetch');
+Route::post('register', 'Auth\RegisterController@create')->name('register.create');
 Route::post('calon/fetch', 'CalonController@fetch')->name('calon.fetch');
 
 
@@ -50,14 +43,31 @@ Route::get('/',     [MainController::class, 'index']);
 Route::get('/chart', [MainController::class, 'chart']);
 Route::post('/vote', [MainController::class, 'vote'])->name('vote');
 
-// Route::resource('calons', CalonController::class);
-Route::resource('mahasiswas', MahasiswaController::class)->except([
-    'create', 'store', 'destroy'
-]);;
-Route::resource('prodis', ProdiController::class);
-Route::resource('suaras', SuaraController::class)->except([
-    'create', 'edit', 'update'
-]);
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/logout', [MainController::class, 'logout']);
+
+    Route::get('/chart', [MainController::class, 'chart']);
+    Route::post('/vote', [MainController::class, 'vote']);
+
+    // Route::resource('calons', CalonController::class);
+    Route::resource('mahasiswas', MahasiswaController::class)->except([
+        'create', 'store', 'destroy'
+    ]);;
+    Route::resource('prodis', ProdiController::class);
+    Route::resource('suaras', SuaraController::class)->except([
+        'create', 'edit', 'update'
+    ]);
+    
+    Route::get("admin", 'DashboardController@index');
+    Route::get("admin/calon", 'CalonController@index');
+    Route::get("admin/calon/create", 'CalonController@create');
+    Route::post("admin/calon/store", 'CalonController@store');
+    Route::get("admin/calon/edit/{calon:id}", 'CalonController@edit');
+    Route::put("admin/calon/update/{calon:id}", 'CalonController@update');
+    Route::delete("admin/calon/delete/{calon:id}", 'CalonController@destroy');
+    Route::view("admin/mahasiswa", 'admin/mahasiswa/index');
+});
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
