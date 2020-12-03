@@ -7,12 +7,12 @@ $(document).ready(function () {
   var btnSubmitModal = $('#btn-modal-submit');
   var btnSubmit = $('#btn-submit');
   var btnSee = $('#btn-See');
-  btnSee.hide();
+  // btnSee.hide();
 
   btnSubmitModal.click(function () {
-    btnSubmit.fadeOut();
-    btnSee.fadeIn();
-    isSubmitted = true;
+    // btnSubmit.fadeOut();
+    // btnSee.fadeIn();
+    // isSubmitted = true;
   });
 });
 

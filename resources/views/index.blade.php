@@ -1,7 +1,7 @@
 @extends('layouts/master',["title"=>"Musma Teknik 2020"])
 @section('content')
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="hasil-sementara" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -30,48 +30,6 @@
 	</div>
 </div>
 
-<div class="modal fade" id="modalVisiMisi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Visi Misi</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div class="feature-box feature-box-style-2">
-					<div class="feature-box-icon">
-						<i class="icons icon-list "></i>
-					</div>
-					<div class="feature-box-info">
-						<h4 class="font-weight-bold  text-4 mb-2">VISI</h4>
-						<p class=" opacity-7 text-justify">Kegiatan Musyawarah bersama adalah
-							kegiatan untuk menetapkan peraturan Anggaran Dasar, Anggaran Rumah Tangga, Program Kerja
-							Organisasi dan Mengevaluasi keberadaan SMFT dan BPMFT UNUD untuk periode 1 tahun kedepan
-						</p>
-					</div>
-				</div>
-				<div class="feature-box feature-box-style-2">
-					<div class="feature-box-icon">
-						<i class="icons icon-plus "></i>
-					</div>
-					<div class="feature-box-info">
-						<h4 class="font-weight-bold  text-4 mb-2">MISI</h4>
-						<p class=" opacity-7 text-justify">Kegiatan Musyawarah bersama adalah
-							kegiatan untuk menetapkan peraturan Anggaran Dasar, Anggaran Rumah Tangga, Program Kerja
-							Organisasi dan Mengevaluasi keberadaan SMFT dan BPMFT UNUD untuk periode 1 tahun kedepan
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 <div role="main" class="main" id="home">
 	<section class="slider-container rev_slider_wrapper" style="height: 100vh;">
@@ -219,7 +177,7 @@
 		</div>
 		<div class="row pb-5 mb-5">
 
-			<form action="" class="radio-buttons" method="POST">
+			<form action="/vote" class="radio-buttons" id="#create-form" method="POST">
 				@csrf
 				<div class="modal fade" id="exampleModalalert" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -236,8 +194,8 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" id="btn-modal-submit" class="btn btn-primary" data-dismiss="modal"
-									data-toggle="modal" data-target="#exampleModal">Save changes</button>
+								<button class="btn btn-primary" type="button" id="btn-submit-modal" data-toggle="modal"
+						data-target="#exampleModalalert">Submit</button>
 							</div>
 						</div>
 					</div>
@@ -246,28 +204,13 @@
 					<div class="judul-pol">
 						<h2>SMFT</h2>
 					</div>
-					<label class="custom-radio">
-						<input type="radio" required name="radio" />
-						<span class="radio-btn"
-							style=" background: url(img/wahyu.jpg);background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
-								class="lar la-check-circle"></i>
-							<div class="poll-icon">
-								{{-- <img src="img/index.png" class="img-fluids"> --}}
-							</div>
-						</span>
-						<span>
-							<div class="button p-0 m-0">
-								<p class="font-weight-bold p-0 m-0">IR.Soekarno</p>
-								<button class="btn btn-primary" type="button" id="btn-visiMisi" data-toggle="modal"
-									data-target="#modalVisiMisi">Lihat Visi Misi</button>
-							</div>
-						</span>
-					</label>
+					@foreach ($smft as $item)
+				
 
 					<label class="custom-radio">
-						<input type="radio" required name="radio" />
+					<input type="radio" required id="smft" name="smft" value="{{$item->id}}"/>
 						<span class="radio-btn"
-							style=" background: url(img/wahyu.jpg);background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
+							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
 								class="lar la-check-circle"></i>
 							<div class="poll-icon">
 								{{-- <img src="img/index.png" class="img-fluids"> --}}
@@ -275,39 +218,25 @@
 						</span>
 						<span>
 							<div class="button p-0 m-0">
-								<p class="font-weight-bold p-0 m-0">IR.Soekarno</p>
+								<p class="font-weight-bold p-0 m-0">{{$item->nama_panggilan}}</p>
 								<button class="btn btn-primary" type="button" id="btn-visiMisi" data-toggle="modal"
 									data-target="#modalVisiMisi">Lihat Visi Misi</button>
 							</div>
 						</span>
 					</label>
-					<label class="custom-radio">
-						<input type="radio" required name="radio" />
-						<span class="radio-btn"
-							style=" background: url(img/wahyu.jpg);background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
-								class="lar la-check-circle"></i>
-							<div class="poll-icon">
-								{{-- <img src="img/index.png" class="img-fluids"> --}}
-							</div>
-						</span>
-						<span>
-							<div class="button p-0 m-0">
-								<p class="font-weight-bold p-0 m-0">IR.Soekarno</p>
-								<button class="btn btn-primary" type="button" id="btn-visiMisi" data-toggle="modal"
-									data-target="#modalVisiMisi">Lihat Visi Misi</button>
-							</div>
-						</span>
-					</label>
+					@endforeach
 				</div>
 				<hr>
 				<div class="bpmft appear-animation mt-3" data-appear-animation="fadeInUpShorter">
 					<div class="judul-pol">
 						<h2>BPMFT</h2>
 					</div>
+					@foreach ($bpmft as $item)
+				
 					<label class="custom-radio">
-						<input type="radio" required name="radio2" />
+					<input type="radio" required id="bpmft" name="bpmft" value="{{$item->id}}" />
 						<span class="radio-btn"
-							style=" background: url(img/wahyu.jpg);background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
+							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
 								class="lar la-check-circle"></i>
 							<div class="poll-icon">
 								{{-- <img src="img/index.png" class="img-fluids"> --}}
@@ -315,36 +244,22 @@
 						</span>
 						<span>
 							<div class="button p-0 m-0">
-								<p class="font-weight-bold p-0 m-0">IR.Soekarno</p>
+								<p class="font-weight-bold p-0 m-0">{{$item->nama_panggilan}}</p>
 								<button class="btn btn-primary" type="button" id="btn-visiMisi" data-toggle="modal"
 									data-target="#modalVisiMisi">Lihat Visi Misi</button>
 							</div>
 						</span>
 					</label>
-					<label class="custom-radio">
-						<input type="radio" required name="radio2" />
-						<span class="radio-btn"
-							style=" background: url(img/wahyu.jpg);background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
-								class="lar la-check-circle"></i>
-							<div class="poll-icon">
-								{{-- <img src="img/index.png" class="img-fluids"> --}}
-							</div>
-						</span>
-						<span>
-							<div class="button p-0 m-0">
-								<p class="font-weight-bold p-0 m-0">IR.Soekarno</p>
-								<button class="btn btn-primary" type="button" id="btn-visiMisi" data-toggle="modal"
-									data-target="#modalVisiMisi">Lihat Visi Misi</button>
-							</div>
-						</span>
-					</label>
+
+					
+					@endforeach
+
 				</div>
 				<div class="clearfix"></div>
 				<div class="result mt-3">
 					<button class="btn btn-primary" type="button" id="btn-submit" data-toggle="modal"
 						data-target="#exampleModalalert">Submit</button>
-					<button class="btn btn-primary" type="button" id="btn-See" data-toggle="modal"
-						data-target="#exampleModal">Lihat Hasil Sementara</button>
+					<button class="btn btn-primary" type="button" id="btn-See">Lihat Hasil Sementara</button>
 				</div>
 			</form>
 		</div>
@@ -360,8 +275,8 @@
 					<div id="googlemaps" class="google-ma h-100 mb-0 p-0" style="min-height: 500px;">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63114.03314524725!2d115.21000524619285!3d-8.631753311983303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd241ea9986cc09%3A0xefdc9ad9df39e8f4!2sSEKBER%20FT%20UNUD*21!5e0!3m2!1sid!2sid!4v1604911691204!5m2!1sid!2sid"
-							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%" allowfullscreen=""
-							aria-hidden="false" tabindex="0"></iframe>
+							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%"
+							allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 					</div>
 
 				</div>
@@ -369,7 +284,46 @@
 			</div>
 		</div>
 	</section>
-
+	<div class="modal fade" id="modalVisiMisi" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Visi Misi</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="feature-box feature-box-style-2">
+									<div class="feature-box-icon">
+										<i class="icons icon-list "></i>
+									</div>
+									<div class="feature-box-info">
+										<h4 class="font-weight-bold  text-4 mb-2">VISI</h4>
+										<p class=" opacity-7 text-justify">
+										
+										</p>
+									</div>
+								</div>
+								<div class="feature-box feature-box-style-2">
+									<div class="feature-box-icon">
+										<i class="icons icon-plus "></i>
+									</div>
+									<div class="feature-box-info">
+										<h4 class="font-weight-bold  text-4 mb-2">MISI</h4>
+										<p class=" opacity-7 text-justify">
+											
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
 	<section class="section bg-primary border-0 m-0">
 		<div class="container">
 			<div class="row justify-content-center text-center text-lg-left py-4">
@@ -415,8 +369,8 @@
 								<span class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank"
 										class="text-color-light font-weight-semibold" title="Facebook"><i
 											class="mr-1 fab fa-facebook-f"></i> FACEBOOK</a></span>
-								<span class="social-icons-twitter pl-3"><a href="http://www.twitter.com/" target="_blank"
-										class="text-color-light font-weight-semibold" title="Twitter"><i
+								<span class="social-icons-twitter pl-3"><a href="http://www.twitter.com/"
+										target="_blank" class="text-color-light font-weight-semibold" title="Twitter"><i
 											class="mr-1 fab fa-instagram"></i> INSTAGRAM</a></span>
 							</p>
 						</div>

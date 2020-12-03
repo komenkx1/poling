@@ -44,12 +44,11 @@ Route::view('visi-misi', 'visi-misi');
 // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('register/fetch', 'Auth\RegisterController@fetch')->name('autocomplete.fetch');
 Route::post('calon/fetch', 'CalonController@fetch')->name('calon.fetch');
-Route::get('/', function () {
-    return view('index');
-});
 
+
+Route::get('/',     [MainController::class, 'index']);
 Route::get('/chart', [MainController::class, 'chart']);
-Route::post('/vote', [MainController::class, 'vote']);
+Route::post('/vote', [MainController::class, 'vote'])->name('vote');
 
 // Route::resource('calons', CalonController::class);
 Route::resource('mahasiswas', MahasiswaController::class)->except([

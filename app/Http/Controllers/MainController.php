@@ -19,19 +19,21 @@ class MainController extends Controller
 
     public function vote(Request $request)
     {
-        $this->validate($request, [
-            'calon_smft' => 'required',
-            'calon_bpmft' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'calon_smft' => 'required',
+        //     'calon_bpmft' => 'required',
+        // ]);
+
+        // dd($request);
 
         $suara_smft = new Suara();
-        $suara_smft->mahasiswa_id = Auth::id();
-        $suara_smft->calon_id = $request->calon_smft;
+        $suara_smft->mahasiswa_id = 1;
+        $suara_smft->calon_id = $request->smft;
         $suara_smft->save();
 
         $suara_bpmft = new Suara();
-        $suara_bpmft->mahasiswa_id = Auth::id();
-        $suara_bpmft->calon_id = $request->calon_bpmft;
+        $suara_bpmft->mahasiswa_id = 1;
+        $suara_bpmft->calon_id = $request->bpmft;
         $suara_bpmft->save();
 
         return "Terima kasih telah memilih";
@@ -46,6 +48,6 @@ class MainController extends Controller
             $query->where('jenis_calon', 'BPMFT');
         }])->get();
 
-        return json_encode($arr);
+        return \json_encode($arr);
     }
 }

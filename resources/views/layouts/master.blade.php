@@ -6,7 +6,7 @@
 	<!-- Basic -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>{{$title ?? ''}}</title>
 
 	<meta name="keywords" content="Musma Teknik 2020" />
@@ -127,6 +127,42 @@
 		<!-- Examples -->
 		<script src="/js/examples/examples.portfolio.js"></script>
 
+
+
+		<script>
+			$(document).ready(function(){
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+
+				$('#btn-See').click(function(){
+					$('#hasil-sementara').modal('show');
+				});
+
+				$('#btn-submit-modal').on("click", function(event){ 
+					
+					event.preventDefault()
+					var data = $('form').serialize();
+
+					$.ajax({
+						url:"{{ route('vote') }}",
+						method:"POST",
+						data: data,
+						success:function(data){
+							$('#hasil-sementara').modal('show');
+						},
+						error: function(data) {
+							var errors = data.responseJSON;
+							console.log(errors);
+						}
+			 		});
+	
+				});
+			  
+			});
+		</script>
 	</body>
 
 </html>
