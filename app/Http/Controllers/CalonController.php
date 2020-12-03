@@ -54,26 +54,24 @@ class CalonController extends Controller
 
         $calon = new Calon;
 
-        $calon->user_id = 1;
+        $calon->user_id = User::select('id')->where('nim', $request->nim)->first();;
         $calon->nama_panggilan = $request->nama_panggilan;
         $calon->visi = $request->visi;
         $calon->misi = $request->misi;
         $calon->jenis_calon = $request->jenis_calon;
 
         $slug = Str::slug($request->nama_panggilan);
-        if($request->file('photo_url')){
+        if ($request->file('photo_url')) {
             $gambar = $request->file('photo_url');
             $urlgambar = $gambar->storeAs("img/calon", "{$slug}.{$gambar->extension()}");
             $calon->photo_url = $urlgambar;
-        }else{
-            null;
         }
 
-        // dd($calon);
         $calon->save();
 
         // return redirect('/calon');
     }
+
     function fetch(Request $request)
     {
         if ($request->get('query')) {
