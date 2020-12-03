@@ -19,7 +19,7 @@
 
               <div class="form-group">
                 <label for="Nama">nim</label>
-                <input type="number" class="form-control" name="user_id" id="nim" placeholder="Enter Nim">
+                <input type="number" class="form-control" name="nim" id="nim" placeholder="Enter Nim">
                 <div class="" id="nimList">
                 </div>
               </div>

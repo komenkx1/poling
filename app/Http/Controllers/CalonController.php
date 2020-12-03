@@ -53,8 +53,7 @@ class CalonController extends Controller
         ]);
 
         $calon = new Calon;
-
-        $calon->user_id = User::select('id')->where('nim', $request->nim)->first();;
+        $calon->user_id = User::select('id')->where('nim', $request->nim)->first()->id;
         $calon->nama_panggilan = $request->nama_panggilan;
         $calon->visi = $request->visi;
         $calon->misi = $request->misi;
@@ -66,10 +65,10 @@ class CalonController extends Controller
             $urlgambar = $gambar->storeAs("img/calon", "{$slug}.{$gambar->extension()}");
             $calon->photo_url = $urlgambar;
         }
-
+        // echo($userid);
         $calon->save();
 
-        // return redirect('/calon');
+        return redirect('admin/calon');
     }
 
     function fetch(Request $request)
@@ -108,7 +107,11 @@ class CalonController extends Controller
      */
     public function edit(Calon $calon)
     {
-        return view('calon_edit', ['calon' => $calon]);
+        $prodi = Calon::with('prodi')->get();
+        return view('admin/calon/edit', [
+            'calon' => $calon,
+            'prodi' => $prodi
+        ]);
     }
 
     /**
@@ -129,22 +132,28 @@ class CalonController extends Controller
             'photo_url' => 'required|file|max:2000'
         ]);
 
+
+        $slug = Str::slug($request->nama_panggilan);
+        if ($request->file('photo_url')) {
+            \Storage::delete($calon->photo_url); // menghapus gambar atau file
+            $gambar = $request->file('photo_url');
+            $urlgambar = $gambar->storeAs("img/calon", "{$slug}.{$gambar->extension()}");
+        } else {
+            $gambar = $request->file('photo_url');
+            $urlgambar = $gambar->storeAs("img/calon", "{$slug}.{$gambar->extension()}");
+        }
         $calon->user_id = $request->user_id;
         $calon->nama_panggilan = $request->nama_panggilan;
         $calon->visi = $request->visi;
         $calon->misi = $request->misi;
         $calon->jenis_calon = $request->jenis_calon;
-        $calon->photo_url = $request->photo_url;
-
+        $calon->photo_url = $urlgambar;
         $calon->save();
+        return redirect('admin/calon');
+        // dd($calon);
 
-        $slug = Str::slug($request->nama_panggilan);
-        if ($request->file('photo_url')) {
-            $photo = $request->file('photo_url');
-            $photo->storeAs("img/calon", "{$slug}.{$photo->extension()}");
-        }
 
-        return redirect('/calon');
+
     }
 
     /**
@@ -155,7 +164,8 @@ class CalonController extends Controller
      */
     public function destroy(Calon $calon)
     {
+        \Storage::delete($calon->photo_url);
         $calon->delete();
-        return redirect('/calon');
+        return redirect('/admin/calon');
     }
 }
