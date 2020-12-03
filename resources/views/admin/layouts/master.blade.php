@@ -70,6 +70,7 @@
   <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>  
   <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+  <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
   <script src="/html/scripts/ui-jp.js"></script>
   <script src="/html/scripts/ui-include.js"></script>
   <script src="/html/scripts/ui-device.js"></script>
@@ -109,6 +110,50 @@
          }
       } );
 } );
+</script>
+<script>
+  $(document).ready(function() {
+
+$(".dataTable").on('click','.trash', function () { 
+var id = $(this).data('id');
+var nama = $(this).data('nama');
+var title = document.getElementById("myModalLabel");
+title.innerHTML = "Data : "+ nama;
+$('#modalDelete').attr('action', '/admin/calon/delete/' + id);
+});
+  });
+</script>
+<script>
+  // Replace the <textarea id="editor1"> with a CKEditor 4
+  // instance, using default configuration.
+  CKEDITOR.replace( 'editor1' );
+</script>
+<script>
+  $(document).ready(function(){
+    
+      $('#nim').keyup(function(){ 
+  var query = $(this).val();
+  if(query != '')
+  {
+   var _token = $('input[name="_token"]').val();
+   $.ajax({
+    url:"{{ route('calon.fetch') }}",
+    method:"POST",
+    data:{query:query, _token:_token},
+    success:function(data){
+     $('#nimList').fadeIn();  
+              $('#nimList').html(data);
+    }
+   });
+  }
+});
+
+$(document).on('click', 'li', function(){  
+  $('#nim').val($(this).text().replace(/[^0-9\.]/g, ''));  
+  $('#nimList').fadeOut();  
+});
+    
+    });
 </script>
 <!-- endbuild -->
 </body>

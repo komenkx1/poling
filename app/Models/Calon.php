@@ -33,4 +33,8 @@ class Calon extends Model
     {
         return $this->hasMany('App\Models\Suara');
     }
+    public function getTakeImageAttribute()
+    {
+        return "/storage/". $this->photo_url;
+    }
 }
