@@ -42,7 +42,9 @@ Route::get('auth', 'Auth\RegisterController@index')->name('auth');
 Route::view('visi-misi', 'visi-misi');
 // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('register/fetch', 'Auth\RegisterController@fetch')->name('autocomplete.fetch');
+Route::post('register', 'Auth\RegisterController@create')->name('register.create');
 Route::post('calon/fetch', 'CalonController@fetch')->name('calon.fetch');
+
 Route::get('/', function () {
     return view('index');
 });

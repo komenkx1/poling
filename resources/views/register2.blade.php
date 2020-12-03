@@ -56,7 +56,7 @@
         </div>
 
       </form>
-      <form method="POST" action="{{ route('register') }}" class="sign-up-form" enctype="multipart/form-data"
+      <form method="POST" action="{{ route('register.create') }}" class="sign-up-form" enctype="multipart/form-data"
         id="myForm1" autocomplete="off">
         @csrf
         <h2 class="title">Sign Up</h2>
@@ -68,13 +68,6 @@
               <input placeholder="Your Nim" name="nim" id="nim" type="text" required="">
             </div>
             <div class="" id="nimList">
-            </div>
-          </div>
-          <div class="input-field col-md-12">
-            <label>Email</label>
-            <div class="pom-agile">
-              <span class="fa fa-envelope-open"></span>
-              <input placeholder="Email" name="email" type="email" required="">
             </div>
           </div>
           <div class="input-field col-md-6">
@@ -104,7 +97,7 @@
             <div class="pom-agile">
               <label class="text-left font-" for="customFile" id="custom-File" style="line-height: 2">Choose
                 file</label>
-              <input placeholder="Masukan Foto" name="Foto" type="file" id="customFile" required>
+              <input placeholder="Masukan Foto" name="file_url" type="file" id="customFile" required>
               <span class="fa fa-folder" style="line-height: 2"></span>
               <div id="fileInvalid" class="invalid-feedback">a to z only (2 to 6 long)</div>
             </div>

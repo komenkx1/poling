@@ -89,25 +89,30 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
-        $kode_prodi = substr($data['nim'], 4, -3);
+        $kode_prodi = substr($request->nim, 4, -3);
         $prodi = Prodi::where('kode_prodi', $kode_prodi)->first();
 
         //buat dapetin user dari nim yang di input
-        $user = User::where('nim', $data['nim'])->first();
+        $user = User::where('nim', $request->nim)->first();
 
         $user->prodi_id = $prodi->id;
-        $user->password = Hash::make($data['password']);
-        $user->save();
+        $user->password = Hash::make($request->password);
 
         Mahasiswa::create([
             'user_id' => $user->id,
         ]);
 
-        if ($data->file('photo_url')) {
-            $photo = $data->file('photo_url');
-            $photo->storeAs("img/calon", "{$data['nim']}.{$photo->extension()}");
+        $slug = Str::slug($request->nim);
+        if ($request->file('file_url')) {
+            $gambar = $request->file('file_url');
+            $urlgambar = $gambar->storeAs("img/mahasiswa", "{$slug}.{$gambar->extension()}");
+            $user->photo_url = $urlgambar;
         }
+
+        dd($prodi);
+
+        //$user->save();
     }
 }
