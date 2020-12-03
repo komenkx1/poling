@@ -17,14 +17,16 @@
 <body>
   <div class="containers sign-up-mode">
     <div class="signin-signup">
-      <form action="#" class="sign-in-form">
+      <form method="POST" action="{{ route('login') }}" class="sign-in-form">
+        @csrf
+
         <h2 class="title">Sign in</h2>
         <div class="row">
           <div class="input-field col-md-12">
             <label>Your Nim</label>
             <div class="pom-agile">
               <span class="fa fa-user"></span>
-              <input placeholder="Your Nim" type="text" required="">
+              <input placeholder="Your Nim" type="text" name="nim" required="">
             </div>
           </div>
           <div class="input-field col-md-12">
