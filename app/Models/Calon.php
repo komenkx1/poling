@@ -19,6 +19,11 @@ class Calon extends Model
         'photo_url',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
     public function prodi()
     {
         return $this->belongsTo('App\Models\Prodi');

@@ -10,9 +10,15 @@ class Mahasiswa extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'status',
         'verified_at',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 
     public function suaras()
     {
