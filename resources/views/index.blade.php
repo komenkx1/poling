@@ -12,6 +12,9 @@
 				</button>
 			</div>
 			<div class="modal-body">
+				<div class="alert alert-success" style="display:none">
+					{{ Session::get('success') }}
+				</div>
 				<div class="chart">
 					<div class="item m-3">
 						<p for="charSMFT" class="text-center font-weight-bold"># Vote SMFT</p>
@@ -22,6 +25,25 @@
 						<canvas id="bpmft" width="250" height="150"></canvas>
 					</div>
 				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="alert-vote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Peringatan!</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="text-modal"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -192,7 +214,7 @@
 							<div class="modal-body">
 								Yakin Ingin Memilih Paslon?
 							</div>
-							<div class="modal-footer">
+							<div class="modal-footer ">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 								<button class="btn btn-primary" type="button" id="btn-submit-modal" data-toggle="modal"
 						data-target="#exampleModalalert">Submit</button>
@@ -208,7 +230,7 @@
 				
 
 					<label class="custom-radio">
-					<input type="radio" required id="smft" name="smft" value="{{$item->id}}"/>
+					<input type="radio" @guest disabled @endguest required id="smft" name="smft" value="{{$item->id}}" />
 						<span class="radio-btn"
 							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
 								class="lar la-check-circle"></i>
@@ -234,7 +256,7 @@
 					@foreach ($bpmft as $item)
 				
 					<label class="custom-radio">
-					<input type="radio" required id="bpmft" name="bpmft" value="{{$item->id}}" />
+					<input type="radio" @guest disabled @endguest required id="bpmft" name="bpmft" value="{{$item->id}}" />
 						<span class="radio-btn"
 							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
 								class="lar la-check-circle"></i>
@@ -256,10 +278,10 @@
 
 				</div>
 				<div class="clearfix"></div>
-				<div class="result mt-3">
-					<button class="btn btn-primary" type="button" id="btn-submit" data-toggle="modal"
+				<div class="result mt-3 @guest d-none @endguest @auth d-flex justify-content-center @endauth">
+					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth" type="button" id="btn-submit" data-toggle="modal"
 						data-target="#exampleModalalert">Submit</button>
-					<button class="btn btn-primary" type="button" id="btn-See">Lihat Hasil Sementara</button>
+					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth" type="button" id="btn-See">Lihat Hasil Sementara</button>
 				</div>
 			</form>
 		</div>
@@ -380,5 +402,6 @@
 		</div>
 	</section>
 </div>
+
 
 @endsection

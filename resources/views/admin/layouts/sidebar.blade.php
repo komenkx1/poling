@@ -41,7 +41,7 @@
                   </a>
                 </li>
                 <li class="@if($title == 'Calons') active @endif ">
-                  <a href="/calons">
+                  <a href="/admin/calon">
                     <span class="nav-icon ">
                       <i class="fa fa-users">
                         <span ui-include="'../assets/images/i_0.svg'"></span>

@@ -148,7 +148,7 @@ class CalonController extends Controller
         $calon->misi = $request->misi;
         $calon->jenis_calon = $request->jenis_calon;
         $calon->photo_url = $urlgambar;
-        $calon->save();
+        $calon->update();
         return redirect('admin/calon');
         // dd($calon);
 

@@ -17,7 +17,7 @@
 <body>
   <div class="containers sign-up-mode">
     <div class="signin-signup">
-      <form method="POST" action="{{ route('login') }}" class="sign-in-form">
+      <form method="POST" action="{{ route('login') }}" class="sign-in-form" style="transform: translate(0%, -30%);">
         @csrf
 
         <h2 class="title">Sign in</h2>
@@ -26,13 +26,13 @@
             <label>Your Nim</label>
             <div class="pom-agile">
               <span class="fa fa-user"></span>
-              <input placeholder="Your Nim" type="text" name="nim" required="">
+              <input placeholder="Your Nim" type="text" name="nim" id="nim2" required="">
             </div>
           </div>
           <div class="input-field col-md-12">
             <label>password</label>
             <div class="pom-agile">
-              <span class="fa fa-envelope-open"></span>
+              <span class="fa fa-lock"></span>
               <input placeholder="password" name="password" type="password" required="">
             </div>
           </div>
@@ -42,21 +42,7 @@
             id="sign-up-btpn">
             disini
           </a></p>
-        <div class="social-media">
-          <a href="#" class="social-icon">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="fab fa-google"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </div>
-
+        
       </form>
       <form method="POST" action="{{ route('register.create') }}" class="sign-up-form" enctype="multipart/form-data"
         id="myForm1" autocomplete="off">
@@ -197,6 +183,8 @@ $(document).on('click', 'li', function(){
   
   // Install input filters.
   $("#nim").inputFilter(function(value) {
+    return /^-?\d*$/.test(value); });
+    $("#nim2").inputFilter(function(value) {
     return /^-?\d*$/.test(value); });
   </script>
 

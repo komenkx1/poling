@@ -53,7 +53,7 @@
                                         @endauth
 
                                         @guest
-                                        <li>
+                                        <li class="d-block d-lg-none">
                                             <a data-hash class="dropdown-item active" href="{{ route('auth') }}">
                                                 Daftar
                                             </a>
@@ -93,7 +93,15 @@
 
             <nav class="header-nav-top p-1 d-none d-lg-inline-flex">
                 <ul class="nav nav-pills">
-
+                    @guest
+                    <li class="nav-item dropdown nav-item-left-border  border-black">
+                    <a class="nav-link" href="{{route('auth')}}" role="button" id="dropdownLanguage"
+                            aria-haspopup="true" aria-expanded="false">
+                            Daftar
+                           
+                        </a>
+                    </li>
+                    @endguest
                     @auth
                     {{-- logined --}}
                     <li class="nav-item dropdown nav-item-left-border">
