@@ -91,34 +91,7 @@
 						data-fontsize="['18','18','18','40']" data-lineheight="['26','26','26','45']">TEKNIK 2020</div>
 
 				</li>
-				{{-- <li class="slide-overlay slide-overlay-gradient" data-transition="fade">
-								<img src="img/Untitled-3.png"  
-									alt=""
-									data-bgposition="center center" 
-									data-bgfit="cover" 
-									data-bgrepeat="no-repeat" 
-									class="rev-slidebg">
-							
 
-							
-								<div class="tp-caption font-weight-extra-bold text-color-light negative-ls-1"
-									data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
-									data-x="center"
-									data-y="center"
-									data-fontsize="['50','50','50','90']"
-									data-lineheight="['55','55','55','95']" style="z-index: 5;">Selamat Datang</div>
-				
-								<div class="tp-caption font-weight-light ws-normal text-center"
-									data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2000,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
-									data-x="center"
-									data-y="center" data-voffset="['60','60','60','105']"
-									data-width="['530','530','530','1100']"
-									data-fontsize="['18','18','18','40']"
-									data-lineheight="['26','26','26','45']"
-									style="color: #b5b5b5; z-index: 5;"></strong> Pada Musma Teknik Tahun 2020</div>
-				
-								<div class="tp-dottedoverlay tp-opacity-overlay"></div>
-							</li> --}}
 			</ul>
 		</div>
 	</section>
@@ -193,8 +166,9 @@
 					<p class="mb-4"> PEMILIHAN KETUA SMFT & BPMFT</p>
 				</div>
 				<div class="warning bg-danger" style="border: 1px solid black; border-radius: 5px;">
-					<p class="warning-start pt-3 text-light appear-animation font-weight-bold" data-appear-animation="fadeInUpShorter"
-						data-appear-animation-delay="200"> @guest Silahkan login terlebih dahulu dengan akun yang sudah
+					<p class="warning-start pt-3 text-light appear-animation font-weight-bold"
+						data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200"> @guest Silahkan login
+						terlebih dahulu dengan akun yang sudah
 						terverifikasi untuk melakukan voting @endguest
 						@auth
 						@if ($mahasiswa->status == 'voted')
@@ -243,8 +217,11 @@
 					@foreach ($smft as $item)
 
 					<label class="custom-radio">
-						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='ready') disabled
-						@endif @endauth required id="smft" name="smft"
+						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='ready' ||
+						$mahasiswa->status == 'voted' ) disabled
+						@endif @foreach ($suara as $item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
+						@endauth required id="smft"
+						name="smft"
 						value="{{$item->id}}" />
 						<span class="radio-btn"
 							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
@@ -271,9 +248,11 @@
 					@foreach ($bpmft as $item)
 
 					<label class="custom-radio">
-						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='ready') disabled
-						@endif @endauth required id="bpmft" name="bpmft"
-						value="{{$item->id}}" />
+						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='ready' ||
+						$mahasiswa->status == 'voted') disabled
+						@endif @foreach ($suara as $item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
+						@endauth required id="bpmft"
+						name="bpmft" value="{{$item->id}}" />
 						<span class="radio-btn"
 							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
 								class="lar la-check-circle"></i>
@@ -296,7 +275,7 @@
 				</div>
 				<div class="clearfix"></div>
 				<div
-					class="result mt-3 @guest d-none @endguest @auth  @if($mahasiswa->status =='ready' || $mahasiswa->status =='voted')  d-none @else d-flex justify-content-center @endif @endauth">
+					class="result mt-3 @guest d-none @endguest @auth  @if($mahasiswa->status =='ready')  d-none @else d-flex justify-content-center @endif @endauth">
 					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
 						type="button" id="btn-submit" data-toggle="modal"
 						data-target="#exampleModalalert">Submit</button>
@@ -409,9 +388,6 @@
 <script>
 	$('.btn-visiMisi').click(function(){
 		var id = $(this).data('id');
-		
-
-// AJAX request
 $.ajax({
 url: '{{Route("visimisi")}}',
 type: 'post',
@@ -426,5 +402,76 @@ console.log(id);
 });
 				
 				});
+</script>
+<script>
+	var ctx = document.getElementById('smft');
+var ctx2 = document.getElementById('bpmft');
+var datasmft = {
+  
+  labels: ["Sipil", "Mesin", "Elektro", "Arsitek", "TI"],
+  datasets: [
+  {
+	label: "<?php echo 'hii' ?>",
+	backgroundColor: 'rgba(255, 99, 132, 0.2)',
+	borderColor: 'rgba(255, 99, 132, 1)',
+	borderWidth: 1,
+	data: [1,2,5,6,{!!$ti!!}]
+  }, {
+	label: "Paslon 2",
+	backgroundColor: 'rgba(54, 162, 235, 0.2)',
+	borderColor: 'rgba(54, 162, 235, 1)',
+	borderWidth: 1,
+	data: [4, 3, 5, 22, 5]
+  }, {
+	label: "Paslon 3",
+	backgroundColor: 'rgba(14, 255, 108, 0.2)',
+	borderColor: 'rgba(54, 235, 65)',
+	borderWidth: 1,
+	data: [4, 3, 2, 93, 5]
+  }]
+};
+
+var databpmft = {
+  labels: ["Sipil", "Mesin", "Elektro", "Arsitek", "TI"],
+  datasets: [{
+	label: "Paslon 1",
+	backgroundColor: 'rgba(255, 99, 132, 0.2)',
+	borderColor: 'rgba(255, 99, 132, 1)',
+	borderWidth: 1,
+	data: [34, 11, 4, 8, 2]
+  }, {
+	label: "Paslon 2",
+	backgroundColor: 'rgba(54, 162, 235, 0.2)',
+	borderColor: 'rgba(54, 162, 235, 1)',
+	borderWidth: 1,
+	data: [44, 3, 25, 22, 5]
+  }]
+};
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: datasmft,
+  options: {
+	scales: {
+	  yAxes: [{
+		ticks: {
+		  beginAtZero: true
+		}
+	  }]
+	}
+  }
+});
+var myChart = new Chart(ctx2, {
+  type: 'bar',
+  data: databpmft,
+  options: {
+	scales: {
+	  yAxes: [{
+		ticks: {
+		  beginAtZero: true
+		}
+	  }]
+	}
+  }
+});
 </script>
 @endsection
