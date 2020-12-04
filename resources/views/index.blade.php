@@ -13,6 +13,9 @@
 				</button>
 			</div>
 			<div class="modal-body">
+				<div class="alert alert-success" style="display:none">
+					{{ Session::get('success') }}
+				</div>
 				<div class="chart">
 					<div class="item m-3">
 						<p class="text-center font-weight-bold"># Vote SMFT</p>
@@ -23,6 +26,25 @@
 						<canvas id="bpmft" width="250" height="150"></canvas>
 					</div>
 				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="alert-vote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Peringatan!</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="text-modal"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -111,34 +133,7 @@
 						data-fontsize="['18','18','18','40']" data-lineheight="['26','26','26','45']">TEKNIK 2020</div>
 
 				</li>
-				{{-- <li class="slide-overlay slide-overlay-gradient" data-transition="fade">
-								<img src="img/Untitled-3.png"  
-									alt=""
-									data-bgposition="center center" 
-									data-bgfit="cover" 
-									data-bgrepeat="no-repeat" 
-									class="rev-slidebg">
-							
 
-							
-								<div class="tp-caption font-weight-extra-bold text-color-light negative-ls-1"
-									data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
-									data-x="center"
-									data-y="center"
-									data-fontsize="['50','50','50','90']"
-									data-lineheight="['55','55','55','95']" style="z-index: 5;">Selamat Datang</div>
-				
-								<div class="tp-caption font-weight-light ws-normal text-center"
-									data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2000,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
-									data-x="center"
-									data-y="center" data-voffset="['60','60','60','105']"
-									data-width="['530','530','530','1100']"
-									data-fontsize="['18','18','18','40']"
-									data-lineheight="['26','26','26','45']"
-									style="color: #b5b5b5; z-index: 5;"></strong> Pada Musma Teknik Tahun 2020</div>
-				
-								<div class="tp-dottedoverlay tp-opacity-overlay"></div>
-							</li> --}}
 			</ul>
 		</div>
 	</section>
@@ -212,11 +207,27 @@
 					<h2 class="font-weight-bold mb-2">Polling</h2>
 					<p class="mb-4"> PEMILIHAN KETUA SMFT & BPMFT</p>
 				</div>
-				<p class="pb-3 mb-4 appear-animation" data-appear-animation="fadeInUpShorter"
-					data-appear-animation-delay="200">Silahkan Pilih salah satu calon ketua SMFT dan BPMFT dengan cara
-					mengklik foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan.</p>
+				<div class="warning bg-danger" style="border: 1px solid black; border-radius: 5px;">
+					<p class="warning-start pt-3 text-light appear-animation font-weight-bold"
+						data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200"> @guest Silahkan login
+						terlebih dahulu dengan akun yang sudah
+						terverifikasi untuk melakukan voting @endguest
+						@auth
+						@if ($mahasiswa->status == 'voted')
+						Anda Sudah Melakukan Vote
+						@elseif($mahasiswa->status != 'terverifikasi' && $mahasiswa->status !='voted' )
+						Akun Anda Belum Terverifikasi. silahkan tunggu hingga admin memverifikasi
+						@else
+						Silahkan Pilih salah satu calon ketua SMFT dan
+						BPMFT dengan cara
+						mengklik foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan.
+						@endif
+						@endauth
+					</p>
+				</div>
 			</div>
 		</div>
+		<br>
 		<div class="row pb-5 mb-5">
 
 			<form action="/vote" class="radio-buttons" id="#create-form" method="POST">
@@ -234,7 +245,7 @@
 							<div class="modal-body">
 								Yakin Ingin Memilih Paslon?
 							</div>
-							<div class="modal-footer">
+							<div class="modal-footer ">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 								<button class="btn btn-primary" type="button" id="btn-submit-modal" data-toggle="modal"
 									data-target="#exampleModalalert">Submit</button>
@@ -248,9 +259,13 @@
 					</div>
 					@foreach ($smft as $item)
 
-
 					<label class="custom-radio">
-						<input type="radio" required id="smft" name="smft" value="{{$item->id}}" />
+						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='ready' ||
+						$mahasiswa->status == 'voted' ) disabled
+						@endif @foreach ($suara as $item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
+						@endauth required id="smft"
+						name="smft"
+						value="{{$item->id}}" />
 						<span class="radio-btn"
 							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
 								class="lar la-check-circle"></i>
@@ -261,8 +276,7 @@
 						<span>
 							<div class="button p-0 m-0">
 								<p class="font-weight-bold p-0 m-0">{{$item->nama_panggilan}}</p>
-								<button class="btn btn-primary btn-visiMisi-smft" type="button"
-									data-index="{{ $loop->index }}">Lihat
+								<button class="btn-visiMisi btn btn-primary" type="button" id="" data-id="{{$item->id}}">Lihat
 									Visi Misi</button>
 							</div>
 						</span>
@@ -277,31 +291,38 @@
 					@foreach ($bpmft as $item)
 
 					<label class="custom-radio">
-						<input type="radio" required id="bpmft" name="bpmft" value="{{$item->id}}" />
-						<div class="radio-btn"
-							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;">
-							<i class="lar la-check-circle"></i>
+						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='ready' ||
+						$mahasiswa->status == 'voted') disabled
+						@endif @foreach ($suara as $item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
+						@endauth required id="bpmft"
+						name="bpmft" value="{{$item->id}}" />
+						<span class="radio-btn"
+							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
+								class="lar la-check-circle"></i>
 							<div class="poll-icon">
 								{{-- <img src="img/index.png" class="img-fluids"> --}}
 							</div>
-						</div>
-						<div>
+						</span>
+						<span>
 							<div class="button p-0 m-0">
 								<p class="font-weight-bold p-0 m-0">{{$item->nama_panggilan}}</p>
-								<button class="btn btn-primary btn-visiMisi-bpmft" type="button"
-									data-index="{{ $loop->index }}">Lihat
-									Visi Misi</button>
+								<button class="btn-visiMisi btn btn-primary" type="button" id="" data-id="{{$item->id}}">Lihat
+									Visi
+									Misi</button>
 							</div>
-						</div>
+						</span>
 					</label>
 					@endforeach
 
 				</div>
+
 				<div class="clearfix"></div>
-				<div class="result mt-3">
-					<button class="btn btn-primary" type="button" id="btn-submit" data-toggle="modal"
-						data-target="#exampleModalalert">Submit</button>
-					<button class="btn btn-primary" type="button" id="btn-See">Lihat Hasil Sementara</button>
+				<div
+					class="result mt-3 @guest d-none @endguest @auth  @if($mahasiswa->status =='ready')  d-none @else d-flex justify-content-center @endif @endauth">
+					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
+						type="button" id="btn-submit" data-toggle="modal" data-target="#exampleModalalert">Submit</button>
+					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth"
+						type="button" id="btn-See">Lihat Hasil Sementara</button>
 				</div>
 			</form>
 		</div>
@@ -326,7 +347,25 @@
 			</div>
 		</div>
 	</section>
+	<div class="modal fade" id="modalVisiMisi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Visi Misi</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
 
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<section class="section bg-primary border-0 m-0">
 		<div class="container">
 			<div class="row justify-content-center text-center text-lg-left py-4">
@@ -384,5 +423,92 @@
 		</div>
 	</section>
 </div>
+@endsection
 
+@section('footer')
+<script>
+	$('.btn-visiMisi').click(function(){
+		var id = $(this).data('id');
+		$.ajax({
+			url: '{{Route("visimisi")}}',
+			type: 'post',
+			data: {id: id},
+			success: function(data){
+				$('.modal-body').html(data);
+				console.log(id);
+				$('#modalVisiMisi').modal('show'); 
+			}
+		});
+	});
+	
+	var ctx = document.getElementById('smft');
+	var ctx2 = document.getElementById('bpmft');
+	var datasmft = {
+		labels: ["Sipil", "Mesin", "Elektro", "Arsitek", "TI"],
+		datasets: [
+		{
+			label: "<?php echo 'hii' ?>",
+			backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			borderColor: 'rgba(255, 99, 132, 1)',
+			borderWidth: 1,
+			data: [1,2,5,6,{!!$ti!!}]
+		}, {
+			label: "Paslon 2",
+			backgroundColor: 'rgba(54, 162, 235, 0.2)',
+			borderColor: 'rgba(54, 162, 235, 1)',
+			borderWidth: 1,
+			data: [4, 3, 5, 22, 5]
+		}, {
+			label: "Paslon 3",
+			backgroundColor: 'rgba(14, 255, 108, 0.2)',
+			borderColor: 'rgba(54, 235, 65)',
+			borderWidth: 1,
+			data: [4, 3, 2, 93, 5]
+		}]
+	};
+
+	var databpmft = {
+		labels: ["Sipil", "Mesin", "Elektro", "Arsitek", "TI"],
+		datasets: [{
+			label: "Paslon 1",
+			backgroundColor: 'rgba(255, 99, 132, 0.2)',
+			borderColor: 'rgba(255, 99, 132, 1)',
+			borderWidth: 1,
+			data: [34, 11, 4, 8, 2]
+		}, {
+			label: "Paslon 2",
+			backgroundColor: 'rgba(54, 162, 235, 0.2)',
+			borderColor: 'rgba(54, 162, 235, 1)',
+			borderWidth: 1,
+			data: [44, 3, 25, 22, 5]
+		}]
+	};
+	var myChart = new Chart(ctx, {
+		type: 'bar',
+		data: datasmft,
+		options: {
+			scales: {
+			yAxes: [{
+				ticks: {
+				beginAtZero: true
+				}
+			}]
+			}
+		}
+	});
+
+	var myChart = new Chart(ctx2, {
+		type: 'bar',
+		data: databpmft,
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+					beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+</script>
 @endsection

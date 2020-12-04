@@ -17,7 +17,7 @@
 <body>
   <div class="containers sign-up-mode">
     <div class="signin-signup">
-      <form method="POST" action="{{ route('login') }}" class="sign-in-form">
+      <form method="POST" action="{{ route('login') }}" class="sign-in-form" style="transform: translate(0%, -30%);">
         @csrf
 
         <h2 class="title">Sign in</h2>
@@ -26,13 +26,13 @@
             <label>Your Nim</label>
             <div class="pom-agile">
               <span class="fa fa-user"></span>
-              <input placeholder="Your Nim" type="text" name="nim" required="">
+              <input placeholder="Your Nim" type="text" name="nim" id="nim2" required="">
             </div>
           </div>
           <div class="input-field col-md-12">
             <label>password</label>
             <div class="pom-agile">
-              <span class="fa fa-envelope-open"></span>
+              <span class="fa fa-lock"></span>
               <input placeholder="password" name="password" type="password" required="">
             </div>
           </div>
@@ -42,7 +42,6 @@
             id="sign-up-btpn">
             disini
           </a></p>
-
       </form>
       <form method="POST" action="{{ route('register.create') }}" class="sign-up-form" enctype="multipart/form-data"
         id="myForm1" autocomplete="off">
@@ -58,7 +57,7 @@
             <div class="" id="nimList">
             </div>
           </div>
-          <div class="input-field col-md-6">
+          <div class="input-field col-lg-6 col-md-12">
             <label>Password</label>
             <div class="pom-agile">
               <span class="fa fa-key"></span>
@@ -68,7 +67,7 @@
               <div class="invalid-feedback  text-right">(2 to 30 long)</div>
             </div>
           </div>
-          <div class="input-field col-md-6">
+          <div class="input-field col-lg-6 col-md-12">
             <label>Confirm Password</label>
             <div class="pom-agile">
               <span class="fa fa-key"></span>
@@ -116,7 +115,7 @@
       </div>
       <div class="panel right-panel">
         <div class="content">
-          <h3>Sudak Memiliki Akun ?</h3>
+          <h3>Sudah Memiliki Akun ?</h3>
           <p>
             Silahkan Melakukan Sign In Melalui Tombol Di Bawah Ini
           </p>
@@ -183,6 +182,8 @@ $(document).on('click', 'li', function(){
   
   // Install input filters.
   $("#nim").inputFilter(function(value) {
+    return /^-?\d*$/.test(value); });
+    $("#nim2").inputFilter(function(value) {
     return /^-?\d*$/.test(value); });
   </script>
 

@@ -1,10 +1,6 @@
 @extends('/admin/layouts/master',['title'=>'Create Calon'])
 @section('content')
-
-<!-- Small boxes (Stat box) -->
-<!-- ############ PAGE START-->
 <div ui-view class="app-body" id="view">
-  <!-- ############ PAGE START-->
   <div class="padding">
     <div class="row">
       <div class="col-md-12">
@@ -31,14 +27,12 @@
               <div class="form-group">
                 <label for="visi">Visi</label>
                 <textarea name="visi" id="input-visi" name="visi" class="form-control" rows="10" cols="80"
-                  placeholder="Masukkan Visi">
-                    </textarea>
+                  placeholder="Masukkan Visi"></textarea>
               </div>
               <div class="form-group">
                 <label for="misi">Misi</label>
                 <textarea name="misi" id="input-misi" name="misi" class="form-control" rows="10" cols="80"
-                  placeholder="Masukkan Misi">
-                    </textarea>
+                  placeholder="Masukkan Misi"></textarea>
               </div>
               <div class="form-group">
                 <label for="Jenis Calon">Jenis Calon</label>
@@ -59,15 +53,7 @@
           </div>
         </div>
       </div>
-
-
-      <!-- ############ PAGE END-->
-
     </div>
   </div>
-  <!-- / -->
-
-  <!-- theme switcher -->
-
-
-  @endsection
+</div>
+@endsection

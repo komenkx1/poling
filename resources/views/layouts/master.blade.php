@@ -126,6 +126,8 @@
 
 		<!-- Examples -->
 		<script src="/js/examples/examples.portfolio.js"></script>
+		@yield('footer')
+
 
 		<script>
 			$(document).ready(function(){
@@ -138,6 +140,7 @@
 				$('#btn-See').click(function(){
 					$('#hasil-sementara').modal('show');
 				});
+				
 
 				$('#btn-submit-modal').on("click", function(event){ 
 					
@@ -150,6 +153,15 @@
 						data: data,
 						success:function(data){
 							$('#hasil-sementara').modal('show');
+							$(".alert-success").css("display", "block");
+							$(".warning").append("<strong class='text-center text-light'>Vote Telah Disimpan</strong");
+							$(".warning-start").hide();
+							$(".alert-success").append("<strong class='text-center'>Vote Telah Disimpan</strong");
+								window.setTimeout(function() {
+								$(".alert").fadeTo(300, 0).slideUp(300, function(){
+										$(this).remove();
+									});
+								}, 4000);
 						},
 						error: function(data) {
 							var errors = data.responseJSON;
@@ -161,26 +173,6 @@
 			  
 			});
 		</script>
-
-		<script>
-			$('.btn-visiMisi-smft').on("click", function(event){ 	
-				console.log("triggered");
-				var index = $(this).data('index');
-				$('#modal-visi').html("<?= $smft[0]->visi ?>");
-				$('#modal-misi').html("<?= $smft[0]->misi ?>");
-				$('#modalVisiMisi').modal('show');
-			});
-
-			$('.btn-visiMisi-bpmft').on("click", function(event){ 
-				console.log("triggered");
-				var index = $(this).data('index');
-				$('#modal-visi').html("<?= $bpmft[0]->visi ?>");
-				$('#modal-misi').html("<?= $bpmft[0]->misi ?>");
-				$('#modalVisiMisi').modal('show');
-			});
-		</script>
-
-
 	</body>
 
 </html>

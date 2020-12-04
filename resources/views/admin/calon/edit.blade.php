@@ -30,7 +30,7 @@
                   </div>
                   <div class="form-group">
                     <label for="misi">Misi</label>
-                    <textarea name="misi" id="editor1" class="form-control" rows="10" cols="80" placeholder="Masukkan Misi">
+                    <textarea name="misi" id="editor2" class="form-control" rows="10" cols="80" placeholder="Masukkan Misi">
                         {{$calon->misi}}
                     </textarea>
                   </div>

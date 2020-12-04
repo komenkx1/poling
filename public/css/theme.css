@@ -312,10 +312,11 @@ li {
 }
 
 #header .header-nav-top .nav > li > a, #header .header-nav-top .nav > li > span {
-	color: #999;
+	color: rgb(255, 255, 255);
 	font-size: 0.9em;
 	padding: 6px 10px;
 	display: inline-block;
+	border: 1px solid white;
 }
 
 #header .header-nav-top .nav > li > a [class*="fa-"], #header .header-nav-top .nav > li > a .icons, #header .header-nav-top .nav > li > span [class*="fa-"], #header .header-nav-top .nav > li > span .icons {
