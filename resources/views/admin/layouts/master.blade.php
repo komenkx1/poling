@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <title>{{$title ?? ''}}</title>
@@ -15,7 +16,7 @@
   <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="shortcut icon" sizes="196x196" href="/../assets/images/logo.png">
-  
+
   <!-- style -->
   <link rel="stylesheet" href="/../assets/animate.css/animate.min.css" type="text/css" />
   <link rel="stylesheet" href="/../assets/glyphicons/glyphicons.css" type="text/css" />
@@ -32,6 +33,7 @@
   <link rel="stylesheet" href="/../assets/styles/font.css" type="text/css" />
   @yeild("head")
 </head>
+
 <body>
   <div class="app" id="app">
 
@@ -50,24 +52,24 @@
       </div>
     </div>
     @yield('content')
-</div>
-</div><!-- /.container-fluid -->
+  </div>
+  </div><!-- /.container-fluid -->
 
 
 
-    <!-- build:js scripts/app.html.js -->
-<!-- jQuery -->
+  <!-- build:js scripts/app.html.js -->
+  <!-- jQuery -->
   <script src="/../libs/jquery/jquery/dist/jquery.js"></script>
-<!-- Bootstrap -->
+  <!-- Bootstrap -->
   <script src="/../libs/jquery/tether/dist/js/tether.min.js"></script>
   <script src="/../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
-<!-- core -->
+  <!-- core -->
   <script src="/../libs/jquery/underscore/underscore-min.js"></script>
   <script src="/../libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
   <script src="/../libs/jquery/PACE/pace.min.js"></script>
   <script src="/html/scripts/config.lazyload.js"></script>
   <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>  
+  <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
   <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
@@ -84,8 +86,8 @@
   <script src="/html/scripts/app.js"></script>
   <script src="/js/custom.js"></script>
 
-  
-    <script>
+
+  <script>
     $(document).ready(function() {
     $('#example').DataTable( {
          initComplete: function() {
@@ -110,9 +112,9 @@
          }
       } );
 } );
-</script>
-<script>
-  $(document).ready(function() {
+  </script>
+  <script>
+    $(document).ready(function() {
 
 $(".dataTable").on('click','.trash', function () { 
 var id = $(this).data('id');
@@ -122,14 +124,14 @@ title.innerHTML = "Data : "+ nama;
 $('#modalDelete').attr('action', '/admin/calon/delete/' + id);
 });
   });
-</script>
-<script>
-  // Replace the <textarea id="editor1"> with a CKEditor 4
+  </script>
+  <script>
+    // Replace the <textarea id="editor1"> with a CKEditor 4
   // instance, using default configuration.
   CKEDITOR.replace( 'editor1' );
-</script>
-<script>
-  $(document).ready(function(){
+  </script>
+  <script>
+    $(document).ready(function(){
     
       $('#nim').keyup(function(){ 
   var query = $(this).val();
@@ -154,7 +156,8 @@ $(document).on('click', 'li', function(){
 });
     
     });
-</script>
-<!-- endbuild -->
+  </script>
+  <!-- endbuild -->
 </body>
+
 </html>

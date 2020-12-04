@@ -30,13 +30,13 @@
               </div>
               <div class="form-group">
                 <label for="visi">Visi</label>
-                <textarea name="visi" id="editor1" name="visi" class="form-control" rows="10" cols="80"
+                <textarea name="visi" id="input-visi" name="visi" class="form-control" rows="10" cols="80"
                   placeholder="Masukkan Visi">
                     </textarea>
               </div>
               <div class="form-group">
                 <label for="misi">Misi</label>
-                <textarea name="misi" id="editor1" name="misi" class="form-control" rows="10" cols="80"
+                <textarea name="misi" id="input-misi" name="misi" class="form-control" rows="10" cols="80"
                   placeholder="Masukkan Misi">
                     </textarea>
               </div>

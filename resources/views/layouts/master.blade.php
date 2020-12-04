@@ -127,8 +127,6 @@
 		<!-- Examples -->
 		<script src="/js/examples/examples.portfolio.js"></script>
 
-
-
 		<script>
 			$(document).ready(function(){
 				$.ajaxSetup({
@@ -163,6 +161,26 @@
 			  
 			});
 		</script>
+
+		<script>
+			$('.btn-visiMisi-smft').on("click", function(event){ 	
+				console.log("triggered");
+				var index = $(this).data('index');
+				$('#modal-visi').html("<?= $smft[0]->visi ?>");
+				$('#modal-misi').html("<?= $smft[0]->misi ?>");
+				$('#modalVisiMisi').modal('show');
+			});
+
+			$('.btn-visiMisi-bpmft').on("click", function(event){ 
+				console.log("triggered");
+				var index = $(this).data('index');
+				$('#modal-visi').html("<?= $bpmft[0]->visi ?>");
+				$('#modal-misi').html("<?= $bpmft[0]->misi ?>");
+				$('#modalVisiMisi').modal('show');
+			});
+		</script>
+
+
 	</body>
 
 </html>

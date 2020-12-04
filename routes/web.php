@@ -39,7 +39,7 @@ Route::post('register', 'Auth\RegisterController@create')->name('register.create
 Route::post('calon/fetch', 'CalonController@fetch')->name('calon.fetch');
 
 
-Route::get('/',     [MainController::class, 'index']);
+Route::get('/',     [MainController::class, 'index'])->name('home');
 Route::get('/chart', [MainController::class, 'chart']);
 Route::post('/vote', [MainController::class, 'vote'])->name('vote');
 

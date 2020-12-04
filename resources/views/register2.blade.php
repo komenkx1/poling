@@ -38,24 +38,10 @@
           </div>
         </div>
         <input type="submit" value="Login" class="bton" />
-        <p class="d-block d-lg-none d-md-none text-center"> sudah memiliki akun? silahkan login <a class=" "
+        <p class="d-block d-lg-none d-md-none text-center"> belum memiliki akun? silahkan daftar <a class=" "
             id="sign-up-btpn">
             disini
           </a></p>
-        <div class="social-media">
-          <a href="#" class="social-icon">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="fab fa-google"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </div>
 
       </form>
       <form method="POST" action="{{ route('register.create') }}" class="sign-up-form" enctype="multipart/form-data"
