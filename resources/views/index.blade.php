@@ -426,6 +426,7 @@
 @endsection
 
 @section('footer')
+<?php $ti = 4?>
 <script>
 	$('.btn-visiMisi').click(function(){
 		var id = $(this).data('id');
@@ -440,7 +441,7 @@
 			}
 		});
 	});
-	
+
 	var ctx = document.getElementById('smft');
 	var ctx2 = document.getElementById('bpmft');
 	var datasmft = {

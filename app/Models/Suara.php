@@ -14,13 +14,13 @@ class Suara extends Model
         'calon_id',
     ];
 
-    public function mahasiswa()
+    public function mahasiswas()
     {
-        return $this->belongsTo('App\Models\Mahasiswa');
+        return $this->hasOne('App\Models\Mahasiswa');
     }
 
-    public function calon()
+    public function calons()
     {
-        return $this->belongsTo('App\Models\Calon');
+        return $this->hasOne('App\Models\Calon');
     }
 }

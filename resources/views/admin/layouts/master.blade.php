@@ -42,7 +42,7 @@
     <div class="app-footer">
       <div class="p-2 text-xs">
         <div class="pull-right text-muted py-1">
-          &copy; Copyright <strong>Flatkit</strong> <span class="hidden-xs-down">- Built with Love v1.1.3</span>
+          &copy; Copyright <strong>Flatkit</strong> <span class="hidden-xs-down">Built with Love v1.1.3</span>
           <a ui-scroll-to="content"><i class="fa fa-long-arrow-up p-x-sm"></i></a>
         </div>
         <div class="nav">
@@ -53,7 +53,6 @@
     </div>
     @yield('content')
   </div>
-  </div><!-- /.container-fluid -->
 
 
 
@@ -112,8 +111,6 @@
          }
       } );
 } );
-  </script>
-  <script>
     $(document).ready(function() {
 
 $(".dataTable").on('click','.trash', function () { 
@@ -124,14 +121,9 @@ title.innerHTML = "Data : "+ nama;
 $('#modalDelete').attr('action', '/admin/calon/delete/' + id);
 });
   });
-  </script>
-  <script>
-    // Replace the <textarea id="editor1"> with a CKEditor 4
-  // instance, using default configuration.
-  CKEDITOR.replace( 'editor1' );
-  CKEDITOR.replace( 'editor2' );
-  </script>
-  <script>
+    CKEDITOR.replace( 'input-visi' );
+  CKEDITOR.replace( 'input-misi' );
+
     $(document).ready(function(){
     
       $('#nim').keyup(function(){ 
