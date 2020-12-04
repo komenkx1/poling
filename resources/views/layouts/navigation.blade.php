@@ -54,7 +54,7 @@
 
                                         @guest
                                         <li class="d-block d-lg-none">
-                                            <a data-hash class="dropdown-item active" href="{{ route('auth') }}">
+                                            <a  class="dropdown-item active" href="{{ route('auth') }}">
                                                 Daftar
                                             </a>
                                         </li>

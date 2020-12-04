@@ -18,9 +18,39 @@ class MainController extends Controller
         $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
         $mahasiswa = Mahasiswa::where('user_id',$id_user)->get()->first();
         $suara = Suara::with('calon')->get();
-
         return view('index', ['smft' => $smft, 'bpmft' => $bpmft, 'suara' => $suara, 'mahasiswa' => $mahasiswa]);
     }
+
+public function misi(Request $request){
+    $calonid = $request->id;
+     $visi = Calon::where('id', $calonid)->get();
+     foreach ($visi as $item) {
+     $output = '<div class="feature-box feature-box-style-2">
+     <div class="feature-box-icon">
+         <i class="icons icon-list "></i>
+     </div>
+     <div class="feature-box-info">
+         <h4 class="font-weight-bold  text-4 mb-2">VISI</h4>
+         <p id="text-misi" class=" opacity-7 text-justify">'
+        .$item->misi.
+         '</p>
+     </div>
+ </div>
+ <div class="feature-box feature-box-style-2">
+     <div class="feature-box-icon">
+         <i class="icons icon-plus "></i>
+     </div>
+     <div class="feature-box-info">
+         <h4 class="font-weight-bold  text-4 mb-2">MISI</h4>
+         <p class=" opacity-7 text-justify">'
+         .$item->visi.
+         '</p>
+     </div>
+ </div>';
+     echo($output);
+    // return \json_encode($visi);
+     }
+}
 
     public function vote(Request $request)
     {
@@ -45,10 +75,6 @@ class MainController extends Controller
         $suara_bpmft->mahasiswa_id = $mahasiswa->id;;
         $suara_bpmft->calon_id = $request->bpmft;
         $suara_bpmft->save();
-
-      
-
-        \Session::flash('sukses','Data User Berhasil Di Tambahkan');
         return "Terima kasih telah memilih";
     }
 

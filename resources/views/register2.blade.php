@@ -58,7 +58,7 @@
             <div class="" id="nimList">
             </div>
           </div>
-          <div class="input-field col-md-6">
+          <div class="input-field col-lg-6 col-md-12">
             <label>Password</label>
             <div class="pom-agile">
               <span class="fa fa-key"></span>
@@ -68,7 +68,7 @@
               <div class="invalid-feedback  text-right">(2 to 30 long)</div>
             </div>
           </div>
-          <div class="input-field col-md-6">
+          <div class="input-field col-lg-6 col-md-12">
             <label>Confirm Password</label>
             <div class="pom-agile">
               <span class="fa fa-key"></span>
@@ -116,7 +116,7 @@
       </div>
       <div class="panel right-panel">
         <div class="content">
-          <h3>Sudak Memiliki Akun ?</h3>
+          <h3>Sudah Memiliki Akun ?</h3>
           <p>
             Silahkan Melakukan Sign In Melalui Tombol Di Bawah Ini
           </p>

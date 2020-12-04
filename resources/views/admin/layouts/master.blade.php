@@ -127,6 +127,7 @@ $('#modalDelete').attr('action', '/admin/calon/delete/' + id);
   // Replace the <textarea id="editor1"> with a CKEditor 4
   // instance, using default configuration.
   CKEDITOR.replace( 'editor1' );
+  CKEDITOR.replace( 'editor2' );
 </script>
 <script>
   $(document).ready(function(){

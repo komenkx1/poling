@@ -126,7 +126,7 @@
 
 		<!-- Examples -->
 		<script src="/js/examples/examples.portfolio.js"></script>
-
+		@yield('footer')
 
 
 		<script>
@@ -140,6 +140,7 @@
 				$('#btn-See').click(function(){
 					$('#hasil-sementara').modal('show');
 				});
+				
 
 				$('#btn-submit-modal').on("click", function(event){ 
 					
@@ -153,6 +154,8 @@
 						success:function(data){
 							$('#hasil-sementara').modal('show');
 							$(".alert-success").css("display", "block");
+							$(".warning").append("<strong class='text-center text-light'>Vote Telah Disimpan</strong");
+							$(".warning-start").hide();
 							$(".alert-success").append("<strong class='text-center'>Vote Telah Disimpan</strong");
 								window.setTimeout(function() {
 								$(".alert").fadeTo(300, 0).slideUp(300, function(){

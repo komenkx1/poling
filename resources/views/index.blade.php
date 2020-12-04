@@ -192,11 +192,25 @@
 					<h2 class="font-weight-bold mb-2">Polling</h2>
 					<p class="mb-4"> PEMILIHAN KETUA SMFT & BPMFT</p>
 				</div>
-				<p class="pb-3 mb-4 appear-animation" data-appear-animation="fadeInUpShorter"
-					data-appear-animation-delay="200">Silahkan Pilih salah satu calon ketua SMFT dan BPMFT dengan cara
-					mengklik foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan.</p>
+				<div class="warning bg-danger" style="border: 1px solid black; border-radius: 5px;">
+					<p class="warning-start pt-3 text-light appear-animation font-weight-bold" data-appear-animation="fadeInUpShorter"
+						data-appear-animation-delay="200"> @guest Silahkan login terlebih dahulu dengan akun yang sudah
+						terverifikasi untuk melakukan voting @endguest
+						@auth
+						@if ($mahasiswa->status == 'voted')
+						Anda Sudah Melakukan Vote
+						@elseif($mahasiswa->status != 'terverifikasi' && $mahasiswa->status !='voted' )
+						Akun Anda Belum Terverifikasi. silahkan tunggu hingga admin memverifikasi
+						@else
+						Silahkan Pilih salah satu calon ketua SMFT dan
+						BPMFT dengan cara
+						mengklik foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan.
+						@endif
+						@endauth</p>
+				</div>
 			</div>
 		</div>
+		<br>
 		<div class="row pb-5 mb-5">
 
 			<form action="/vote" class="radio-buttons" id="#create-form" method="POST">
@@ -217,7 +231,7 @@
 							<div class="modal-footer ">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 								<button class="btn btn-primary" type="button" id="btn-submit-modal" data-toggle="modal"
-						data-target="#exampleModalalert">Submit</button>
+									data-target="#exampleModalalert">Submit</button>
 							</div>
 						</div>
 					</div>
@@ -227,10 +241,11 @@
 						<h2>SMFT</h2>
 					</div>
 					@foreach ($smft as $item)
-				
 
 					<label class="custom-radio">
-					<input type="radio" @guest disabled @endguest required id="smft" name="smft" value="{{$item->id}}" />
+						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='ready') disabled
+						@endif @endauth required id="smft" name="smft"
+						value="{{$item->id}}" />
 						<span class="radio-btn"
 							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
 								class="lar la-check-circle"></i>
@@ -241,8 +256,8 @@
 						<span>
 							<div class="button p-0 m-0">
 								<p class="font-weight-bold p-0 m-0">{{$item->nama_panggilan}}</p>
-								<button class="btn btn-primary" type="button" id="btn-visiMisi" data-toggle="modal"
-									data-target="#modalVisiMisi">Lihat Visi Misi</button>
+								<button class="btn-visiMisi btn btn-primary" type="button" id=""
+									data-id="{{$item->id}}">Lihat Visi Misi</button>
 							</div>
 						</span>
 					</label>
@@ -254,9 +269,11 @@
 						<h2>BPMFT</h2>
 					</div>
 					@foreach ($bpmft as $item)
-				
+
 					<label class="custom-radio">
-					<input type="radio" @guest disabled @endguest required id="bpmft" name="bpmft" value="{{$item->id}}" />
+						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='ready') disabled
+						@endif @endauth required id="bpmft" name="bpmft"
+						value="{{$item->id}}" />
 						<span class="radio-btn"
 							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
 								class="lar la-check-circle"></i>
@@ -267,21 +284,24 @@
 						<span>
 							<div class="button p-0 m-0">
 								<p class="font-weight-bold p-0 m-0">{{$item->nama_panggilan}}</p>
-								<button class="btn btn-primary" type="button" id="btn-visiMisi" data-toggle="modal"
-									data-target="#modalVisiMisi">Lihat Visi Misi</button>
+								<button class="btn-visiMisi btn btn-primary" type="button" id=""
+									data-id="{{$item->id}}">Lihat Visi Misi</button>
 							</div>
 						</span>
 					</label>
 
-					
+
 					@endforeach
 
 				</div>
 				<div class="clearfix"></div>
-				<div class="result mt-3 @guest d-none @endguest @auth d-flex justify-content-center @endauth">
-					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth" type="button" id="btn-submit" data-toggle="modal"
+				<div
+					class="result mt-3 @guest d-none @endguest @auth  @if($mahasiswa->status =='ready' || $mahasiswa->status =='voted')  d-none @else d-flex justify-content-center @endif @endauth">
+					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
+						type="button" id="btn-submit" data-toggle="modal"
 						data-target="#exampleModalalert">Submit</button>
-					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth" type="button" id="btn-See">Lihat Hasil Sementara</button>
+					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth"
+						type="button" id="btn-See">Lihat Hasil Sementara</button>
 				</div>
 			</form>
 		</div>
@@ -306,46 +326,25 @@
 			</div>
 		</div>
 	</section>
-	<div class="modal fade" id="modalVisiMisi" tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Visi Misi</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<div class="feature-box feature-box-style-2">
-									<div class="feature-box-icon">
-										<i class="icons icon-list "></i>
-									</div>
-									<div class="feature-box-info">
-										<h4 class="font-weight-bold  text-4 mb-2">VISI</h4>
-										<p class=" opacity-7 text-justify">
-										
-										</p>
-									</div>
-								</div>
-								<div class="feature-box feature-box-style-2">
-									<div class="feature-box-icon">
-										<i class="icons icon-plus "></i>
-									</div>
-									<div class="feature-box-info">
-										<h4 class="font-weight-bold  text-4 mb-2">MISI</h4>
-										<p class=" opacity-7 text-justify">
-											
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
+	<div class="modal fade" id="modalVisiMisi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Visi Misi</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
+				<div class="modal-body">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<section class="section bg-primary border-0 m-0">
 		<div class="container">
 			<div class="row justify-content-center text-center text-lg-left py-4">
@@ -404,4 +403,28 @@
 </div>
 
 
+@endsection
+
+@section('footer')
+<script>
+	$('.btn-visiMisi').click(function(){
+		var id = $(this).data('id');
+		
+
+// AJAX request
+$.ajax({
+url: '{{Route("visimisi")}}',
+type: 'post',
+data: {id: id},
+success: function(data){ 
+  // Add response in Modal body
+  $('.modal-body').html(data);
+console.log(id);
+  // Display Modal
+  $('#modalVisiMisi').modal('show'); 
+}
+});
+				
+				});
+</script>
 @endsection
