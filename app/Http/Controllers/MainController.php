@@ -96,29 +96,41 @@ class MainController extends Controller
 
     public function chart()
     {
-
         foreach (Calon::where('jenis_calon', 'SMFT')->cursor() as $calon_smft) {
+            $prodis = [];
+            $prodisValues = [];
             foreach (Prodi::cursor() as $prodi) {
-                $chart['SMFT'][$calon_smft->id][$prodi->id] =
-                    DB::table('suaras')
+
+                $jumlah = DB::table('suaras')
                     ->join('mahasiswas', 'suaras.mahasiswa_id', '=', 'mahasiswas.id')
                     ->join('users', 'mahasiswas.user_id', '=', 'users.id')
                     ->where('suaras.calon_id', '=', $calon_smft->id)
                     ->where('users.prodi_id', '=', $prodi->id)
                     ->get()->count();
+
+                array_push($prodis, $prodi->nama_prodi);
+                array_push($prodisValues, $jumlah);
             }
+            $chart['SMFT'][$calon_smft->nama_panggilan]['prodis'] = $prodis;
+            $chart['SMFT'][$calon_smft->nama_panggilan]['prodi_value'] = $prodisValues;
         }
 
         foreach (Calon::where('jenis_calon', 'BPMFT')->cursor() as $calon_bpmft) {
+            $prodis = [];
+            $prodisValues = [];
             foreach (Prodi::cursor() as $prodi) {
-                $chart['BPMFT'][$calon_bpmft->id][$prodi->id] =
-                    DB::table('suaras')
+                $jumlah = DB::table('suaras')
                     ->join('mahasiswas', 'suaras.mahasiswa_id', '=', 'mahasiswas.id')
                     ->join('users', 'mahasiswas.user_id', '=', 'users.id')
                     ->where('suaras.calon_id', '=', $calon_bpmft->id)
                     ->where('users.prodi_id', '=', $prodi->id)
                     ->get()->count();
+
+                array_push($prodis, $prodi->nama_prodi);
+                array_push($prodisValues, $jumlah);
             }
+            $chart['BPMFT'][$calon_bpmft->nama_panggilan]['prodis'] = $prodis;
+            $chart['BPMFT'][$calon_bpmft->nama_panggilan]['prodi_value'] = $prodisValues;
         }
 
         return json_encode($chart);

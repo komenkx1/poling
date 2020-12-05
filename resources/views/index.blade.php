@@ -426,8 +426,12 @@
 @endsection
 
 @section('footer')
-<?php $ti = 4?>
 <script>
+	var cSmft = document.getElementById('smft');
+	var cBpmft = document.getElementById('bpmft');
+
+	loadDataChart();
+
 	$('.btn-visiMisi').click(function(){
 		var id = $(this).data('id');
 		$.ajax({
@@ -442,74 +446,130 @@
 		});
 	});
 
-	var ctx = document.getElementById('smft');
-	var ctx2 = document.getElementById('bpmft');
-	var datasmft = {
-		labels: ["Sipil", "Mesin", "Elektro", "Arsitek", "TI"],
-		datasets: [
-		{
-			label: "<?php echo 'hii' ?>",
-			backgroundColor: 'rgba(255, 99, 132, 0.2)',
-			borderColor: 'rgba(255, 99, 132, 1)',
-			borderWidth: 1,
-			data: [1,2,5,6,{!!$ti!!}]
-		}, {
-			label: "Paslon 2",
-			backgroundColor: 'rgba(54, 162, 235, 0.2)',
-			borderColor: 'rgba(54, 162, 235, 1)',
-			borderWidth: 1,
-			data: [4, 3, 5, 22, 5]
-		}, {
-			label: "Paslon 3",
-			backgroundColor: 'rgba(14, 255, 108, 0.2)',
-			borderColor: 'rgba(54, 235, 65)',
-			borderWidth: 1,
-			data: [4, 3, 2, 93, 5]
-		}]
-	};
-
-	var databpmft = {
-		labels: ["Sipil", "Mesin", "Elektro", "Arsitek", "TI"],
-		datasets: [{
-			label: "Paslon 1",
-			backgroundColor: 'rgba(255, 99, 132, 0.2)',
-			borderColor: 'rgba(255, 99, 132, 1)',
-			borderWidth: 1,
-			data: [34, 11, 4, 8, 2]
-		}, {
-			label: "Paslon 2",
-			backgroundColor: 'rgba(54, 162, 235, 0.2)',
-			borderColor: 'rgba(54, 162, 235, 1)',
-			borderWidth: 1,
-			data: [44, 3, 25, 22, 5]
-		}]
-	};
-	var myChart = new Chart(ctx, {
-		type: 'bar',
-		data: datasmft,
-		options: {
-			scales: {
-			yAxes: [{
-				ticks: {
-				beginAtZero: true
-				}
-			}]
-			}
-		}
+	
+	$('#btn-See').click(function(){
+		$('#hasil-sementara').modal('show');
 	});
 
-	var myChart = new Chart(ctx2, {
-		type: 'bar',
-		data: databpmft,
-		options: {
-			scales: {
+	$('#btn-submit-modal').on("click", function(event){ 	
+		event.preventDefault()
+		var data = $('form').serialize();
+
+		$.ajax({
+			url:"{{ route('vote') }}",
+			method:"POST",
+			data: data,
+			success:function(data){
+				loadDataChart();
+				$('#hasil-sementara').modal('show');
+				$(".alert-success").css("display", "block");
+				$(".warning").append("<strong class='text-center text-light'>Vote Telah Disimpan</strong");
+				$(".warning-start").hide();
+				$(".alert-success").append("<strong class='text-center'>Vote Telah Disimpan</strong");
+					window.setTimeout(function() {
+					$(".alert").fadeTo(300, 0).slideUp(300, function(){
+							$(this).remove();
+						});
+					}, 4000);
+			},
+			error: function(data) {
+				var errors = data.responseJSON;
+				console.log(errors);
+			}
+		});
+
+	});
+
+	function loadDataChart(){
+		$.ajax({
+			url: '{{Route("chart")}}',
+			type: 'get',
+			success: function(data){
+				chart = JSON.parse(data);
+				updateChart(chart);
+			}
+		});
+	}
+
+	function updateChart(data){
+
+		var smft_calons = [];
+   	for(var k in data.SMFT) smft_calons.push(k);
+
+		var prodis = data.SMFT[smft_calons[0]].prodis;
+		var datasmft = {
+			labels: prodis,
+			datasets: [
+			{
+				label: smft_calons[0],
+				backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				borderColor: 'rgba(255, 99, 132, 1)',
+				borderWidth: 1,
+				data: data.SMFT[smft_calons[0]].prodi_value
+			}/* , {
+				label: smft_calons[1],
+				backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				borderColor: 'rgba(54, 162, 235, 1)',
+				borderWidth: 1,
+				data: data.SMFT[smft_calons[1]].prodi_value
+			}, {
+				label: smft_calons[3],
+				backgroundColor: 'rgba(14, 255, 108, 0.2)',
+				borderColor: 'rgba(54, 235, 65)',
+				borderWidth: 1,
+				data: data.SMFT[smft_calons[2]].prodi_value
+			} */]
+		};
+
+		var bpmft_calons = [];
+   	for(var k in data.BPMFT) bpmft_calons.push(k);
+
+		var databpmft = {
+			labels: prodis,
+			datasets: [{
+				label: bpmft_calons[0],
+				backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				borderColor: 'rgba(255, 99, 132, 1)',
+				borderWidth: 1,
+				data: data.BPMFT[bpmft_calons[0]].prodi_value
+			}/* , {
+				label: bpmft_calons[0],
+				backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				borderColor: 'rgba(54, 162, 235, 1)',
+				borderWidth: 1,
+				data: data.BPMFT[bpmft_calons[1]].prodi_value
+			} */]
+		};
+
+		var chartSMFT = new Chart(cSmft, {
+			type: 'bar',
+			data: datasmft,
+			options: {
+				scales: {
 				yAxes: [{
 					ticks: {
 					beginAtZero: true
 					}
 				}]
+				}
 			}
-		}
-	});
+		});
+
+		var chartBPMFT = new Chart(cBpmft, {
+			type: 'bar',
+			data: databpmft,
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+						beginAtZero: true
+						}
+					}]
+				}
+			}
+		});
+	}
+
+	
 </script>
 @endsection
