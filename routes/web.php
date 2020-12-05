@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 Route::auth();
 // Route::get("/register", 'RegisterController@index');
 // Route::get('register', 'RegisterController@index')->name('search');
+Route::get('register', 'Auth\RegisterController@index')->name('register');
 Route::get('auth', 'Auth\RegisterController@index')->name('auth');
 Route::view('visi-misi', 'visi-misi');
 // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -64,7 +65,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get("admin/calon/edit/{calon:id}", 'CalonController@edit');
     Route::put("admin/calon/update/{calon:id}", 'CalonController@update');
     Route::delete("admin/calon/delete/{calon:id}", 'CalonController@destroy');
-    Route::view("admin/mahasiswa", 'admin/mahasiswa/index');
+    Route::get("admin/mahasiswa", 'MahasiswaController@index');
+    Route::put("admin/mahasiswa/verif/{mahasiswa:id}", 'MahasiswaController@verif');
 });
 
 

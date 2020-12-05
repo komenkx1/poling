@@ -45,7 +45,7 @@
 
               <div class="form-group">
                 <label for="exampleInputFile">Foto</label>
-                <input type="file" id="exampleInputFile" class="form-control" name="photo_url">
+                <input type="file" id="exampleInputFile" class="form-control" name="photo_url" required>
               </div>
 
               <button type="submit" class="btn white m-b">Submit</button>

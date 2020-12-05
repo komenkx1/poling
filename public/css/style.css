@@ -117,13 +117,16 @@ form.sign-in-form {
     letter-spacing: 1px;
     flex-basis: 95%;
     -webkit-flex-basis: 95%;
-    width: 100%;
+    width: 90%;
     -webkit-appearance: none!important;
     -moz-appearance: none!important;
     appearance: none!important;
 }
 
-
+.maks-size-file{
+  position: relative;
+  bottom: 15px;
+}
 /* //form */
 
 
@@ -160,7 +163,6 @@ position: relative;
 
 .valid-feedback {
   display: none;
-  width: 50%!important;
   margin-top: .25rem;
   font-size: 80%;
   color: #dc3545;

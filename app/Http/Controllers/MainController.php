@@ -20,15 +20,9 @@ class MainController extends Controller
         $smft = Calon::where('jenis_calon', 'SMFT')->get();
         $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
         $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
-        $ti = User::select('users.prodi_id', 'suaras.calon_id')
-            ->join('mahasiswas', 'users.id', '=', 'mahasiswas.user_id')
-            ->join('suaras', 'mahasiswas.id', '=', 'suaras.mahasiswa_id')
-            ->where('users.prodi_id', 5)
-            ->where('suaras.calon_id', 5)
-            ->get()->count();
         if (Auth::user()) {
             $suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
-            return view('index', ['smft' => $smft, 'bpmft' => $bpmft, 'suara' => $suara, 'mahasiswa' => $mahasiswa, 'ti' => $ti]);
+            return view('index', ['smft' => $smft, 'bpmft' => $bpmft, 'suara' => $suara, 'mahasiswa' => $mahasiswa]);
         } else {
             return view('index', ['smft' => $smft, 'bpmft' => $bpmft,  'mahasiswa' => $mahasiswa]);
         }
@@ -47,9 +41,10 @@ class MainController extends Controller
                 </div>
                 <div class="feature-box-info">
                     <h4 class="font-weight-bold  text-4 mb-2">VISI</h4>
-                    <p id="text-misi" class=" opacity-7 text-justify">'
-                . $item->misi .
-                '</p>
+                    <div id="text-misi" class=" opacity-7 text-justify">'
+                    . $item->visi .
+               
+                '</div>
                 </div>
             </div>
             <div class="feature-box feature-box-style-2">
@@ -58,9 +53,9 @@ class MainController extends Controller
                 </div>
                 <div class="feature-box-info">
                     <h4 class="font-weight-bold  text-4 mb-2">MISI</h4>
-                    <p class=" opacity-7 text-justify">'
-                . $item->visi .
-                '</p>
+                    <div class=" opacity-7 text-justify">'
+                    . $item->misi .
+                '</div>
                 </div>
             </div>';
             echo ($output);

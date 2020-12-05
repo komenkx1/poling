@@ -18,12 +18,12 @@
            
               <li class="nav-item dropdown">
                 <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
-                  <span class="avatar w-32">
-                    <img src="../assets/images/a0.jpg" alt="...">
-                    <i class="on b-white bottom"></i>
+                  <span class="avatar w-50">
+                    <p style="position: relative;top:10px">{{Auth::user()->nim}}</p>
+                  
                   </span>
                 </a>
-                <div ui-include="'../views/blocks/dropdown.user.html'"></div>
+                <div ui-include="'/../views/blocks/dropdown.user.html'"></div>
               </li>
               <li class="nav-item hidden-md-up">
                 <a class="nav-link pl-2" data-toggle="collapse" data-target="#collapse">

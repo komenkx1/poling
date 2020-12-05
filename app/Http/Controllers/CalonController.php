@@ -129,7 +129,7 @@ class CalonController extends Controller
             'visi' => 'required',
             'misi' => 'required',
             'jenis_calon' => 'required',
-            'photo_url' => 'required|file|max:2000'
+            'photo_url' => 'max:2000'
         ]);
 
 
@@ -138,16 +138,16 @@ class CalonController extends Controller
             \Storage::delete($calon->photo_url); // menghapus gambar atau file
             $gambar = $request->file('photo_url');
             $urlgambar = $gambar->storeAs("img/calon", "{$slug}.{$gambar->extension()}");
-        } else {
-            $gambar = $request->file('photo_url');
-            $urlgambar = $gambar->storeAs("img/calon", "{$slug}.{$gambar->extension()}");
+            $calon->photo_url = $urlgambar;
+        }else{
+            null;
         }
         $calon->user_id = $request->user_id;
         $calon->nama_panggilan = $request->nama_panggilan;
         $calon->visi = $request->visi;
         $calon->misi = $request->misi;
         $calon->jenis_calon = $request->jenis_calon;
-        $calon->photo_url = $urlgambar;
+        
         $calon->update();
         return redirect('admin/calon');
         // dd($calon);

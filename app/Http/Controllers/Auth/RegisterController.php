@@ -92,6 +92,13 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
+
+        $this->validate($request, [
+            'nim' => 'required',
+            'password' => 'required|min:2|max:30',
+            'file_url' => 'required|max:2000'
+        ]);
+
         $kode_prodi = substr($request->nim, 4, -3);
         $prodi = Prodi::where('kode_prodi', $kode_prodi)->first();
 

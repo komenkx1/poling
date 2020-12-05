@@ -15,26 +15,36 @@
 </head>
 
 <body>
-  <div class="containers sign-up-mode">
+  <div class="containers @if (Route::currentRouteName() == 'register') sign-up-mode @endif">
     <div class="signin-signup">
-      <form method="POST" action="{{ route('login') }}" class="sign-in-form" style="transform: translate(0%, -30%);">
+      <form method="POST" action="{{ route('login') }}" class="sign-in-form" style="transform: translate(0%, -25%);">
         @csrf
 
         <h2 class="title">Sign in</h2>
         <div class="row">
           <div class="input-field col-md-12">
-            <label>Your Nim</label>
+            <label>Nim</label>
             <div class="pom-agile">
               <span class="fa fa-user"></span>
-              <input placeholder="Your Nim" type="text" name="nim" id="nim2" required="">
+              <input placeholder="Nim" type="text" class=" @error('nim') is-invalid @enderror" name="nim" id="nim2" required="">
             </div>
+            @error('nim')
+            <p class="text-danger" role="alert">
+                <strong>{{ $message }}</strong>
+            </p>
+            @enderror
           </div>
           <div class="input-field col-md-12">
             <label>password</label>
             <div class="pom-agile">
               <span class="fa fa-lock"></span>
-              <input placeholder="password" name="password" type="password" required="">
+              <input placeholder="password"  class=" @error('password') is-invalid @enderror"  name="password" type="password" required="">
             </div>
+            @error('password')
+            <p class="text-danger" role="alert">
+                <strong>{{ $message }}</strong>
+            </p>
+            @enderror
           </div>
         </div>
         <input type="submit" value="Login" class="bton" />
@@ -49,10 +59,10 @@
         <h2 class="title">Sign Up</h2>
         <div class="row">
           <div class="input-field col-md-12">
-            <label>Your Nim</label>
+            <label>Nim</label>
             <div class="pom-agile">
               <span class="fa fa-user"></span>
-              <input placeholder="Your Nim" name="nim" id="nim" type="text" required="">
+              <input placeholder="Nim" name="nim" id="nim" type="text" required="">
             </div>
             <div class="" id="nimList">
             </div>
@@ -63,19 +73,21 @@
               <span class="fa fa-key"></span>
               <input type="password" name="password" placeholder="Pasword" id="pwdId" class="form"
                 pattern="^[0-9a-zA-Z]{2,30}$" required>
-              <div class="valid-feedback text-right">Valid</div>
-              <div class="invalid-feedback  text-right">(2 to 30 long)</div>
             </div>
+            <div class="valid-feedback" style="position:relative;bottom:10px;" id=pwdValid>Valid</div>
+            <div class="invalid-feedback " style="position:relative;bottom:10px;" id=pwdInValid>(min 2 to 30 max)</div>
           </div>
           <div class="input-field col-lg-6 col-md-12">
             <label>Confirm Password</label>
             <div class="pom-agile">
+              
               <span class="fa fa-key"></span>
               <input type="password" name="password_confirmation" placeholder="Confirm Password" id="cPwdId"
                 class="form myCpwdClass" pattern="^[0-9a-zA-Z]{2,30}$" required>
-
-              <div id="cPwdValid" class="valid-feedback text-right">Passwords Match</div>
-              <div id="cPwdInvalid" class="invalid-feedback  text-right">a to z only (2 to 6 long)</div>
+            </div>
+            <div class="alert-pass">
+              <div id="cPwdValid" class="valid-feedback" style="position:relative;bottom:10px;">Passwords Match</div>
+              <div id="cPwdInvalid" class="invalid-feedback " style="position:relative;bottom:10px;">a to z only (2 to 6 long)</div>
             </div>
           </div>
 
@@ -84,10 +96,15 @@
             <div class="pom-agile">
               <label class="text-left font-" for="customFile" id="custom-File" style="line-height: 2">Choose
                 file</label>
-              <input placeholder="Masukan Foto" name="file_url" type="file" id="customFile" required>
+              <input placeholder="Masukan Foto" class=" @error('file_url') is-invalid @enderror" name="file_url" type="file" id="customFile" required>
               <span class="fa fa-folder" style="line-height: 2"></span>
-              <div id="fileInvalid" class="invalid-feedback">a to z only (2 to 6 long)</div>
             </div>
+            <small class="maks-size-file text-danger mb-5">*maks file 2Mb</small>
+            @error('file_url')
+            <p class="text-danger" role="alert">
+                <strong>File tidak boleh lebih dari 2mb</strong>
+            </p>
+            @enderror
           </div>
         </div>
         <input type="submit" value="Submit" id="submitBtn" class="bton justify-content-center gx-auto">

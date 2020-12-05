@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -15,9 +16,19 @@ class MahasiswaController extends Controller
     public function index()
     {
         $mahasiswa = Mahasiswa::all();
-        return view('mahasiswa', ['mahasiswa' => $mahasiswa]);
+        $user = User::with('mahasiswa')->get();
+        return view('admin/mahasiswa/index', ['mahasiswa' => $mahasiswa,'user'=>$user]);
     }
 
+    public function verif(Request $request, Mahasiswa $mahasiswa)
+    {
+        $mahasiswa->id = $request->id;
+        $mahasiswa->status = 'terverifikasi';
+        $mahasiswa->verified_at = date('Y-m-d');
+        $mahasiswa->update();
+        // dd($mahasiswa);
+       return redirect('/admin/mahasiswa');
+    }
     /**
      * Show the form for creating a new resource.
      *

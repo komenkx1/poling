@@ -141,3 +141,100 @@
   
 
 @endsection
+@section('footer')
+    <script>
+      var cSmft = document.getElementById('smft');
+	var cBpmft = document.getElementById('bpmft');
+
+	loadDataChart();
+	function loadDataChart(){
+		$.ajax({
+			url: '{{Route("chart")}}',
+			type: 'get',
+			success: function(data){
+				chart = JSON.parse(data);
+				updateChart(chart);
+			}
+		});
+	}
+
+	function updateChart(data){
+
+		var smft_calons = [];
+   	for(var k in data.SMFT) smft_calons.push(k);
+
+		var prodis = data.SMFT[smft_calons[0]].prodis;
+		var datasmft = {
+			labels: prodis,
+			datasets: [
+			{
+				label: smft_calons[0],
+				backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				borderColor: 'rgba(255, 99, 132, 1)',
+				borderWidth: 1,
+				data: data.SMFT[smft_calons[0]].prodi_value
+			} , {
+				label: smft_calons[1],
+				backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				borderColor: 'rgba(54, 162, 235, 1)',
+				borderWidth: 1,
+				data: data.SMFT[smft_calons[1]].prodi_value
+			} , {
+				label: smft_calons[2],
+				backgroundColor: 'rgba(14, 255, 108, 0.2)',
+				borderColor: 'rgba(54, 235, 65)',
+				borderWidth: 1,
+				data: data.SMFT[smft_calons[2]].prodi_value
+			} ]
+		};
+
+		var bpmft_calons = [];
+   	for(var k in data.BPMFT) bpmft_calons.push(k);
+
+		var databpmft = {
+			labels: prodis,
+			datasets: [{
+				label: bpmft_calons[0],
+				backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				borderColor: 'rgba(255, 99, 132, 1)',
+				borderWidth: 1,
+				data: data.BPMFT[bpmft_calons[0]].prodi_value
+			} , {
+				label: bpmft_calons[1],
+				backgroundColor: 'rgba(54, 162, 235, 0.2)',
+				borderColor: 'rgba(54, 162, 235, 1)',
+				borderWidth: 1,
+				data: data.BPMFT[bpmft_calons[1]].prodi_value
+			} ]
+		};
+
+		var chartSMFT = new Chart(cSmft, {
+			type: 'bar',
+			data: datasmft,
+			options: {
+				scales: {
+				yAxes: [{
+					ticks: {
+					beginAtZero: true
+					}
+				}]
+				}
+			}
+		});
+
+		var chartBPMFT = new Chart(cBpmft, {
+			type: 'bar',
+			data: databpmft,
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+						beginAtZero: true
+						}
+					}]
+				}
+			}
+		});
+	}
+    </script>
+@endsection

@@ -24,14 +24,16 @@
                   </div>
                   <div class="form-group">
                     <label for="visi">Visi</label>
-                    <textarea name="visi" id="editor1" class="form-control" rows="10" cols="80" placeholder="Masukkan Visi">
-                    {{$calon->visi}}
+                    <textarea name="visi" id="input-visi" name="visi" class="form-control" rows="10" cols="80"
+                      placeholder="Masukkan Visi">
+                      {!!$calon->visi!!}
                     </textarea>
                   </div>
                   <div class="form-group">
                     <label for="misi">Misi</label>
-                    <textarea name="misi" id="editor2" class="form-control" rows="10" cols="80" placeholder="Masukkan Misi">
-                        {{$calon->misi}}
+                    <textarea name="misi" id="input-misi" name="misi" class="form-control" rows="10" cols="80"
+                      placeholder="Masukkan Misi">
+                      {!!$calon->misi!!}
                     </textarea>
                   </div>
                   <div class="form-group">
@@ -52,7 +54,14 @@
                  
                     <img src="{{$calon->takeimage}}" width="10%" alt="">
                     </div>
-                <input type="file" id="exampleInputFile" class="form-control" name="photo_url">
+                <input type="file" id="exampleInputFile" class="form-control @error('photo_url') is-invalid @enderror" name="photo_url">
+                @error('photo_url')
+                {{--default laravel = {{$message}} == the field is required--}}
+                <div class="invalid-feedback">
+                    {{-- pemanggilan error validasi --}}
+                    <b style="color: red">File tidak Boleh Lebih Dari 2mb</b>
+                </div>
+            @enderror
               <input type="hidden" id="exampleInputFile" value="{{$calon->photo_url}}" class="form-control" name="old_photo_url">
               </div>
             

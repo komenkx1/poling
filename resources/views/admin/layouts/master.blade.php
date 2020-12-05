@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css ">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css">
 
   <link rel="stylesheet" href="/../assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
   <!-- build:css ../assets/styles/app.min.css -->
@@ -71,6 +72,7 @@
   <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
   <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
   <script src="/html/scripts/ui-jp.js"></script>
   <script src="/html/scripts/ui-include.js"></script>
@@ -85,12 +87,13 @@
   <script src="/html/scripts/app.js"></script>
   <script src="/js/custom.js"></script>
 
-
+@yield('footer')
   <script>
     $(document).ready(function() {
     $('#example').DataTable( {
+      "order": false,
          initComplete: function() {
-        this.api().columns("4").every(function() {
+        this.api().columns("3").every(function() {
           var column = this;
           var select = $('#selectfilter')
             .appendTo($("#selectfilter"))
@@ -149,6 +152,10 @@ $(document).on('click', 'li', function(){
 });
     
     });
+  </script>
+  <script>
+  $("[data-fancybox]").fancybox();
+});
   </script>
   <!-- endbuild -->
 </body>

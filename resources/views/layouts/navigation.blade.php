@@ -54,7 +54,7 @@
 
                                         @guest
                                         <li class="d-block d-lg-none">
-                                            <a  class="dropdown-item active" href="{{ route('auth') }}">
+                                            <a  class="dropdown-item active" href="{{ route('register') }}">
                                                 Daftar
                                             </a>
                                         </li>
@@ -95,7 +95,7 @@
                 <ul class="nav nav-pills">
                     @guest
                     <li class="nav-item dropdown nav-item-left-border  border-black">
-                    <a class="nav-link" href="{{route('auth')}}" role="button" id="dropdownLanguage"
+                    <a class="nav-link" href="{{route('register')}}" role="button" id="dropdownLanguage"
                             aria-haspopup="true" aria-expanded="false">
                             Daftar
                            

@@ -39,6 +39,15 @@ $(document).ready(function(){
     
       // ------------ Check passwords similarity --------------
       $('#pwdId, #cPwdId').on('keyup', function () {
+
+        if ($('#pwdId').val().length  >= 2 && $('#pwdId').val().length < 30){
+          $('#pwdInValid').hide();
+          $('#pwdValid').show();
+        }else{
+          $('#pwdValid').hide();
+          $('#pwdInValid').show();
+
+        }
         if ($('#pwdId').val() != '' && $('#cPwdId').val() != '' && $('#pwdId').val() == $('#cPwdId').val() ) {
           $('#cPwdValid').show();
           $('#cPwdInvalid').hide();
