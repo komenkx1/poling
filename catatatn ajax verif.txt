@@ -93,29 +93,6 @@
     $(document).ready(function() {
       
 
-    $('#example').DataTable( {
-      "order": false,
-         initComplete: function() {
-        this.api().columns("3").every(function() {
-          var column = this;
-          var select = $('#selectfilter')
-            .appendTo($("#selectfilter"))
-            .on('change', function() {
-              var val = $.fn.dataTable.util.escapeRegex(
-                $(this).val()
-              );
-
-              column
-                .search(val ? '^' + val + '$' : '', true, false)
-                .draw();
-            });
-
-          column.data().unique().sort().each(function(d, j) {
-            select.append('<option value="' + d + '">' + d + '</option>')
-          });
-        });
-         }
-      } );
 } );
     $(document).ready(function() {
 
@@ -161,16 +138,9 @@ $(document).on('click', 'li', function(){
 });
   </script>
   <script>
-  $(document).on("click", '.btn-verif',function(){ 
-    var id = $(this).data('id');
-    $('#btnVerif').attr('data-id', id)
-    $('#verif').modal('show');
-	})
-
-  $(document).on("click",'#btnVerif',function(){
-    event.preventDefault()
-		var data = $(this).attr('data-id');
-    console.log(data);
+    $(document).on("click", '.btn-verif',function(){
+	event.preventDefault()
+		var data = $(this).data('id');
     var table = $('#example').DataTable(); 
     $.ajaxSetup({
 					headers: {
@@ -182,8 +152,8 @@ $(document).on('click', 'li', function(){
 			url: '/admin/mahasiswa/verif/' + data,
 			type: 'put',
 			data: data,
-			success: function(data){
-        loaddata();
+			success: function(response){
+        $('#example').DataTable().ajax.reload();
 
 			},
       error: function(data) {
@@ -191,47 +161,110 @@ $(document).on('click', 'li', function(){
 				console.log(errors);
 			}
 		});
-  })
+	});
   </script>
+  
   <script>
-    
-    
-      loaddata();
-
-      function loaddata(){
-      $.ajax({
-			url: '/admin/mahasiswa/data',
-			type: 'get',
-			dataType: 'html',
-			success: function(data){
-       
-           // Destroy existing table
-        $('#example').DataTable().destroy();
-        
-        $('.hasil').html(data);
-         // Initialize the table
-         $('#example').DataTable({
-          "bStateSave": true,
-        "fnStateSave": function (oSettings, oData) {
-            localStorage.setItem('example', JSON.stringify(oData));
-            
-        },
-        "fnStateLoad": function (oSettings, oData) {
-            return JSON.parse(localStorage.getItem('example'));
-           
-        }
-         });
-			},
-      error: function(data) {
-				var errors = data.responseJSON;
-				console.log(errors);
-			}
-		});
-  };
-
-
+    $(document).ready(function() {
+     
+            $('#example').dataTable({
+              
+                "serverSide" : true,
+                "ajax" : {
+                    "url" : "/admin/mahasiswa/data",
+                    "type" : "GET",
+                    "dataSrc": ""
+                },
+                "columns" : [ {
+                    "data" : "id"
+                }, {
+                    "data" : "status"
+                },{
+                  "data": function(item) {
+                    return '<div class=" text-center"><a href="/storage/'+item.file_url+'" data-fancybox="gallery" data-caption="/storage/'+item.file_url+'" ><img src="/storage/'+item.file_url+'" alt="avatar" style="max-width: 100px"></a></div>';
+                  }
+                 },{
+                    "data" : "verified_at"
+                },
+                {
+                  "data": function(item) {
+                    return '<div class=" text-center"><button class="btn-verif btn  btn-danger" type="button" data-id='+item.id +'>Verif</button></div>';
+                  }
+                 } ]
+            });
+        });
+  
   </script>
+  {{-- <script>
+   $(document).on("click", '.btn-verif', function(event) { 
+    alert("new link clicked!");
+});
+  </script> --}}
   <!-- endbuild -->
 </body>
 
 </html>
+---- master ---
+
+@extends('/admin/layouts/master',['title'=>'Mahasiswa'])
+@section('content')
+
+      <!-- Small boxes (Stat box) -->
+<!-- ############ PAGE START-->
+<div ui-view class="app-body" id="view">
+ <!-- ############ PAGE START-->
+<div class="padding">
+    <div class="box">
+      <div class="box-header">
+        <a href="mahasiswa/create" class="btn btn-success">Create</a>
+        <small>List Mahasiswa</small>
+        <div class="form-group">
+            <select class="form-control" name="" id="selectfilter">
+                <option value="" >--All--</option>
+            </select>
+        </div>
+      </div>
+      <div class="p-3">
+         
+        <table id="example"  class="table table-striped table-bordered dt-responsive nowrap">
+          <thead>
+            <tr>
+                <th>
+                   id
+                </th>
+                <th>
+                  Status
+              </th>
+                <th>
+                    File
+                </th>
+
+                <th>
+                    Verified At
+                </th>
+                <th class="text-center">
+                  Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+      
+          </tbody>
+    
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ############ PAGE END-->
+
+    </div>
+  </div>
+  <!-- / -->
+
+  <!-- theme switcher -->
+
+
+@endsection
+
+-- index --

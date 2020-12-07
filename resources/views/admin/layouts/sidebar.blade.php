@@ -18,7 +18,16 @@
               <li class="nav-header hidden-folded">
                 <small class="text-muted">Main</small>
               </li>
-              
+              <li class="@if($title == 'Dashboard') active @endif ">
+                <a href="/admin">
+                  <span class="nav-icon ">
+                    <i class="fa fa-dashboard">
+                      <span ui-include="'/../assets/images/i_0.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text ">Dashboard</span>
+                </a>
+              </li>
               <li class="@if($title == 'Mahasiswa') active @endif ">
                 <a href="/admin/mahasiswa">
                   <span class="nav-icon ">
@@ -32,11 +41,21 @@
               <li class="@if($title == 'Calon') active @endif ">
                 <a href="/admin/calon">
                   <span class="nav-icon ">
-                    <i class="fa fa-users">
+                    <i class="fa fa-user">
                       <span ui-include="'/../assets/images/i_0.svg'"></span>
                     </i>
                   </span>
                   <span class="nav-text ">Calon</span>
+                </a>
+              </li>
+              <li class="@if($title == 'Absen') active @endif ">
+                <a href="/admin/absen">
+                  <span class="nav-icon ">
+                    <i class="fa fa-tasks">
+                      <span ui-include="'/../assets/images/i_0.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text ">Absen</span>
                 </a>
               </li>
 

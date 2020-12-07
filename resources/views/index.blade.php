@@ -19,11 +19,11 @@
 				<div class="chart">
 					<div class="item m-3">
 						<p class="text-center font-weight-bold"># Vote SMFT</p>
-						<canvas id="smft" width="250" height="150"></canvas>
+						<canvas id="smft" width="250" height="180"></canvas>
 					</div>
 					<div class="item m-3">
 						<p class="text-center font-weight-bold"># Vote BPMFT</p>
-						<canvas id="bpmft" width="250" height="150"></canvas>
+						<canvas id="bpmft" width="250" height="180"></canvas>
 					</div>
 				</div>
 			</div>

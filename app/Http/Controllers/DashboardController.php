@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Calon;
+use App\Models\Suara;
+
 
 class DashboardController extends Controller
 {
@@ -13,7 +16,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin/index');
+        $smft = Calon::where('jenis_calon', 'SMFT')->get();
+        $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
+        $no_smft =1;
+        $no_bpm =1;
+        return view('admin/index',['bpmft'=>$bpmft,'smft'=>$smft,'no_smft'=>$no_smft,'no_bpm'=>$no_bpm]);
     }
 
     /**

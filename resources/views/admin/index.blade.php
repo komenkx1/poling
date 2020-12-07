@@ -19,67 +19,42 @@
             <h4 class="ml-3">SMFT</h4>
           </div>
           <hr>
+          @foreach ($smft as $item)
+              
+
           <li class="list-item">
             <a herf class="list-left">
               <span class="w-40 circle danger">
-                <strong class="text-lg">1</strong>
+              <strong class="text-lg @if($no_smft != 1) text-muted @endif">{{$no_smft++}}</strong>
               </span>
             </a>
             <div class="list-body">
-              <div ><a href class="_600 ">East Asia &amp; Pacific</a>
+            <div ><a href class="_600 ">{{$item->nama_panggilan}}</a>
+              
               </div>
+ 
               <small class="text-muted">Vote : 300 </small>
             </div>
           </li>
-          <li class="list-item">
-            <a herf class="list-left">
-              <span class="w-40 circle light lt">
-                <strong class="text-lg text-muted">2</strong>
-              </span>
-            </a>
-            <div class="list-body">
-              <div><a href class="_600">Europe &amp; Central Asia</a></div>
-            </div>
-            <small class="text-muted">Vote : 300 </small>
-          </li>
-          <li class="list-item">
-            <a herf class="list-left">
-              <span class="w-40 circle light lt">
-                <strong class="text-lg text-muted">3</strong>
-              </span>
-            </a>
-            <div class="list-body">
-              <div><a href class="_600">Latin America &amp; Caribbean</a></div>
-            </div>
-            <small class="text-muted">Vote : 300 </small>
-          </li>
+          @endforeach
           <hr>
           <div class="title-post">
             <h4 class="ml-3">BPMFT</h4>
           </div>
           <hr>
+          @foreach ($bpmft as $item)
           <li class="list-item">
             <a herf class="list-left">
-              <span class="w-40 circle danger lt">
-                <strong class="text-lg text-muted">1</strong>
+              <span class="w-40 circle danger">
+                <strong class="text-lg @if($no_bpm != 1) text-muted @endif">{{$no_bpm++}}</strong>
               </span>
             </a>
             <div class="list-body">
-              <div><a href class="_600">Middle East &amp; North Africa</a></div>
+              <div><a href class="_600">{{$item->nama_panggilan}}</a></div>
             </div>
             <small class="text-muted">Vote : 300 </small>
           </li>
-          <li class="list-item">
-            <a herf class="list-left">
-              <span class="w-40 circle light lt">
-                <strong class="text-lg text-muted">2</strong>
-              </span>
-            </a>
-            <div class="list-body">
-              <div><a href class="_600">South Asia</a></div>
-            </div>
-            <small class="text-muted">Vote : 300 </small>
-          </li>
+ @endforeach
         </ul>
       </div>
      

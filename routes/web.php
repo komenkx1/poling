@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put("admin/calon/update/{calon:id}", 'CalonController@update');
     Route::delete("admin/calon/delete/{calon:id}", 'CalonController@destroy');
     Route::get("admin/mahasiswa", 'MahasiswaController@index');
+    Route::get("admin/mahasiswa/data", 'MahasiswaController@data');
     Route::put("admin/mahasiswa/verif/{mahasiswa:id}", 'MahasiswaController@verif');
 });
 
