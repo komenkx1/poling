@@ -66,22 +66,27 @@ class MainController extends Controller
 
     public function vote(Request $request)
     {
-        $id_user = Auth::id();
-        $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
-        $mahasiswa->id = $mahasiswa->id;
-        $mahasiswa->status = 'voted';
-        $mahasiswa->update();
+        if (isset($request->smft) && isset($request->bpmft)) {
+            $id_user = Auth::id();
+            $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
+            $mahasiswa->id = $mahasiswa->id;
+            $mahasiswa->status = 'voted';
+            $mahasiswa->update();
 
-        $suara_smft = new Suara();
-        $suara_smft->mahasiswa_id = $mahasiswa->id;
-        $suara_smft->calon_id = $request->smft;
-        $suara_smft->save();
+            $suara_smft = new Suara();
+            $suara_smft->mahasiswa_id = $mahasiswa->id;
+            $suara_smft->calon_id = $request->smft;
+            $suara_smft->save();
 
-        $suara_bpmft = new Suara();
-        $suara_bpmft->mahasiswa_id = $mahasiswa->id;;
-        $suara_bpmft->calon_id = $request->bpmft;
-        $suara_bpmft->save();
-        return "Terima kasih telah memilih";
+            $suara_bpmft = new Suara();
+            $suara_bpmft->mahasiswa_id = $mahasiswa->id;;
+            $suara_bpmft->calon_id = $request->bpmft;
+            $suara_bpmft->save();
+
+            return "Terima kasih telah memilih";
+        } else {
+            return "Silahkan pilih salah satu calon ketua SMFT dan BPMFT";
+        }
     }
 
     public function chart()
