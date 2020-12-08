@@ -88,150 +88,128 @@
   <script src="/html/scripts/app.js"></script>
   <script src="/js/custom.js"></script>
 
-@yield('footer')
   <script>
     $(document).ready(function() {
-      
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
 
-    $('#example').DataTable( {
-      "order": false,
-         initComplete: function() {
-        this.api().columns("3").every(function() {
-          var column = this;
-          var select = $('#selectfilter')
-            .appendTo($("#selectfilter"))
-            .on('change', function() {
-              var val = $.fn.dataTable.util.escapeRegex(
-                $(this).val()
-              );
+      $('#example').DataTable({
+        "order": false,
+        initComplete: function() {
+          this.api().columns("3").every(function() {
+            var column = this;
+            var select = $('#selectfilter')
+              .appendTo($("#selectfilter"))
+              .on('change', function() {
+                var val = $.fn.dataTable.util.escapeRegex(
+                  $(this).val()
+                );
 
-              column
-                .search(val ? '^' + val + '$' : '', true, false)
-                .draw();
+                column
+                  .search(val ? '^' + val + '$' : '', true, false)
+                  .draw();
+              });
+
+            column.data().unique().sort().each(function(d, j) {
+              select.append('<option value="' + d + '">' + d + '</option>')
             });
-
-          column.data().unique().sort().each(function(d, j) {
-            select.append('<option value="' + d + '">' + d + '</option>')
           });
-        });
-         }
-      } );
-} );
-    $(document).ready(function() {
+        }
+      });
 
-$(".dataTable").on('click','.trash', function () { 
-var id = $(this).data('id');
-var nama = $(this).data('nama');
-var title = document.getElementById("myModalLabel");
-title.innerHTML = "Data : "+ nama;
-$('#modalDelete').attr('action', '/admin/calon/delete/' + id);
-});
-  });
-    CKEDITOR.replace( 'input-visi' );
-  CKEDITOR.replace( 'input-misi' );
-
-    $(document).ready(function(){
-    
+      $(".dataTable").on('click','.trash', function () { 
+        var id = $(this).data('id');
+        var nama = $(this).data('nama');
+        var title = document.getElementById("myModalLabel");
+        title.innerHTML = "Data : "+ nama;
+        $('#modalDelete').attr('action', '/admin/calon/delete/' + id);
+      });
+          
       $('#nim').keyup(function(){ 
-  var query = $(this).val();
-  if(query != '')
-  {
-   var _token = $('input[name="_token"]').val();
-   $.ajax({
-    url:"{{ route('calon.fetch') }}",
-    method:"POST",
-    data:{query:query, _token:_token},
-    success:function(data){
-     $('#nimList').fadeIn();  
+        var query = $(this).val();
+        if(query != ''){
+          var _token = $('input[name="_token"]').val();
+          $.ajax({
+            url:"{{ route('calon.fetch') }}",
+            method:"POST",
+            data:{query:query, _token:_token},
+            success:function(data){
+              $('#nimList').fadeIn();  
               $('#nimList').html(data);
-    }
-   });
-  }
-});
+            }
+          });
+        }
+      });
 
-$(document).on('click', 'li', function(){  
-  $('#nim').val($(this).text().replace(/[^0-9\.]/g, ''));  
-  $('#nimList').fadeOut();  
-});
-    
-    });
-  </script>
-  <script>
-  $("[data-fancybox]").fancybox();
-});
-  </script>
-  <script>
-  $(document).on("click", '.btn-verif',function(){ 
-    var id = $(this).data('id');
-    $('#btnVerif').attr('data-id', id)
-    $('#verif').modal('show');
-	})
+      $(document).on('click', 'li', function(){  
+        $('#nim').val($(this).text().replace(/[^0-9\.]/g, ''));  
+        $('#nimList').fadeOut();  
+      });
+          
+      $("[data-fancybox]").fancybox();
 
-  $(document).on("click",'#btnVerif',function(){
-    event.preventDefault()
-		var data = $(this).attr('data-id');
-    console.log(data);
-    var table = $('#example').DataTable(); 
-    $.ajaxSetup({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
-				});
+      $(document).on("click", '.btn-verif',function(){ 
+          var id = $(this).data('id');
+          $('#btnVerif').attr('data-id', id)
+          $('#verif').modal('show');
+      });
 
-		$.ajax({
-			url: '/admin/mahasiswa/verif/' + data,
-			type: 'put',
-			data: data,
-			success: function(data){
-        loaddata();
+      $(document).on("click",'#btnVerif',function(){
+        event.preventDefault()
+        var data = $(this).attr('data-id');
+        console.log(data);
+        var table = $('#example').DataTable(); 
 
-			},
-      error: function(data) {
-				var errors = data.responseJSON;
-				console.log(errors);
-			}
-		});
-  })
-  </script>
-  <script>
-    
-    
+        $.ajax({
+          url: '/admin/mahasiswa/verif/' + data,
+          type: 'put',
+          data: data,
+          success: function(data){
+            loaddata();
+
+          },
+          error: function(data) {
+            var errors = data.responseJSON;
+            console.log(errors);
+          }
+        });
+      })
+
       loaddata();
 
       function loaddata(){
-      $.ajax({
-			url: '/admin/mahasiswa/data',
-			type: 'get',
-			dataType: 'html',
-			success: function(data){
-       
-           // Destroy existing table
-        $('#example').DataTable().destroy();
-        
-        $('.hasil').html(data);
-         // Initialize the table
-         $('#example').DataTable({
-          "bStateSave": true,
-        "fnStateSave": function (oSettings, oData) {
-            localStorage.setItem('example', JSON.stringify(oData));
-            
+        $.ajax({
+        url: '/admin/mahasiswa/data',
+        type: 'get',
+        dataType: 'html',
+        success: function(data){
+          // Destroy existing table
+          $('#example').DataTable().destroy();
+          
+          $('.hasil').html(data);
+          // Initialize the table
+          $('#example').DataTable({
+            "bStateSave": true,
+            "fnStateSave": function (oSettings, oData) {
+              localStorage.setItem('example', JSON.stringify(oData));
+            },
+            "fnStateLoad": function (oSettings, oData) {
+              return JSON.parse(localStorage.getItem('example'));
+            }
+          });
         },
-        "fnStateLoad": function (oSettings, oData) {
-            return JSON.parse(localStorage.getItem('example'));
-           
-        }
-         });
-			},
-      error: function(data) {
-				var errors = data.responseJSON;
-				console.log(errors);
-			}
-		});
-  };
-
-
+        error: function(data) {
+          var errors = data.responseJSON;
+          console.log(errors);
+        }});
+      };
+    });
   </script>
-  <!-- endbuild -->
+
+  @yield('footer')
 </body>
 
 </html>

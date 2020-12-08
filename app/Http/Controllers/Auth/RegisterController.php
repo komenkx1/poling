@@ -122,14 +122,12 @@ class RegisterController extends Controller
             $user->save() &&
             $mahasiswa->save()
         ) {
-            echo 'berhasil';
+            $user->assignRole('mahasiswa');
             $credentials = $request->only('nim', 'password');
 
             if (Auth::attempt($credentials)) {
                 return redirect()->route('home');
             }
-
-            echo 'tapi login gagal';
         }
     }
 }

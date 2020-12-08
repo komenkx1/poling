@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CalonController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MainController;
@@ -31,23 +33,26 @@ use Illuminate\Support\Facades\Route;
 Route::auth();
 // Route::get("/register", 'RegisterController@index');
 // Route::get('register', 'RegisterController@index')->name('search');
-Route::get('register', 'Auth\RegisterController@index')->name('register');
-Route::get('auth', 'Auth\RegisterController@index')->name('auth');
+Route::get('register', [RegisterController::class, 'index'])->name('register');
+Route::get('auth', [RegisterController::class, 'index'])->name('auth');
 Route::view('visi-misi', 'visi-misi');
 // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('register/fetch', 'Auth\RegisterController@fetch')->name('autocomplete.fetch');
-Route::post('register', 'Auth\RegisterController@create')->name('register.create');
-Route::post('calon/fetch', 'CalonController@fetch')->name('calon.fetch');
+Route::post('register/fetch', [RegisterController::class, 'fetch'])->name('autocomplete.fetch');
+Route::post('register', [RegisterController::class, 'create'])->name('register.create');
+Route::post('calon/fetch', [CalonController::class, 'fetch'])->name('calon.fetch');
 
 
 Route::get('/',     [MainController::class, 'index'])->name('home');
 Route::post('/visi-misi', [MainController::class, 'misi'])->name('visimisi');
-Route::get('/chart', [MainController::class, 'chart'])->name('chart');
-Route::post('/vote', [MainController::class, 'vote'])->name('vote');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/chart', [MainController::class, 'chart'])->name('chart');
+    Route::post('/vote', [MainController::class, 'vote'])->name('vote');
 
     Route::get('/logout', [MainController::class, 'logout']);
+});
+
+Route::middleware(['role:admin'])->group(function () {
 
     // Route::resource('calons', CalonController::class);
     Route::resource('mahasiswas', MahasiswaController::class)->except([
@@ -68,6 +73,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get("admin/mahasiswa", 'MahasiswaController@index');
     Route::get("admin/mahasiswa/data", 'MahasiswaController@data');
     Route::put("admin/mahasiswa/verif/{mahasiswa:id}", 'MahasiswaController@verif');
+
+    Route::get("admin/absen", [AbsenController::class, 'index']);
+    Route::get("admin/absen/edit/{absen:id}", [AbsenController::class, 'edit']);
+    Route::put("admin/absen/update/{absen:id}", [AbsenController::class, 'update']);
+    Route::delete("admin/absen/delete/{absen:id}", [AbsenController::class, 'destroy']);
 });
 
 

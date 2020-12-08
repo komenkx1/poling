@@ -16,7 +16,7 @@ class CreateMahasiswasTable extends Migration
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->enum('status', ['ready', 'terdaftar', 'terverifikasi', 'voted'])->default('ready');
+            $table->enum('status', ['terdaftar', 'terverifikasi', 'voted'])->default('terdaftar');
             $table->date('verified_at')->nullable();
             $table->string('file_url');
             $table->timestamps();

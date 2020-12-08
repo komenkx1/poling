@@ -57,3 +57,10 @@
   </div>
 </div>
 @endsection
+
+@section('footer')
+<script>
+  CKEDITOR.replace( 'input-visi' );
+  CKEDITOR.replace( 'input-misi' );
+</script>
+@endsection

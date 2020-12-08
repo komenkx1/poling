@@ -20,7 +20,7 @@ class MainController extends Controller
         $smft = Calon::where('jenis_calon', 'SMFT')->get();
         $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
         $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
-        
+
         if (Auth::user()) {
             $suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
             return view('index', ['smft' => $smft, 'bpmft' => $bpmft, 'suara' => $suara, 'mahasiswa' => $mahasiswa]);
@@ -43,8 +43,8 @@ class MainController extends Controller
                 <div class="feature-box-info">
                     <h4 class="font-weight-bold  text-4 mb-2">VISI</h4>
                     <div id="text-misi" class=" opacity-7 text-justify">'
-                    . $item->visi .
-               
+                . $item->visi .
+
                 '</div>
                 </div>
             </div>
@@ -55,7 +55,7 @@ class MainController extends Controller
                 <div class="feature-box-info">
                     <h4 class="font-weight-bold  text-4 mb-2">MISI</h4>
                     <div class=" opacity-7 text-justify">'
-                    . $item->misi .
+                . $item->misi .
                 '</div>
                 </div>
             </div>';
@@ -66,12 +66,6 @@ class MainController extends Controller
 
     public function vote(Request $request)
     {
-        // $this->validate($request, [
-        //     'calon_smft' => 'required',
-        //     'calon_bpmft' => 'required',
-        // ]);
-
-        // dd($request);
         $id_user = Auth::id();
         $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
         $mahasiswa->id = $mahasiswa->id;
