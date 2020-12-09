@@ -21,7 +21,8 @@ class AbsenController extends Controller
             ->orderBy('users.nim', 'asc')
             ->get();
 
-        dd($absen);
+        // dd($absen);
+        return view('admin/absen/index',compact('absen'));
     }
 
     /**

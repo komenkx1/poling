@@ -28,7 +28,6 @@
 <div class="padding">
     <div class="box">
       <div class="box-header">
-        <a href="mahasiswa/create" class="btn btn-success">Create</a>
         <small>List Mahasiswa</small>
         {{-- <div class="form-group">
             <select class="form-control" name="" id="selectfilter">

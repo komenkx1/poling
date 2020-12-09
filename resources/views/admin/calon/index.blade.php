@@ -8,17 +8,18 @@
 <div class="padding">
     <div class="box">
       <div class="box-header">
-        <a href="/admin/calon/create" class="btn btn-success">Create</a>
-        <small>List Mahasiswa</small>
+        <h4 style="position: relative;top:10px">List Calon</h4>
+
         {{-- <div class="form-group">
             <select class="form-control" name="" id="selectfilter">
                 <option value="" >--All--</option>
             </select>
         </div> --}}
       </div>
+      <hr>
       <div class="p-3">
-         
-        <table id="example"  class="table table-striped table-bordered dt-responsive nowrap">
+        <a href="/admin/calon/create" class="btn btn-success">Create</a>
+        <table id="calon"  class="table table-striped table-bordered dt-responsive nowrap">
           <thead>
             <tr>
                 <th>Nama Panggilan</th>

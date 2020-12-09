@@ -9,6 +9,8 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\SuaraController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,16 @@ use Illuminate\Support\Facades\Route;
 
 // });
 Route::auth();
+Route::get('user-tambah', function(){
+    $user = User::create([
+        'name' => 'I Komang Wahyu Hadi Permana',
+        'prodi_id' => '5',
+        'nim' => '1905551010',
+        'password' => bcrypt('komang123'),
+    ]);
+
+    $user->assignRole('admin');
+});
 // Route::get("/register", 'RegisterController@index');
 // Route::get('register', 'RegisterController@index')->name('search');
 Route::get('register', [RegisterController::class, 'index'])->name('register');
