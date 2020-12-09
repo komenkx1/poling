@@ -69,6 +69,7 @@ class MainController extends Controller
         if (isset($request->smft) && isset($request->bpmft)) {
             $id_user = Auth::id();
             $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
+        if($mahasiswa->status == 'terverifikasi'){
             $mahasiswa->id = $mahasiswa->id;
             $mahasiswa->status = 'voted';
             $mahasiswa->update();
@@ -85,8 +86,11 @@ class MainController extends Controller
 
             return "Terima kasih telah memilih";
         } else {
-            return "Silahkan pilih salah satu calon ketua SMFT dan BPMFT";
+            return "Maaf Anda Belum Terverifikasi";
         }
+    }else{
+        return "Silahkan pilih salah satu calon ketua SMFT dan BPMFT ";
+    }
     }
 
     public function chart()

@@ -22,38 +22,12 @@ class MahasiswaController extends Controller
 
     public function data()
     {
-        $mahasiswa = Mahasiswa::get()->all();
+        $mahasiswa = Mahasiswa::orderBy('id','DESC')->get();
         $user = User::with('mahasiswa')->get();
         $no =1;
-         $output = ' 
-         <thead>
-         <tr>
-         <th>
-                No
-             </th>
-             <th>
-                Nama
-             </th>
-             <th>
-                 Nim
-             </th>
-             <th>
-                 File
-             </th>
-             <th>
-                 Status
-             </th>
-             <th>
-                 Verified At
-             </th>
-             <th class="text-center">
-               Action
-           </th>
-         </tr>
-       </thead>
-       <tbody>';
+         
        foreach ($mahasiswa as $item){
-         $output.='<tr >
+         $output='<tr >
              <td>'.$no++.'</td>
              <td>'.$item->user->name.'</td>
              <td>'.$item->user->nim.'</td>
@@ -66,11 +40,9 @@ class MahasiswaController extends Controller
              }else{
                 $output.='<div class=" text-center"><button class="btn-verif btn btn-danger" type="button" data-id='.$item->id.'>Verif</button></div></td>';
              };
+             echo $output;
         };
-        $output.='
-        </tr>
-        </tbody>';
-        echo $output;
+        
     }
 
     public function verif(Request $request, Mahasiswa $mahasiswa)

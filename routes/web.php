@@ -33,16 +33,7 @@ use App\Models\User;
 
 // });
 Route::auth();
-Route::get('user-tambah', function(){
-    $user = User::create([
-        'name' => 'I Komang Wahyu Hadi Permana',
-        'prodi_id' => '5',
-        'nim' => '1905551010',
-        'password' => bcrypt('komang123'),
-    ]);
 
-    $user->assignRole('admin');
-});
 // Route::get("/register", 'RegisterController@index');
 // Route::get('register', 'RegisterController@index')->name('search');
 Route::get('register', [RegisterController::class, 'index'])->name('register');

@@ -36,8 +36,34 @@
         </div> --}}
       </div>
       <div class="p-3 ">
-        <table id="example"  class="table hasil table-striped table-bordered dt-responsive nowrap">
-          
+        <table id="example"  class="table table-striped table-bordered dt-responsive nowrap">
+          <thead>
+            <tr>
+            <th>
+                   No
+                </th>
+                <th>
+                   Nama
+                </th>
+                <th>
+                    Nim
+                </th>
+                <th>
+                    File
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Verified At
+                </th>
+                <th class="text-center">
+                  Action
+              </th>
+            </tr>
+          </thead>
+          <tbody class="hasil">
+          </tbody>
         </table>
       </div>
     </div>

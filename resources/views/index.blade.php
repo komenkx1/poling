@@ -260,7 +260,7 @@
 					@foreach ($smft as $item)
 
 					<label class="custom-radio">
-						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='ready' ||
+						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='terdaftar' ||
 						$mahasiswa->status == 'voted' ) disabled
 						@endif @foreach ($suara as $item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
 						@endauth required id="smft"
@@ -291,7 +291,7 @@
 					@foreach ($bpmft as $item)
 
 					<label class="custom-radio">
-						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='ready' ||
+						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='terdaftar' ||
 						$mahasiswa->status == 'voted') disabled
 						@endif @foreach ($suara as $item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
 						@endauth required id="bpmft"
@@ -318,7 +318,7 @@
 
 				<div class="clearfix"></div>
 				<div
-					class="result mt-3 @guest d-none @endguest @auth  @if($mahasiswa->status =='ready')  d-none @else d-flex justify-content-center @endif @endauth">
+					class="result mt-3 @guest d-none @endguest @auth  @if($mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
 					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
 						type="button" id="btn-submit" data-toggle="modal" data-target="#exampleModalalert">Submit</button>
 					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth"
@@ -465,7 +465,7 @@
 				$(".alert-success").css("display", "block");
 				$(".warning").append("<strong class='text-center text-light'>"+data+"</strong");
 				$(".warning-start").hide();
-				$(".alert-success").append("<strong class='text-center'>Vote Telah Disimpan</strong");
+				$(".alert-success").append("<strong class='text-center'>"+data+"</strong");
 					window.setTimeout(function() {
 					$(".alert").fadeTo(300, 0).slideUp(300, function(){
 							$(this).remove();
@@ -507,7 +507,7 @@
 				borderColor: 'rgba(255, 99, 132, 1)',
 				borderWidth: 1,
 				data: data.SMFT[smft_calons[0]].prodi_value
-			} /* , {
+			}, {
 				label: smft_calons[1],
 				backgroundColor: 'rgba(54, 162, 235, 0.2)',
 				borderColor: 'rgba(54, 162, 235, 1)',
@@ -519,7 +519,7 @@
 				borderColor: 'rgba(54, 235, 65)',
 				borderWidth: 1,
 				data: data.SMFT[smft_calons[2]].prodi_value
-			}  */]
+			}]
 		};
 
 		var bpmft_calons = [];
@@ -533,13 +533,13 @@
 				borderColor: 'rgba(255, 99, 132, 1)',
 				borderWidth: 1,
 				data: data.BPMFT[bpmft_calons[0]].prodi_value
-			} /* , {
+			}, {
 				label: bpmft_calons[1],
 				backgroundColor: 'rgba(54, 162, 235, 0.2)',
 				borderColor: 'rgba(54, 162, 235, 1)',
 				borderWidth: 1,
 				data: data.BPMFT[bpmft_calons[1]].prodi_value
-			} */ ]
+			}]
 		};
 
 		var chartSMFT = new Chart(cSmft, {
