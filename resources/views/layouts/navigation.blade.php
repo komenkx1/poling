@@ -38,11 +38,6 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="/">
-                                                        Akun
-                                                    </a>
-                                                </li>
-                                                <li>
                                                     <a class="dropdown-item" href="{{ route('logout') }}">
                                                         Logout
                                                     </a>
@@ -112,7 +107,6 @@
                         </a>
                         <div class="dropdown-menu" style="background-color:#212529!important;">
                             <a class="dropdown-item" href="#">Report</a>
-                            <a class="dropdown-item" href="#">Akun</a>
                             <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                         </div>
                     </li>

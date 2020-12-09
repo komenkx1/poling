@@ -463,7 +463,7 @@
 				loadDataChart();
 				$('#hasil-sementara').modal('show');
 				$(".alert-success").css("display", "block");
-				$(".warning").append("<strong class='text-center text-light'>Vote Telah Disimpan</strong");
+				$(".warning").append("<strong class='text-center text-light'>"+data+"</strong");
 				$(".warning-start").hide();
 				$(".alert-success").append("<strong class='text-center'>Vote Telah Disimpan</strong");
 					window.setTimeout(function() {
