@@ -275,7 +275,7 @@
 						</span>
 						<span>
 							<div class="button p-0 m-0">
-								<p class="font-weight-bold p-0 m-0">{{$item->nama_panggilan}}</p>
+								<p class="font-weight-bold p-2 m-0 text-4">{{$item->nama_panggilan}}</p>
 								<button class="btn-visiMisi btn btn-primary" type="button" id="" data-id="{{$item->id}}">Lihat
 									Visi Misi</button>
 							</div>
@@ -305,7 +305,7 @@
 						</span>
 						<span>
 							<div class="button p-0 m-0">
-								<p class="font-weight-bold p-0 m-0">{{$item->nama_panggilan}}</p>
+								<p class="font-weight-bold p-2 m-0 text-4">{{$item->nama_panggilan}}</p>
 								<button class="btn-visiMisi btn btn-primary" type="button" id="" data-id="{{$item->id}}">Lihat
 									Visi
 									Misi</button>

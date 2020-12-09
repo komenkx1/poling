@@ -58,6 +58,7 @@ form.sign-up-form {
 
 form.sign-in-form {
   z-index: 2;
+  transform: translate(0%, -5%);
 }
 
 .title {
@@ -229,7 +230,7 @@ position: relative;
 }
 .bton {
   width: 150px;
-  background-color: #fd5959;
+  background-color: #ff3636;
   border: none;
   outline: none!important;
   height: 49px;
@@ -471,6 +472,10 @@ position: relative;
 @media (max-width: 740px) {
   form {
     padding: 0 1.5rem;
+  }
+  form.sign-in-form {
+    z-index: 2;
+    transform: translate(0%, -25%);
   }
 
   .image {

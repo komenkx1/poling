@@ -17,7 +17,7 @@
 <body>
   <div class="containers @if (Route::currentRouteName() == 'register') sign-up-mode @endif">
     <div class="signin-signup">
-      <form method="POST" action="{{ route('login') }}" class="sign-in-form" style="transform: translate(0%, -25%);">
+      <form method="POST" action="{{ route('login') }}" class="sign-in-form">
         @csrf
 
         <h2 class="title">Sign in</h2>
