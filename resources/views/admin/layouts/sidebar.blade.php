@@ -57,6 +57,16 @@
                   <span class="nav-text ">Absen</span>
                 </a>
               </li>
+              <li class="@if($title == 'Role') active @endif ">
+                <a href="/admin/role">
+                  <span class="nav-icon ">
+                    <i class="fa fa-lock">
+                      <span ui-include="'/../assets/images/i_0.svg'"></span>
+                    </i>
+                  </span>
+                  <span class="nav-text ">Role</span>
+                </a>
+              </li>
 
           
             </ul>

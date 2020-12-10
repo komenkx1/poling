@@ -67,6 +67,8 @@ Route::middleware(['role:admin'])->group(function () {
     ]);
 
     Route::get("admin", 'DashboardController@index');
+    Route::get("admin/role/", 'RoleController@index');
+    Route::put("admin/role/update/{role_model:model_id}", 'RoleController@update');
     Route::get("admin/calon", 'CalonController@index');
     Route::get("admin/calon/create", 'CalonController@create');
     Route::post("admin/calon/store", 'CalonController@store');

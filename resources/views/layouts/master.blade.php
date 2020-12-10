@@ -62,7 +62,7 @@
 </head>
 
 <body class="loading-overlay-showing" data-plugin-page-transition data-loading-overlay
-	data-plugin-options="{'hideDelay': 200}">
+	data-plugin-options="{'hideDelay': 100}">
 	<div class="loading-overlay">
 		<div class="bounce-loader">
 			<div class="bounce1"></div>

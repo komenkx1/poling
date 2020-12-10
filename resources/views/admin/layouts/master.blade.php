@@ -93,10 +93,12 @@
   <script src="/vendor/chart.js/dist/Chart.min.js"></script>
   <script src="/html/scripts/app.js"></script>
   <script src="/js/custom.js"></script>
+  @yield('footer')
 
   <script>
     $(document).ready(function() {
-
+      
+      loaddata();
       var currentDate = new Date()
     var day = currentDate.getDate()
     var month = currentDate.getMonth() + 1
@@ -113,6 +115,7 @@
         order : false,
       });
       $('#absen').DataTable({
+        order : false,
         dom: 'Bfrtip',
         buttons: [{
           extend: 'excelHtml5',
@@ -223,9 +226,6 @@
           }
         });
       })
-
-      loaddata();
-
       function loaddata(){
         $.ajax({
         url: '/admin/mahasiswa/data',
@@ -255,7 +255,6 @@
     });
   </script>
 
-  @yield('footer')
 </body>
 
 </html>

@@ -227,6 +227,7 @@ position: relative;
   position:absolute;
   z-index: 99999;
   height: 50px;
+  cursor: pointer;
 }
 .bton {
   width: 150px;

@@ -44,7 +44,6 @@ class MainController extends Controller
                     <h4 class="font-weight-bold  text-4 mb-2">VISI</h4>
                     <div id="text-misi" class=" opacity-7 text-justify">'
                 . $item->visi .
-
                 '</div>
                 </div>
             </div>
@@ -66,33 +65,40 @@ class MainController extends Controller
 
     public function vote(Request $request)
     {
-        if (isset($request->smft) && isset($request->bpmft)) {
-            $id_user = Auth::id();
-            $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
-        if($mahasiswa->status == 'terverifikasi'){
-            $mahasiswa->id = $mahasiswa->id;
-            $mahasiswa->status = 'voted';
-            $mahasiswa->update();
 
-            $suara_smft = new Suara();
-            $suara_smft->mahasiswa_id = $mahasiswa->id;
-            $suara_smft->calon_id = $request->smft;
-            $suara_smft->save();
-
-            $suara_bpmft = new Suara();
-            $suara_bpmft->mahasiswa_id = $mahasiswa->id;;
-            $suara_bpmft->calon_id = $request->bpmft;
-            $suara_bpmft->save();
-
-            return "Terima kasih telah memilih";
+        if (!Auth::user()) {
+            return "Vote gagal, Silahkan Login Dengan Akun Terverifikasi";
         } else {
-            return "Maaf Anda Belum Terverifikasi";
-        }
-    }else{
-        return "Silahkan pilih salah satu calon ketua SMFT dan BPMFT ";
-    }
-    }
+            if (isset($request->smft) && isset($request->bpmft)) {
+                $id_user = Auth::id();
+                $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
+                if ($mahasiswa->status == 'terverifikasi') {
+                    $mahasiswa->id = $mahasiswa->id;
+                    $mahasiswa->status = 'voted';
+                    $mahasiswa->update();
 
+                    $suara_smft = new Suara();
+                    $suara_smft->mahasiswa_id = $mahasiswa->id;
+                    $suara_smft->calon_id = $request->smft;
+                    $suara_smft->save();
+
+                    $suara_bpmft = new Suara();
+                    $suara_bpmft->mahasiswa_id = $mahasiswa->id;;
+                    $suara_bpmft->calon_id = $request->bpmft;
+                    $suara_bpmft->save();
+
+                    return "Vote Disimpan, Terima kasih telah memilih";
+                } else if ($mahasiswa->status == 'voted') {
+                    return "Vote Gagal, Anda Sudah Melakukan Vote";
+                } else {
+                    return "Vote Gagal, Maaf Anda Belum Terverifikasi";
+                }
+            } else {
+                return "Silahkan pilih salah satu calon ketua SMFT dan BPMFT ";
+            }
+        }
+    }
+    
     public function chart()
     {
         foreach (Calon::where('jenis_calon', 'SMFT')->cursor() as $calon_smft) {
