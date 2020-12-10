@@ -78,6 +78,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get("admin/mahasiswa", 'MahasiswaController@index');
     Route::get("admin/mahasiswa/data", 'MahasiswaController@data');
     Route::put("admin/mahasiswa/verif/{mahasiswa:id}", 'MahasiswaController@verif');
+    Route::delete("admin/mahasiswa/delete/{mahasiswa:id}", 'MahasiswaController@destroy');
 
     Route::get("admin/absen", [AbsenController::class, 'index']);
     Route::get("admin/absen/edit/{absen:id}", [AbsenController::class, 'edit']);

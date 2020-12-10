@@ -38,7 +38,10 @@ class MahasiswaController extends Controller
              if($item->status == 'terverifikasi' || $item->status == 'voted'){
                 $output.='<div class=" text-center"><i class="fa fa-check"></i></div></td>';
              }else{
-                $output.='<div class=" text-center"><button class="btn-verif btn btn-danger" type="button" data-id='.$item->id.'>Verif</button></div></td>';
+                $output.='
+                <div class=" text-center"><button class="btn-verif btn btn-primary" type="button" data-id='.$item->id.'>Verif</button>
+                <button class="btn-delete btn btn-danger" type="button" data-id='.$item->id.'>Hapus</button></div>
+                </td>';
              };
              echo $output;
         };
@@ -116,6 +119,6 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->delete();
     }
 }

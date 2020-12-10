@@ -206,6 +206,12 @@
           $('#verif').modal('show');
       });
 
+      $(document).on("click", '.btn-delete',function(){ 
+          var id = $(this).data('id');
+          $('#btnDelete').attr('data-id', id)
+          $('#delete').modal('show');
+      });
+
       $(document).on("click",'#btnVerif',function(){
         event.preventDefault()
         var data = $(this).attr('data-id');
@@ -218,6 +224,26 @@
           data: data,
           success: function(data){
             loaddata();
+
+          },
+          error: function(data) {
+            var errors = data.responseJSON;
+            console.log(errors);
+          }
+        });
+      })
+      $(document).on("click",'#btnDelete',function(){
+        event.preventDefault()
+        var data = $(this).attr('data-id');
+        console.log(data);
+
+        $.ajax({
+          url: '/admin/mahasiswa/delete/' + data,
+          type: 'delete',
+          data: data,
+          success: function(data){
+            loaddata();
+            $('#alert').modal('show');
 
           },
           error: function(data) {
