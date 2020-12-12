@@ -3540,10 +3540,9 @@ html[dir="rtl"] #header .tip-light:before {
 		color: #BF1212!important;
 	}
 
-	#header .header-nav.header-nav-links nav > ul li:hover > a {
+	#header .header-nav.header-nav-links nav > ul li > a:hover {
 		color: #BF1212!important;
 	}
-
 	#header .header-nav.header-nav-links nav > ul:not(:hover) > li > a.active {
 		color: #BF1212!important;
 	}

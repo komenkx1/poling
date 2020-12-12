@@ -46,6 +46,7 @@ Route::post('calon/fetch', [CalonController::class, 'fetch'])->name('calon.fetch
 
 
 Route::get('/',     [MainController::class, 'index'])->name('home');
+Route::get('/rekapitulasi',     [MainController::class, 'rekapitulasi'])->name('home');
 Route::post('/visi-misi', [MainController::class, 'misi'])->name('visimisi');
 
 Route::middleware(['auth'])->group(function () {

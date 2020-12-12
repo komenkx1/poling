@@ -114,6 +114,7 @@
 
 		<!-- Current Page Vendor and Views -->
 		<script src="/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 		<script src="/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 		<script src="/js/views/view.contact.js"></script>
 

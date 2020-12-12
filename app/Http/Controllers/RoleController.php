@@ -20,7 +20,7 @@ class RoleController extends Controller
        $mahasiswa = Mahasiswa::select('*','users.name AS name')
                          ->join('users', 'users.id', '=', 'mahasiswas.user_id')
                          ->join('model_has_roles', 'model_has_roles.model_id','=','mahasiswas.user_id')
-                         ->join('roles','roles.id', '=', 'model_has_roles.role_id')->orderBy('mahasiswas.id','DESC')->get();
+                         ->join('roles','roles.id', '=', 'model_has_roles.role_id')->orderBy('model_has_roles.role_id','ASC')->get();
        return view('/admin/role/index',compact('role','mahasiswa'));
     }
 

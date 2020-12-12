@@ -30,6 +30,22 @@ class MainController extends Controller
     }
 
 
+    public function rekapitulasi()
+    {
+        $id_user = Auth::id();
+        $smft = Calon::where('jenis_calon', 'SMFT')->get();
+        $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
+        $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
+
+        if (Auth::user()) {
+            $suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
+            return view('rekap', ['smft' => $smft, 'bpmft' => $bpmft, 'suara' => $suara, 'mahasiswa' => $mahasiswa]);
+        } else {
+            return view('rekap', ['smft' => $smft, 'bpmft' => $bpmft,  'mahasiswa' => $mahasiswa]);
+        }
+    }
+
+
     public function misi(Request $request)
     {
         $calonid = $request->id;

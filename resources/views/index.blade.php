@@ -64,7 +64,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body-visimisi">
 				<div class="feature-box feature-box-style-2">
 					<div class="feature-box-icon">
 						<i class="icons icon-list "></i>
@@ -331,6 +331,9 @@
 		</div>
 	</section>
 
+
+		
+
 	<section id="contact" class="section bg-color-grey-scale-5 border-0 m-0 p-0"
 		data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="200">
 		<div class="container-fluid">
@@ -430,24 +433,12 @@
 
 @section('footer')
 <script>
+
+
 	var cSmft = document.getElementById('smft');
 	var cBpmft = document.getElementById('bpmft');
 
-	loadDataChart();
 
-	$('.btn-visiMisi').click(function(){
-		var id = $(this).data('id');
-		$.ajax({
-			url: '{{Route("visimisi")}}',
-			type: 'post',
-			data: {id: id},
-			success: function(data){
-				$('.modal-body').html(data);
-				console.log(id);
-				$('#modalVisiMisi').modal('show'); 
-			}
-		});
-	});
 
 	
 	function loadDataChart(){
@@ -461,10 +452,6 @@
 		});
 	}
 
-	$('#btn-See').click(function(){
-		$('#hasil-sementara').modal('show');
-	});
-
 	$('#btn-submit-modal').on("click", function(event){ 	
 		event.preventDefault()
 		var data = $('form').serialize();
@@ -474,8 +461,8 @@
 			method:"POST",
 			data: data,
 			success:function(data){
-				$('#hasil-sementara').modal('show');
 				loadDataChart();
+				$('#hasil-sementara').modal('show');
 				$(".alert-success").css("display", "block");
 				$(".warning").append("<strong class='text-center text-light'>"+data+"</strong");
 				$(".warning-start").hide();
@@ -494,7 +481,6 @@
 		});
 
 	});
-
 
 
 	function updateChart(data){
@@ -576,6 +562,23 @@
 		});
 	}
 
-	
+	$('.btn-visiMisi').click(function(){
+		var id = $(this).data('id');
+		$.ajax({
+			url: '{{Route("visimisi")}}',
+			type: 'post',
+			data: {id: id},
+			success: function(data){
+				$('.modal-body-visimisi').html(data);
+				console.log(id);
+				$('#modalVisiMisi').modal('show'); 
+			}
+		});
+	});
+
+	$('#btn-See').click(function(){
+		loadDataChart();
+		$('#hasil-sementara').modal('show');
+	});
 </script>
 @endsection

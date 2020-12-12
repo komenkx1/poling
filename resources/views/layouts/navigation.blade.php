@@ -23,6 +23,59 @@
                             class="header-nav header-nav-links header-nav-dropdowns-dark header-nav-light-text order-2 order-lg-1">
                             <div
                                 class="header-nav-main header-nav-main-mobile-dark header-nav-main-square header-nav-main-dropdown-no-borders header-nav-main-effect-2 header-nav-main-sub-effect-1">
+                                @if($title == 'Rekapitulasi')
+                                <nav class="collapse">
+                                    <ul class="nav nav-pills" id="mainNav">
+                                        @auth
+                                        {{-- logined --}}
+                                        <li class="dropdown">
+                                            <a class="dropdown-item dropdown-toggle d-lg-none border-all" href="#">
+                                                {{ Auth::user()->nim }}
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item" href="/">
+                                                        Report
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('logout') }}">
+                                                        Logout
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        @endauth
+
+                                        @guest
+                                        <li class="d-block d-lg-none">
+                                            <a  class="dropdown-item active" href="{{ route('register') }}">
+                                                Daftar
+                                            </a>
+                                        </li>
+                                        @endguest
+                                        <li>
+                                            <a class="dropdown-item active" href="/">
+                                                Home
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" data-hash data-hash-offset="75"
+                                            href="#smft">SMFT</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" data-hash data-hash-offset="75"
+                                        href="#bpmft">BPMFT</a>
+                                </li>
+                                        {{-- logined --}}
+                                      
+                                                
+
+                                            </ul>
+                                    
+                                </nav>
+                                @else
                                 <nav class="collapse">
                                     <ul class="nav nav-pills" id="mainNav">
                                         @auth
@@ -60,12 +113,17 @@
                                             </a>
                                         </li>
                                         <li>
+                                            <a class="dropdown-item active" href="/rekapitulasi">
+                                                Rekapitulasi
+                                            </a>
+                                        </li>
+                                        <li>
                                             <a class="dropdown-item" data-hash data-hash-offset="68"
                                                 href="#tentang">tentang</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item" data-hash data-hash-offset="68"
-                                                href="#Polling">Poll</a>
+                                                href="#Polling">Polling</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item" data-hash data-hash-offset="68"
@@ -73,6 +131,7 @@
                                         </li>
                                     </ul>
                                 </nav>
+                                @endif
                             </div>
                             <button class="btn header-btn-collapse-nav" data-toggle="collapse"
                                 data-target=".header-nav-main nav">
