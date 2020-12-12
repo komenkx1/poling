@@ -101,24 +101,35 @@ class RegisterController extends Controller
             'file_url' => 'required|max:2000'
         ]);
 
-        $kode_prodi = substr($request->register_nim, 4, -3);
-        $prodi = Prodi::where('kode_prodi', $kode_prodi)->first();
+        //buat dapetin user dari nim yang di input
+        $user = User::where('nim', $request->register_nim)->first();
 
-        if (!$prodi) {
+        if (!$user) {
             $error = ValidationException::withMessages([
-                'register_nim' => ['NIM tidak di temukan, coba lagi atau hubungi contact person kami.'],
+                'register_nim' => ['NIM tidak di temukan'],
             ]);
 
             throw $error;
         }
 
-        //buat dapetin user dari nim yang di input
-        $user = User::where('nim', $request->register_nim)->first();
+        //buat dapetin mahasiswa dari nim yang di input
+        $mahasiswa = Mahasiswa::where('user_id', $user->id)->first();
+
+        if ($mahasiswa) {
+            $error = ValidationException::withMessages([
+                'register_nim' => ['Anda sudah terdaftar'],
+            ]);
+
+            throw $error;
+        }
+
+        $kode_prodi = substr($request->register_nim, 4, -3);
+        $prodi = Prodi::where('kode_prodi', $kode_prodi)->first();
 
         $user->prodi_id = $prodi->id;
         $user->password = Hash::make($request->register_password);
 
-        $mahasiswa = Mahasiswa::where();
+        $mahasiswa = new Mahasiswa();
         $mahasiswa->user_id = $user->id;
 
         $slug = Str::slug($request->register_nim);
