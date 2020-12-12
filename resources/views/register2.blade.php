@@ -26,23 +26,25 @@
             <label>Nim</label>
             <div class="pom-agile">
               <span class="fa fa-user"></span>
-              <input placeholder="Nim" type="text" class=" @error('nim') is-invalid @enderror" name="nim" id="nim2" required="">
+              <input placeholder="Nim" type="text" class=" @error('nim') is-invalid @enderror" name="nim" id="nim2"
+                required="">
             </div>
             @error('nim')
             <p class="text-danger" role="alert">
-                <strong>{{ $message }}</strong>
+              <strong>{{ $message }}</strong>
             </p>
             @enderror
           </div>
           <div class="input-field col-md-12">
-            <label>password</label>
+            <label>Password</label>
             <div class="pom-agile">
               <span class="fa fa-lock"></span>
-              <input placeholder="password"  class=" @error('password') is-invalid @enderror"  name="password" type="password" required="">
+              <input placeholder="password" class=" @error('password') is-invalid @enderror" name="password"
+                type="password" required="">
             </div>
             @error('password')
             <p class="text-danger" role="alert">
-                <strong>{{ $message }}</strong>
+              <strong>{{ $message }}</strong>
             </p>
             @enderror
           </div>
@@ -62,8 +64,13 @@
             <label>Nim</label>
             <div class="pom-agile">
               <span class="fa fa-user"></span>
-              <input placeholder="Nim" name="nim" id="nim" type="text" required="">
+              <input placeholder="Nim" name="register_nim" id="nim" type="text" required="">
             </div>
+            @error('register_nim')
+            <p class="text-danger" role="alert">
+              <strong>{{ $message }}</strong>
+            </p>
+            @enderror
             <div class="" id="nimList">
             </div>
           </div>
@@ -71,23 +78,28 @@
             <label>Password</label>
             <div class="pom-agile">
               <span class="fa fa-key"></span>
-              <input type="password" name="password" placeholder="Pasword" id="pwdId" class="form"
+              <input type="password" name="register_password" placeholder="Pasword" id="pwdId" class="form"
                 pattern="^[0-9a-zA-Z]{2,30}$" required>
             </div>
+            @error('register_password')
+            <p class="text-danger" role="alert">
+              <strong>{{ $message }}</strong>
+            </p>
+            @enderror
             <div class="valid-feedback" style="position:relative;bottom:10px;" id=pwdValid>Valid</div>
             <div class="invalid-feedback " style="position:relative;bottom:10px;" id=pwdInValid>(min 2 to 30 max)</div>
           </div>
           <div class="input-field col-lg-6 col-md-12">
             <label>Confirm Password</label>
             <div class="pom-agile">
-              
               <span class="fa fa-key"></span>
               <input type="password" name="password_confirmation" placeholder="Confirm Password" id="cPwdId"
                 class="form myCpwdClass" pattern="^[0-9a-zA-Z]{2,30}$" required>
             </div>
             <div class="alert-pass">
               <div id="cPwdValid" class="valid-feedback" style="position:relative;bottom:10px;">Passwords Match</div>
-              <div id="cPwdInvalid" class="invalid-feedback " style="position:relative;bottom:10px;">a to z only (2 to 6 long)</div>
+              <div id="cPwdInvalid" class="invalid-feedback " style="position:relative;bottom:10px;">a to z only (2 to 6
+                long)</div>
             </div>
           </div>
 
@@ -96,13 +108,14 @@
             <div class="pom-agile">
               <label class="text-left font-" for="customFile" id="custom-File" style="line-height: 2">Choose
                 file</label>
-              <input placeholder="Masukan Foto" class=" @error('file_url') is-invalid @enderror" name="file_url" type="file" id="customFile" required>
+              <input placeholder="Masukan Foto" class=" @error('file_url') is-invalid @enderror" name="file_url"
+                type="file" id="customFile" required>
               <span class="fa fa-folder" style="line-height: 2"></span>
             </div>
             <small class="maks-size-file text-danger mb-5">*maks file 2Mb</small>
             @error('file_url')
             <p class="text-danger" role="alert">
-                <strong>File tidak boleh lebih dari 2mb</strong>
+              <strong>File tidak boleh lebih dari 2mb</strong>
             </p>
             @enderror
           </div>

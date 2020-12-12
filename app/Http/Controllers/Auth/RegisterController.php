@@ -14,6 +14,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationData;
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
@@ -94,24 +96,32 @@ class RegisterController extends Controller
     {
 
         $this->validate($request, [
-            'nim' => 'required',
-            'password' => 'required|min:2|max:30',
+            'register_nim' => 'required|min:10|max:10',
+            'register_password' => 'required|min:2|max:30',
             'file_url' => 'required|max:2000'
         ]);
 
-        $kode_prodi = substr($request->nim, 4, -3);
+        $kode_prodi = substr($request->register_nim, 4, -3);
         $prodi = Prodi::where('kode_prodi', $kode_prodi)->first();
 
+        if (!$prodi) {
+            $error = ValidationException::withMessages([
+                'register_nim' => ['NIM tidak di temukan, coba lagi atau hubungi contact person kami.'],
+            ]);
+
+            throw $error;
+        }
+
         //buat dapetin user dari nim yang di input
-        $user = User::where('nim', $request->nim)->first();
+        $user = User::where('nim', $request->register_nim)->first();
 
         $user->prodi_id = $prodi->id;
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($request->register_password);
 
-        $mahasiswa = new Mahasiswa();
+        $mahasiswa = Mahasiswa::where();
         $mahasiswa->user_id = $user->id;
 
-        $slug = Str::slug($request->nim);
+        $slug = Str::slug($request->register_nim);
         if ($request->file('file_url')) {
             $gambar = $request->file('file_url');
             $urlgambar = $gambar->storeAs("img/mahasiswa", "{$slug}.{$gambar->extension()}");
@@ -123,7 +133,7 @@ class RegisterController extends Controller
             $mahasiswa->save()
         ) {
             $user->assignRole('mahasiswa');
-            $credentials = $request->only('nim', 'password');
+            $credentials = $request->only('register_nim', 'register_password');
 
             if (Auth::attempt($credentials)) {
                 return redirect()->route('home');

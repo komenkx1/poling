@@ -114,7 +114,7 @@ class MainController extends Controller
             }
         }
     }
-    
+
     public function chart()
     {
         foreach (Calon::where('jenis_calon', 'SMFT')->cursor() as $calon_smft) {
@@ -132,8 +132,8 @@ class MainController extends Controller
                 array_push($prodis, $prodi->nama_prodi);
                 array_push($prodisValues, $jumlah);
             }
-            $chart['SMFT'][$calon_smft->nama_panggilan]['prodis'] = $prodis;
-            $chart['SMFT'][$calon_smft->nama_panggilan]['prodi_value'] = $prodisValues;
+            $rekap['SMFT'][$calon_smft->nama_panggilan]['prodis'] = $prodis;
+            $rekap['SMFT'][$calon_smft->nama_panggilan]['prodi_value'] = $prodisValues;
         }
 
         foreach (Calon::where('jenis_calon', 'BPMFT')->cursor() as $calon_bpmft) {
@@ -150,11 +150,58 @@ class MainController extends Controller
                 array_push($prodis, $prodi->nama_prodi);
                 array_push($prodisValues, $jumlah);
             }
-            $chart['BPMFT'][$calon_bpmft->nama_panggilan]['prodis'] = $prodis;
-            $chart['BPMFT'][$calon_bpmft->nama_panggilan]['prodi_value'] = $prodisValues;
+            $rekap['BPMFT'][$calon_bpmft->nama_panggilan]['prodis'] = $prodis;
+            $rekap['BPMFT'][$calon_bpmft->nama_panggilan]['prodi_value'] = $prodisValues;
         }
 
-        return json_encode($chart);
+        return json_encode($rekap);
+    }
+
+    public function rekap()
+    {
+
+        foreach (Prodi::cursor() as $prodi) {
+            $calonNames = [];
+            $calonVotes = [];
+
+            foreach (Calon::where('jenis_calon', 'BPMFT')->cursor() as $calon_bpmft) {
+                $jumlah = DB::table('suaras')
+                    ->join('mahasiswas', 'suaras.mahasiswa_id', '=', 'mahasiswas.id')
+                    ->join('users', 'mahasiswas.user_id', '=', 'users.id')
+                    ->where('users.prodi_id', '=', $prodi->id)
+                    ->where('suaras.calon_id', '=', $calon_bpmft->id)
+                    ->get()->count();
+
+                array_push($calonNames, $calon_bpmft->nama_panggilan);
+                array_push($calonVotes, $jumlah);
+            }
+            $rekap['BPMFT'][$prodi->nama_prodi]['calon_names'] = $calonNames;
+            $rekap['BPMFT'][$prodi->nama_prodi]['calon_votes'] = $calonVotes;
+
+            $calonNames = [];
+            $calonVotes = [];
+            foreach (Calon::where('jenis_calon', 'SMFT')->cursor() as $calon_smft) {
+                $jumlah = DB::table('suaras')
+                    ->join('mahasiswas', 'suaras.mahasiswa_id', '=', 'mahasiswas.id')
+                    ->join('users', 'mahasiswas.user_id', '=', 'users.id')
+                    ->where('users.prodi_id', '=', $prodi->id)
+                    ->where('suaras.calon_id', '=', $calon_smft->id)
+                    ->get()->count();
+
+                array_push($calonNames, $calon_smft->nama_panggilan);
+                array_push($calonVotes, $jumlah);
+            }
+            $rekap['SMFT'][$prodi->nama_prodi]['calon_names'] = $calonNames;
+            $rekap['SMFT'][$prodi->nama_prodi]['calon_votes'] = $calonVotes;
+        }
+
+        // $id_user = Auth::id();
+        // $smft = Calon::where('jenis_calon', 'SMFT')->get();
+        // $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
+        // $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
+
+        //$suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
+        return view('rekap', compact(['rekap']));
     }
 
     public function logout()

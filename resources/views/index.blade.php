@@ -276,8 +276,7 @@
 						<span>
 							<div class="button p-0 m-0">
 								<p class="font-weight-bold p-2 m-0 text-4">{{$item->nama_panggilan}}</p>
-								<button class="btn-visiMisi btn btn-primary" type="button" id=""
-									data-id="{{$item->id}}">Lihat
+								<button class="btn-visiMisi btn btn-primary" type="button" id="" data-id="{{$item->id}}">Lihat
 									Visi Misi</button>
 							</div>
 						</span>
@@ -307,8 +306,7 @@
 						<span>
 							<div class="button p-0 m-0">
 								<p class="font-weight-bold p-2 m-0 text-4">{{$item->nama_panggilan}}</p>
-								<button class="btn-visiMisi btn btn-primary" type="button" id=""
-									data-id="{{$item->id}}">Lihat
+								<button class="btn-visiMisi btn btn-primary" type="button" id="" data-id="{{$item->id}}">Lihat
 									Visi
 									Misi</button>
 							</div>
@@ -322,8 +320,7 @@
 				<div
 					class="result mt-3 @guest d-none @endguest @auth  @if($mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
 					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
-						type="button" id="btn-submit" data-toggle="modal"
-						data-target="#exampleModalalert">Submit</button>
+						type="button" id="btn-submit" data-toggle="modal" data-target="#exampleModalalert">Submit</button>
 					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth"
 						type="button" id="btn-See">Lihat Hasil Sementara</button>
 				</div>
@@ -332,7 +329,7 @@
 	</section>
 
 
-		
+
 
 	<section id="contact" class="section bg-color-grey-scale-5 border-0 m-0 p-0"
 		data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="200">
@@ -344,8 +341,8 @@
 					<div id="googlemaps" class="google-ma h-100 mb-0 p-0" style="min-height: 500px;">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63114.03314524725!2d115.21000524619285!3d-8.631753311983303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd241ea9986cc09%3A0xefdc9ad9df39e8f4!2sSEKBER%20FT%20UNUD*21!5e0!3m2!1sid!2sid!4v1604911691204!5m2!1sid!2sid"
-							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%"
-							allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%" allowfullscreen=""
+							aria-hidden="false" tabindex="0"></iframe>
 					</div>
 
 				</div>
@@ -418,8 +415,8 @@
 								<span class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank"
 										class="text-color-light font-weight-semibold" title="Facebook"><i
 											class="mr-1 fab fa-facebook-f"></i> FACEBOOK</a></span>
-								<span class="social-icons-twitter pl-3"><a href="http://www.twitter.com/"
-										target="_blank" class="text-color-light font-weight-semibold" title="Twitter"><i
+								<span class="social-icons-twitter pl-3"><a href="http://www.twitter.com/" target="_blank"
+										class="text-color-light font-weight-semibold" title="Twitter"><i
 											class="mr-1 fab fa-instagram"></i> INSTAGRAM</a></span>
 							</p>
 						</div>
@@ -433,14 +430,9 @@
 
 @section('footer')
 <script>
-
-
 	var cSmft = document.getElementById('smft');
 	var cBpmft = document.getElementById('bpmft');
 
-
-
-	
 	function loadDataChart(){
 		$.ajax({
 			url: '{{Route("chart")}}',
