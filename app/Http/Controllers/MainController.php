@@ -10,9 +10,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class MainController extends Controller
 {
+    /* public function role()
+    {
+        Role::create([
+            'name' => 'sekre',
+            'guard_name' => 'web'
+        ]);
+    } */
 
     public function index()
     {
