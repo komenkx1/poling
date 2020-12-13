@@ -1,3 +1,9 @@
+@auth
+@php
+$user = Auth::user();
+$user_role = $user->getRoleNames()[0];
+@endphp
+@endauth
 <header id="header" class="header-transparent header-effect-shrink"
     data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyChangeLogo': true, 'stickyStartAt': 30, 'stickyHeaderContainerHeight': 80}">
 
@@ -33,11 +39,13 @@
                                                 {{ Auth::user()->nim }}
                                             </a>
                                             <ul class="dropdown-menu">
+                                                @if ($user->hasRole('admin') || $user->hasRole('sekre'))
                                                 <li>
-                                                    <a class="dropdown-item" href="/">
-                                                        Report
+                                                    <a class="dropdown-item" href="/admin">
+                                                        Admin
                                                     </a>
                                                 </li>
+                                                @endif
                                                 <li>
                                                     <a class="dropdown-item" href="{{ route('logout') }}">
                                                         Logout
@@ -85,11 +93,13 @@
                                                 {{ Auth::user()->nim }}
                                             </a>
                                             <ul class="dropdown-menu">
+                                                @if ($user->hasRole('admin') || $user->hasRole('sekre'))
                                                 <li>
-                                                    <a class="dropdown-item" href="/">
-                                                        Report
+                                                    <a class="dropdown-item" href="/admin">
+                                                        Admin
                                                     </a>
                                                 </li>
+                                                @endif
                                                 <li>
                                                     <a class="dropdown-item" href="{{ route('logout') }}">
                                                         Logout
@@ -165,7 +175,13 @@
                             <i class="fas fa-angle-down"></i>
                         </a>
                         <div class="dropdown-menu" style="background-color:#212529!important;">
-                            <a class="dropdown-item" href="#">Report</a>
+                            @if ($user->hasRole('admin') || $user->hasRole('sekre'))
+                                           
+                                                    <a class="dropdown-item" href="/admin">
+                                                        Admin
+                                                    </a>
+                                               
+                                                @endif
                             <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                         </div>
                     </li>

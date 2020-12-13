@@ -14,9 +14,9 @@
         </div>
     </section>
 
-    <section id="smft" class="container" style="width: 40%">
-        <div class="title">
-            <h2 class="text-center font-weight-bold">#SMFT</h2>
+    <section id="smft" class="container" style="width: 30%">
+        <div class="title"  style="position: relative;top:25px;">
+            <h1 class="text-center font-weight-bold">SMFT</h1>
         </div>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -33,8 +33,10 @@
                 <div class="carousel-item @php if($loop->index == 0) echo'active' @endphp">
                     <section class="container mb-3">
                         <div class="title">
-                            <h2 class="text-center font-weight-bold">{{ $key }}</h2>
+                            <h3 class="text-center font-weight-bold">{{ $key }}</h3>
                         </div>
+                        <br>
+
                         <div class="item card" style="box-shadow: 2px 3px 20px 0px #82767667; ">
                             <div class="p-4">
                                 <canvas id="smft_prodi{{ $loop->index }}" width="400" height="400"></canvas>
@@ -57,9 +59,9 @@
 
     <br>
     <br>
-    <section id="bpmft" class="container mt-3" style="width: 40%">
-        <div class="title">
-            <h2 class="text-center font-weight-bold">#BPMFT</h2>
+    <section id="bpmft" class="container mt-1 mb-5" style="width: 30%">
+        <div class="title" style="position: relative;top:20px;">
+            <h1 class="text-center font-weight-bold">BPMFT</h1>
         </div>
         <div id="carouselExampleIndicator" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -76,8 +78,9 @@
                 <div class="carousel-item @php if($loop->index == 0) echo'active' @endphp">
                     <section class="container mb-3">
                         <div class="title">
-                            <h2 class="text-center font-weight-bold">{{ $key }}</h2>
+                            <h3 class="text-center font-weight-bold">{{ $key }}</h3>
                         </div>
+                        <br>
                         <div class="item card" style="box-shadow: 2px 3px 20px 0px #82767667; ">
                             <div class="p-4">
                                 <canvas id="bpmft_prodi{{ $loop->index }}" width="400" height="400"></canvas>
@@ -131,7 +134,6 @@
             data: {
                 labels: val.calon_names,
                 datasets: [{
-                    label: 'Total Suara ' + key,
                     data: val.calon_votes,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -147,6 +149,17 @@
                 }]
             },
             options: {
+                legend: {
+    	display: false
+    },
+    tooltips: {
+    	callbacks: {
+      	label: function(tooltipItem) {
+        console.log(tooltipItem)
+        	return tooltipItem.yLabel;
+        }
+      }
+    },
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -169,7 +182,6 @@
             data: {
                 labels: val.calon_names,
                 datasets: [{
-                    label: 'Total Suara ' + key,
                     data: val.calon_votes,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -185,6 +197,17 @@
                 }]
             },
             options: {
+                legend: {
+    	display: false
+    },
+    tooltips: {
+    	callbacks: {
+      	label: function(tooltipItem) {
+        console.log(tooltipItem)
+        	return tooltipItem.yLabel;
+        }
+      }
+    },
                 scales: {
                     yAxes: [{
                         ticks: {

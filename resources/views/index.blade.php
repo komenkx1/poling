@@ -33,6 +33,28 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="modal fade" id="modalVisiMisi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Visi Misi</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body-visimisi container">
+
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+</div>
+</div>
+
 <div class="modal fade" id="alert-vote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -53,47 +75,7 @@
 	</div>
 </div>
 
-{{-- modal visi misi --}}
-<div class="modal fade" id="modalVisiMisi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Visi Misi</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body-visimisi">
-				<div class="feature-box feature-box-style-2">
-					<div class="feature-box-icon">
-						<i class="icons icon-list "></i>
-					</div>
-					<div class="feature-box-info">
-						<h4 class="font-weight-bold text-4 mb-2">VISI</h4>
-						<p id="modal-visi" class="opacity-7 text-justify">
 
-						</p>
-					</div>
-				</div>
-				<div class="feature-box feature-box-style-2">
-					<div class="feature-box-icon">
-						<i class="icons icon-plus"></i>
-					</div>
-					<div class="feature-box-info">
-						<h4 class="font-weight-bold text-4 mb-2">MISI</h4>
-						<p id="modal-misi" class="opacity-7 text-justify">
-
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 <div role="main" class="main" id="home">
 	<section class="slider-container rev_slider_wrapper" style="height: 100vh;">
@@ -192,7 +174,7 @@
 							<h4 class="font-weight-bold text-color-light text-4 mb-2">PEMILIHAN KETUA BPMFT</h4>
 							<p class="text-color-light opacity-7 text-justify">Pemira bersama untuk memilih ketua BPMFT
 								Unud untuk periode 1 tahun kedepan. Acara ini diselenggarakan setiap tahunnya guna
-								meneruskan kepengurusan BPMFT ke generasi baru</p>
+								meneruskan kepengurusan BPMFT ke angkatan berikutnya.</p>
 						</div>
 					</div>
 				</div>
@@ -350,35 +332,17 @@
 			</div>
 		</div>
 	</section>
-	<div class="modal fade" id="modalVisiMisi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Visi Misi</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<section class="section bg-primary border-0 m-0">
 		<div class="container">
 			<div class="row justify-content-center text-center text-lg-left py-4">
 				<div class="col-lg-auto appear-animation" data-appear-animation="fadeInRightShorter">
 					<div class="feature-box feature-box-style-2 d-block d-lg-flex mb-4 mb-lg-0">
 						<div class="feature-box-icon">
-							<i class="icon-location-pin icons text-color-light"></i>
+							<i class="icon-clock icons text-color-light"></i>
 						</div>
 						<div class="feature-box-info pl-1">
-							<h5 class="font-weight-light text-color-light opacity-7 mb-0">TEMPAT</h5>
+							<h5 class="font-weight-light text-color-light opacity-7 mb-0">Waktu</h5>
 							<p class="text-color-light font-weight-semibold mb-0">MON - FRI: 10:00am - 6:00pm</p>
 						</div>
 					</div>
@@ -412,12 +376,12 @@
 						<div class="feature-box-info pl-1">
 							<h5 class="font-weight-light text-color-light opacity-7 mb-0">SOCIAL MEDIA</h5>
 							<p class="mb-0">
-								<span class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank"
-										class="text-color-light font-weight-semibold" title="Facebook"><i
-											class="mr-1 fab fa-facebook-f"></i> FACEBOOK</a></span>
-								<span class="social-icons-twitter pl-3"><a href="http://www.twitter.com/" target="_blank"
-										class="text-color-light font-weight-semibold" title="Twitter"><i
+								<span class="social-icons-Instagram pl-3"><a href="http://www.twitter.com/" target="_blank"
+										class="text-color-light font-weight-semibold" title="Instagram"><i
 											class="mr-1 fab fa-instagram"></i> INSTAGRAM</a></span>
+											<span class="social-icons-twitter pl-3"><a href="http://www.twitter.com/" target="_blank"
+												class="text-color-light font-weight-semibold" title="Twitter"><i
+													class="mr-1 fa fa-globe"></i> www.smft.unud.ac.id</a></span>
 							</p>
 						</div>
 					</div>

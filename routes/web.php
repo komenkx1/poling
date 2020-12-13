@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [MainController::class, 'logout']);
 });
 
-Route::middleware(['role:admin'])->group(function () {
+Route::middleware(['role:admin|sekre'])->group(function () {
 
     // Route::resource('calons', CalonController::class);
     Route::resource('mahasiswas', MahasiswaController::class)->except([
