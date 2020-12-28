@@ -239,6 +239,9 @@ aria-hidden="true">
 					<div class="judul-pol">
 						<h2>SMFT</h2>
 					</div>
+					@if (count($smft) == 0)
+					<h4>Belum Ada Calon Terdaftar</h4>
+					@endif
 					@foreach ($smft as $item)
 
 					<label class="custom-radio">
@@ -270,6 +273,9 @@ aria-hidden="true">
 					<div class="judul-pol">
 						<h2>BPMFT</h2>
 					</div>
+					@if (count($smft) == 0)
+						<h4>Belum Ada Calon Terdaftar</h4>
+					@endif
 					@foreach ($bpmft as $item)
 
 					<label class="custom-radio">

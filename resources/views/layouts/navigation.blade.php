@@ -113,7 +113,7 @@ $user_role = $user->getRoleNames()[0];
                                         @guest
                                         <li class="d-block d-lg-none">
                                             <a  class="dropdown-item active" href="{{ route('register') }}">
-                                                Daftar
+                                                Daftar / Login
                                             </a>
                                         </li>
                                         @endguest
@@ -161,7 +161,7 @@ $user_role = $user->getRoleNames()[0];
                     <li class="nav-item dropdown nav-item-left-border  border-black">
                     <a class="nav-link" href="{{route('register')}}" role="button" id="dropdownLanguage"
                             aria-haspopup="true" aria-expanded="false">
-                            Daftar
+                            Daftar / Login
                            
                         </a>
                     </li>

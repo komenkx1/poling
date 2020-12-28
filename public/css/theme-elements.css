@@ -10407,7 +10407,7 @@ html.ie11 .scroll-to-top {
 /* Responsive */
 @media (max-width: 991px) {
 	html .scroll-to-top.hidden-mobile {
-		display: none !important;
+		display: block !important;
 	}
 }
 /* Scrollable */

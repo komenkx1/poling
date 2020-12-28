@@ -28,7 +28,6 @@ class MainController extends Controller
         $smft = Calon::where('jenis_calon', 'SMFT')->get();
         $bpmft = Calon::where('jenis_calon', 'BPMFT')->get();
         $mahasiswa = Mahasiswa::where('user_id', $id_user)->get()->first();
-
         if (Auth::user()) {
             $suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
             return view('index', ['smft' => $smft, 'bpmft' => $bpmft, 'suara' => $suara, 'mahasiswa' => $mahasiswa]);
