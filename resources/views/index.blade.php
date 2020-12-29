@@ -1,6 +1,72 @@
 @extends('layouts/master',["title"=>"Musma Teknik 2020"])
 @section('content')
 
+
+<div class="modal fade " id="modaltutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Tutorial</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body-tutor">
+				<div class="row d-flex justify-content-center">
+					<div class="col-md-12">
+						<div class="main-card mb-3">
+							<div class="card-body">
+								<div class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+									<div class="vertical-timeline-item vertical-timeline-element">
+										<div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-success"></i> </span>
+											<div class="vertical-timeline-element-content bounce-in">
+												<h4 class="timeline-title">Registrasi</h4>
+												<p>Masuk ke web Pemira teknik lalu klik <a href="/register" data-abc="true">Daftar</a> jika belum memiliki akun dan klik <a href="/auth" data-abc="true">Login</a> jika sudah memiliki akun </p> <span class="vertical-timeline-element-date"><i class="fas fa-arrow-down"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="vertical-timeline-item vertical-timeline-element">
+										<div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
+											<div class="vertical-timeline-element-content bounce-in">
+												<h4 class="timeline-title">Verifikasi</h4>
+												<p>Setelah melakukan registrasi, tunggu hingga panitia melakukan verifikasi ke akun anda.</p> <span class="vertical-timeline-element-date"><i class="fas fa-arrow-down"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="vertical-timeline-item vertical-timeline-element">
+										<div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-danger"> </i> </span>
+											<div class="vertical-timeline-element-content bounce-in">
+												<h4 class="timeline-title">Status</h4>
+												<p>Untuk mengetahui status verifikasi, silahkan login menggunakan akun yang sudah di registrasi lalu cek status akun pada bagian poling.</p> <span class="vertical-timeline-element-date"><i class="fas fa-arrow-down"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="vertical-timeline-item vertical-timeline-element">
+										<div> <span class="vertical-timeline-element-icon bounce-in"> <i class="badge badge-dot badge-dot-xl badge-success"> </i> </span>
+											<div class="vertical-timeline-element-content bounce-in">
+												<h4 class="timeline-title text-success">Pemilihan</h4>
+												<p>Ketika akun sudah terverifikasi, maka akun anda siap digunakan untuk memilih secara serempak pada tanggal yang ditentukan.</p> <span class="vertical-timeline-element-date"><i class="fas fa-arrow-down"></i></span>
+											</div>
+										</div>
+									</div>
+								
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{-- modal tutor --}}
+
+
 {{-- modal Hasil --}}
 <div class="modal fade" id="hasil-sementara" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
@@ -400,6 +466,9 @@ aria-hidden="true">
 
 @section('footer')
 <script>
+	 $(window).on('load', function() {
+        $('#modaltutor').modal('show');
+    });
 	var cSmft = document.getElementById('smft');
 	var cBpmft = document.getElementById('bpmft');
 
