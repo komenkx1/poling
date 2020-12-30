@@ -6,7 +6,6 @@ use App\Http\Controllers\CalonController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProdiController;
-use App\Http\Controllers\SuaraController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;

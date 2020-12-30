@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
+use App\Models\Suara;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AbsenController extends Controller
@@ -22,7 +25,7 @@ class AbsenController extends Controller
             ->get();
 
         // dd($absen);
-        return view('admin/absen/index',compact('absen'));
+        return view('admin/absen/index', compact('absen'));
     }
 
     /**
@@ -88,6 +91,12 @@ class AbsenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Auth::user()->hasRole('admin')) {
+            Suara::where('mahasiswa_id', $id)->delete();
+
+            $mahasiswa = Mahasiswa::find($id);
+            $mahasiswa->status = 'terverifikasi';
+            $mahasiswa->save();
+        }
     }
 }
