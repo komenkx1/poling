@@ -15,7 +15,7 @@ $date = date("Y-m-d");
 					<div class="tp-caption" data-x="center" data-hoffset="['-145','-145','-145','-320']" data-y="center"
 						data-voffset="['-80','-80','-80','-130']" data-start="1000"
 						data-transform_in="x:[-300%];opacity:0;s:500;" data-transform_idle="opacity:0.2;s:500;"><img
-							src="img/slides/slide-title-border.png" alt=""></div>
+							src="img/slide-title-border.png" alt=""></div>
 
 					<div class="tp-caption text-color-light font-weight-normal" data-x="center" data-y="center"
 						data-voffset="['-80','-80','-80','-130']" data-start="700" data-fontsize="['16','16','16','40']"
@@ -25,7 +25,7 @@ $date = date("Y-m-d");
 					<div class="tp-caption" data-x="center" data-hoffset="['145','145','145','320']" data-y="center"
 						data-voffset="['-80','-80','-80','-130']" data-start="1000"
 						data-transform_in="x:[300%];opacity:0;s:500;" data-transform_idle="opacity:0.2;s:500;"><img
-							src="img/slides/slide-title-border.png" alt=""></div>
+							src="img/slide-title-border.png" alt=""></div>
 
 					<div class="tp-caption font-weight-extra-bold text-color-light p-3"
 						data-frames='[{"delay":1300,"speed":1000,"frame":"0","from":"opacity:0;x:-50%;","to":"opacity:0.7;x:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
