@@ -126,121 +126,128 @@ $date = date("Y-m-d");
 						@elseif($mahasiswa->status != 'terverifikasi' && $mahasiswa->status !='voted' )
 						Akun Anda Belum Terverifikasi. silahkan tunggu hingga admin memverifikasi
 						@else
-						Akun Terverifikasi! @if ($date < '2021-01-08') Silahkan Login kembali pada tanggal 08 Januari 2021 untuk melakukan pemilihan @else Silahkan Pilih salah satu calon ketua SMFT dan
-						BPMFT dengan cara
-						mengklik foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan.
-						@endif 
-						@endif
-						@endauth
-					</p>
-				</div>
-			</div>
-		</div>
-		<br>
-		<div class="row pb-5 mb-5">
+						Akun Terverifikasi! @if ($date < '2021-01-08' ) Silahkan Login kembali pada tanggal 08 Januari
+							2021 untuk melakukan pemilihan @else Silahkan Pilih salah satu calon ketua SMFT dan BPMFT
+							dengan cara mengklik foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan
+							pilihan. @endif @endif @endauth </p> </div> </div> </div> <br>
+							<div class="row pb-5 mb-5">
 
-			<form action="/vote" class="radio-buttons" id="#create-form" method="POST">
-				@csrf
-				<div class="modal fade" id="exampleModalalert" tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Alert!</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body-alert">
-								Yakin Ingin Memilih Paslon?
-							</div>
-							<div class="modal-footer ">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button class="btn btn-primary" type="button" id="btn-submit-modal" data-toggle="modal"
-									data-target="#exampleModalalert">Submit</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="smft appear-animation" data-appear-animation="fadeInUpShorter">
-					<div class="judul-pol">
-						<h2>SMFT</h2>
-					</div>
-					@if (count($smft) == 0)
-					<h4>Belum Ada Calon Terdaftar</h4>
-					@endif
-					@foreach ($smft as $item)
+								<form action="/vote" class="radio-buttons" id="#create-form" method="POST">
+									@csrf
+									<div class="modal fade" id="exampleModalalert" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Alert!</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body-alert">
+													Yakin Ingin Memilih Paslon?
+												</div>
+												<div class="modal-footer ">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">Close</button>
+													<button class="btn btn-primary" type="button" id="btn-submit-modal"
+														data-toggle="modal"
+														data-target="#exampleModalalert">Submit</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="smft appear-animation" data-appear-animation="fadeInUpShorter">
+										<div class="judul-pol">
+											<h2>SMFT</h2>
+										</div>
+										@if (count($smft) == 0)
+										<h4>Belum Ada Calon Terdaftar</h4>
+										@endif
+										@foreach ($smft as $item)
 
-					<label class="custom-radio">
-						<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08' || $mahasiswa->status =='terdaftar' ||
-						$mahasiswa->status == 'voted' ) disabled
-						@endif @foreach ($suara as $item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
-						@endauth required
-						name="smft"
-						value="{{$item->id}}" />
-						<span class="radio-btn"
-							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
-								class="lar la-check-circle"></i>
-							<div class="poll-icon">
-								{{-- <img src="img/index.png" class="img-fluids"> --}}
-							</div>
-						</span>
-						<span>
-							<div class="button p-0 m-0">
-								<p class="font-weight-bold p-2 m-0 text-4">{{$item->nama_panggilan}}</p>
-								<button class="btn-visiMisi btn btn-primary" type="button" id="" data-id="{{$item->id}}">Lihat
-									Visi Misi</button>
-							</div>
-						</span>
-					</label>
-					@endforeach
-				</div>
-				<hr>
-				<div class="bpmft appear-animation mt-3" data-appear-animation="fadeInUpShorter">
-					<div class="judul-pol">
-						<h2>BPMFT</h2>
-					</div>
-					@if (count($smft) == 0)
-					<h4>Belum Ada Calon Terdaftar</h4>
-					@endif
-					@foreach ($bpmft as $item)
+										<label class="custom-radio">
+											<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08'
+												|| $mahasiswa->status =='terdaftar' ||
+											$mahasiswa->status == 'voted' ) disabled
+											@endif @foreach ($suara as
+											$item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
+											@endauth required
+											name="smft"
+											value="{{$item->id}}" />
+											<span class="radio-btn"
+												style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
+													class="lar la-check-circle"></i>
+												<div class="poll-icon">
+													{{-- <img src="img/index.png" class="img-fluids"> --}}
+												</div>
+											</span>
+											<span>
+												<div class="button p-0 m-0">
+													<p class="font-weight-bold p-2 m-0 text-4">{{$item->nama_panggilan}}
+													</p>
+													<button class="btn-visiMisi btn btn-primary" type="button" id=""
+														data-id="{{$item->id}}">Lihat
+														Visi Misi</button>
+												</div>
+											</span>
+										</label>
+										@endforeach
+									</div>
+									<hr>
+									<div class="bpmft appear-animation mt-3" data-appear-animation="fadeInUpShorter">
+										<div class="judul-pol">
+											<h2>BPMFT</h2>
+										</div>
+										@if (count($smft) == 0)
+										<h4>Belum Ada Calon Terdaftar</h4>
+										@endif
+										@foreach ($bpmft as $item)
 
-					<label class="custom-radio">
-						<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08' || $mahasiswa->status =='terdaftar' ||
-						$mahasiswa->status == 'voted') disabled
-						@endif @foreach ($suara as $item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
-						@endauth required
-						name="bpmft" value="{{$item->id}}" />
-						<span class="radio-btn"
-							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
-								class="lar la-check-circle"></i>
-							<div class="poll-icon">
-								{{-- <img src="img/index.png" class="img-fluids"> --}}
-							</div>
-						</span>
-						<span>
-							<div class="button p-0 m-0">
-								<p class="font-weight-bold p-2 m-0 text-4">{{$item->nama_panggilan}}</p>
-								<button class="btn-visiMisi btn btn-primary" type="button" id="" data-id="{{$item->id}}">Lihat
-									Visi
-									Misi</button>
-							</div>
-						</span>
-					</label>
-					@endforeach
+										<label class="custom-radio">
+											<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08'
+												|| $mahasiswa->status =='terdaftar' ||
+											$mahasiswa->status == 'voted') disabled
+											@endif @foreach ($suara as
+											$item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
+											@endauth required
+											name="bpmft" value="{{$item->id}}" />
+											<span class="radio-btn"
+												style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
+													class="lar la-check-circle"></i>
+												<div class="poll-icon">
+													{{-- <img src="img/index.png" class="img-fluids"> --}}
+												</div>
+											</span>
+											<span>
+												<div class="button p-0 m-0">
+													<p class="font-weight-bold p-2 m-0 text-4">{{$item->nama_panggilan}}
+													</p>
+													<button class="btn-visiMisi btn btn-primary" type="button" id=""
+														data-id="{{$item->id}}">Lihat
+														Visi
+														Misi</button>
+												</div>
+											</span>
+										</label>
+										@endforeach
 
-				</div>
+									</div>
 
-				<div class="clearfix"></div>
-				<div
-					class="result mt-3 @guest d-none @endguest @auth  @if($date < '2021-01-08' || $mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
-					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
-						type="button" id="btn-submit" data-toggle="modal" data-target="#exampleModalalert">Submit</button>
-					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth"
-						type="button" id="btn-See">Lihat Hasil Sementara</button>
-				</div>
-			</form>
-		</div>
+									<div class="clearfix"></div>
+									<div
+										class="result mt-3 @guest d-none @endguest @auth  @if($date < '2021-01-08' || $mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
+										<button
+											class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
+											type="button" id="btn-submit" data-toggle="modal"
+											data-target="#exampleModalalert">Submit</button>
+										<button
+											class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth"
+											type="button" id="btn-See">Lihat Hasil Sementara</button>
+									</div>
+								</form>
+							</div>
 	</section>
 
 	<section id="contact" class="section bg-color-grey-scale-5 border-0 m-0 p-0"
@@ -253,8 +260,8 @@ $date = date("Y-m-d");
 					<div id="googlemaps" class="google-ma h-100 mb-0 p-0" style="min-height: 500px;">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63114.03314524725!2d115.21000524619285!3d-8.631753311983303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd241ea9986cc09%3A0xefdc9ad9df39e8f4!2sSEKBER%20FT%20UNUD*21!5e0!3m2!1sid!2sid!4v1604911691204!5m2!1sid!2sid"
-							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%" allowfullscreen=""
-							aria-hidden="false" tabindex="0"></iframe>
+							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%"
+							allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 					</div>
 
 				</div>
@@ -286,11 +293,12 @@ $date = date("Y-m-d");
 						<div class="feature-box-info pl-1">
 							<h5 class="font-weight-light text-color-light opacity-7 mb-0">NARAHUBUNG</h5>
 							<p class="mb-0">
-								<a href="tel:+8001234567"
-									class="text-color-light font-weight-semibold text-decoration-none">800-123-4567 </a>
-								<span class="text-light"> | </span>
-								<a href="tel:+8001234567"
-									class="text-color-light font-weight-semibold text-decoration-none">800-123-4567</a>
+								<span class="social-icons-Instagram"><a href="https://www.instagram.com/smft_unud/"
+										target="_blank" class="text-color-light font-weight-semibold"
+										title="Instagram"><i class="mr-1 fab fa-instagram"></i> dayucahyanid</a></span>
+								<span class="social-icons-twitter pl-1"><a href="https://line.me/ti/p/~deyaachan"
+										target="_blank" class="text-color-light font-weight-semibold" title="Line"><i
+											class="mr-1 fab fa-line"></i> deyaachan</a></span>
 							</p>
 
 						</div>
@@ -306,11 +314,11 @@ $date = date("Y-m-d");
 						<div class="feature-box-info pl-1">
 							<h5 class="font-weight-light text-color-light opacity-7 mb-0">SOCIAL MEDIA</h5>
 							<p class="mb-0">
-								<span class="social-icons-Instagram pl-3"><a href="https://www.instagram.com/smft_unud/"
-										target="_blank" class="text-color-light font-weight-semibold" title="Instagram"><i
-											class="mr-1 fab fa-instagram"></i> INSTAGRAM</a></span>
-								<span class="social-icons-twitter pl-3"><a href="https://smft.unud.ac.id/" target="_blank"
-										class="text-color-light font-weight-semibold" title="Website"><i
+								<span class="social-icons-Instagram"><a href="https://www.instagram.com/smft_unud/"
+										target="_blank" class="text-color-light font-weight-semibold"
+										title="SMFT UNUD"><i class="mr-1 fab fa-instagram"></i> INSTAGRAM</a></span>
+								<span class="social-icons-twitter pl-1"><a href="https://smft.unud.ac.id/"
+										target="_blank" class="text-color-light font-weight-semibold" title="Website"><i
 											class="mr-1 fa fa-globe"></i> www.smft.unud.ac.id</a></span>
 							</p>
 						</div>
@@ -339,15 +347,18 @@ $date = date("Y-m-d");
 						<div class="main-card mb-3">
 							<div class="card-body">
 								<div class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
-								
+
 									<div class="vertical-timeline-item vertical-timeline-element">
 										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
 													class="badge badge-dot badge-dot-xl badge-dark"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Registrasi</h4>
-												<p class="text-justify" >Masuk ke web Pemira teknik lalu klik <a href="/register"
-														data-abc="true">Daftar</a> jika belum memiliki akun untuk melakukan registrasi atau klik <a href="/auth"
-														data-abc="true">Login</a> jika sudah memiliki akun atau sudah melakukan registrasi sebelumnya. Registrasi dapat dilakukan dari tanggal 2 sampai dengan 6 Januari 2021
+												<p class="text-justify">Masuk ke web Pemira teknik lalu klik <a
+														href="/register" data-abc="true">Daftar</a> jika belum memiliki
+													akun untuk melakukan registrasi atau klik <a href="/auth"
+														data-abc="true">Login</a> jika sudah memiliki akun atau sudah
+													melakukan registrasi sebelumnya. Registrasi dapat dilakukan dari
+													tanggal 2 sampai dengan 6 Januari 2021
 												</p> <span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
 											</div>
@@ -358,8 +369,10 @@ $date = date("Y-m-d");
 													class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Verifikasi</h4>
-												<p class="text-justify">Setelah melakukan registrasi, tunggu hingga panitia melakukan
-													verifikasi ke akun anda.</p> <span class="vertical-timeline-element-date"><i
+												<p class="text-justify">Setelah melakukan registrasi, tunggu hingga
+													panitia melakukan
+													verifikasi ke akun anda.</p> <span
+													class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
 											</div>
 										</div>
@@ -369,7 +382,8 @@ $date = date("Y-m-d");
 													class="badge badge-dot badge-dot-xl badge-danger"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Status</h4>
-												<p class="text-justify">Untuk mengetahui status verifikasi, silahkan login menggunakan akun
+												<p class="text-justify">Untuk mengetahui status verifikasi, silahkan
+													login menggunakan akun
 													yang sudah di registrasi lalu cek status akun pada bagian poling.
 												</p> <span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
@@ -381,7 +395,8 @@ $date = date("Y-m-d");
 													class="badge badge-dot badge-dot-xl badge-success"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Pemilihan</h4>
-												<p class="text-justify">Ketika akun sudah terverifikasi, maka akun anda siap digunakan untuk
+												<p class="text-justify">Ketika akun sudah terverifikasi, maka akun anda
+													siap digunakan untuk
 													memilih secara serempak pada tanggal <b>08 Januari 2021</b>.</p>
 												<span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
