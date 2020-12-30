@@ -19,17 +19,13 @@
               <li class="nav-item dropdown">
                 <a class="nav-link p-0 clear" href="#" data-toggle="dropdown">
                   <span class="avatar w-50">
-                    <p style="position: relative;top:10px">{{Auth::user()->nim}}</p>
+                    <p class="font-weight-bold border p-2"> <a href="/logout"> Logout</a> </p>
                   
                   </span>
                 </a>
                 <div ui-include="'/../views/blocks/dropdown.user.html'"></div>
               </li>
-              <li class="nav-item hidden-md-up">
-                <a class="nav-link pl-2" data-toggle="collapse" data-target="#collapse">
-                  <i class="material-icons">&#xe5d4;</i>
-                </a>
-              </li>
+             
             </ul>
             <!-- / navbar right -->
         </div>

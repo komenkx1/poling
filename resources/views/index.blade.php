@@ -353,9 +353,8 @@ $date = date("Y-m-d");
 													class="badge badge-dot badge-dot-xl badge-dark"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Registrasi</h4>
-												<p class="text-justify">Masuk ke web Pemira teknik lalu klik <a
-														href="/register" data-abc="true">Daftar</a> jika belum memiliki
-													akun untuk melakukan registrasi atau klik <a href="/auth"
+												<p class="text-justify">Masuk ke web Pemira teknik lalu klik <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('register')}} @endif" data-abc="true">Daftar</a> jika belum memiliki
+													akun untuk melakukan registrasi atau klik <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('auth')}} @endif"
 														data-abc="true">Login</a> jika sudah memiliki akun atau sudah
 													melakukan registrasi sebelumnya. Registrasi dapat dilakukan dari
 													tanggal 2 sampai dengan 6 Januari 2021
