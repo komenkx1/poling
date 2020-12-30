@@ -75,12 +75,12 @@
   <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-  <script src=" https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js "></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js "></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-  <script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
-  <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+  <script src="//cdn.ckeditor.com/4.15.1/basic/ckeditor.js"></script>
   <script src="/html/scripts/ui-jp.js"></script>
   <script src="/html/scripts/ui-include.js"></script>
   <script src="/html/scripts/ui-device.js"></script>
@@ -97,47 +97,19 @@
 
   <script>
     $(document).ready(function() {
-      
-      loaddata();
-      var currentDate = new Date()
-    var day = currentDate.getDate()
-    var month = currentDate.getMonth() + 1
-    var year = currentDate.getFullYear()
-    var tbl = $('#absen');
+      var currentDate = new Date();
+      var day = currentDate.getDate();
+      var month = currentDate.getMonth() + 1;
+      var year = currentDate.getFullYear();
 
-    var d = day + "-" + month + "-" + year;
+      var d = day + "-" + month + "-" + year;
+
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
-      $('#calon').DataTable({
-        order : false,
-      });
-      $('#absen').DataTable({
-        order : false,
-        dom: 'Bfrtip',
-        buttons: [{
-          extend: 'excelHtml5',
-          className: 'btn btn-danger',
-          text: 'Export to excel',
-          title: 'ABSEN MUSMA TEKNIK - '+d,
-          filename: 'absen musma - '+d,
-          init: function(api, node, config) {
-       $(node).removeClass('dt-button')
-    },
-          exportOptions: {
-            rows: {
-          search: 'applied'
-        },
-            orthogonal: 'export',
-            columns: [0,1, 2,3]
-          }
-        }
-      ],
-     
-    });
-    
+
       $('#example').DataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -169,14 +141,6 @@
         }
       });
 
-      $(".dataTable").on('click','.trash', function () { 
-        var id = $(this).data('id');
-        var nama = $(this).data('nama');
-        var title = document.getElementById("myModalLabel");
-        title.innerHTML = "Data : "+ nama;
-        $('#modalDelete').attr('action', '/admin/calon/delete/' + id);
-      });
-          
       $('#nim').keyup(function(){ 
         var query = $(this).val();
         if(query != ''){
@@ -211,73 +175,6 @@
           $('#btnDelete').attr('data-id', id)
           $('#delete').modal('show');
       });
-
-      $(document).on("click",'#btnVerif',function(){
-        event.preventDefault()
-        var data = $(this).attr('data-id');
-        console.log(data);
-        var table = $('#example').DataTable(); 
-
-        $.ajax({
-          url: '/admin/mahasiswa/verif/' + data,
-          type: 'put',
-          data: data,
-          success: function(data){
-            loaddata();
-
-          },
-          error: function(data) {
-            var errors = data.responseJSON;
-            console.log(errors);
-          }
-        });
-      })
-      $(document).on("click",'#btnDelete',function(){
-        event.preventDefault()
-        var data = $(this).attr('data-id');
-        console.log(data);
-
-        $.ajax({
-          url: '/admin/mahasiswa/delete/' + data,
-          type: 'delete',
-          data: data,
-          success: function(data){
-            loaddata();
-            $('#alert').modal('show');
-
-          },
-          error: function(data) {
-            var errors = data.responseJSON;
-            console.log(errors);
-          }
-        });
-      })
-      function loaddata(){
-        $.ajax({
-        url: '/admin/mahasiswa/data',
-        type: 'get',
-        dataType: 'html',
-        success: function(data){
-          // Destroy existing table
-          $('#example').DataTable().destroy();
-          
-          $('.hasil').html(data);
-          // Initialize the table
-          $('#example').DataTable({
-            "bStateSave": true,
-            "fnStateSave": function (oSettings, oData) {
-              localStorage.setItem('example', JSON.stringify(oData));
-            },
-            "fnStateLoad": function (oSettings, oData) {
-              return JSON.parse(localStorage.getItem('example'));
-            }
-          });
-        },
-        error: function(data) {
-          var errors = data.responseJSON;
-          console.log(errors);
-        }});
-      };
     });
   </script>
 

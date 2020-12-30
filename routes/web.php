@@ -5,10 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CalonController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\ProdiController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 
 
 /*
@@ -60,13 +57,13 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['role:admin|sekre'])->group(function () {
 
     // Route::resource('calons', CalonController::class);
-    Route::resource('mahasiswas', MahasiswaController::class)->except([
-        'create', 'store', 'destroy'
-    ]);;
-    Route::resource('prodis', ProdiController::class);
-    Route::resource('suaras', SuaraController::class)->except([
-        'create', 'edit', 'update'
-    ]);
+    // Route::resource('mahasiswas', MahasiswaController::class)->except([
+    //     'create', 'store', 'destroy'
+    // ]);;
+    // Route::resource('prodis', ProdiController::class);
+    // Route::resource('suaras', SuaraController::class)->except([
+    //     'create', 'edit', 'update'
+    // ]);
 
     Route::get("admin", 'DashboardController@index');
     Route::get("admin/role/", 'RoleController@index');
@@ -80,11 +77,11 @@ Route::middleware(['role:admin|sekre'])->group(function () {
     Route::get("admin/mahasiswa", 'MahasiswaController@index');
     Route::get("admin/mahasiswa/data", 'MahasiswaController@data');
     Route::put("admin/mahasiswa/verif/{mahasiswa:id}", 'MahasiswaController@verif');
-    Route::delete("admin/mahasiswa/delete/{mahasiswa:id}", 'MahasiswaController@destroy');
+    // Route::delete("admin/mahasiswa/delete/{mahasiswa:id}", 'MahasiswaController@destroy');
 
     Route::get("admin/absen", [AbsenController::class, 'index']);
-    Route::get("admin/absen/edit/{absen:id}", [AbsenController::class, 'edit']);
-    Route::put("admin/absen/update/{absen:id}", [AbsenController::class, 'update']);
+    // Route::get("admin/absen/edit/{absen:id}", [AbsenController::class, 'edit']);
+    // Route::put("admin/absen/update/{absen:id}", [AbsenController::class, 'update']);
     Route::delete("admin/absen/delete/{absen:id}", [AbsenController::class, 'destroy']);
 });
 
