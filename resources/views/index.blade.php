@@ -1,7 +1,8 @@
 @extends('layouts/master',["title"=>"Musma Teknik 2020"])
 @section('content')
 
-
+@if (!Auth::user() or $mahasiswa->status != 'voted')
+{{-- modal tutor --}}
 <div class="modal fade " id="modaltutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -24,8 +25,8 @@
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Registrasi</h4>
 												<p>Masuk ke web Pemira teknik lalu klik <a href="/register"
-														data-abc="true">Daftar</a> jika belum memiliki akun dan klik <a
-														href="/auth" data-abc="true">Login</a> jika sudah memiliki akun
+														data-abc="true">Daftar</a> jika belum memiliki akun dan klik <a href="/auth"
+														data-abc="true">Login</a> jika sudah memiliki akun
 												</p> <span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
 											</div>
@@ -37,8 +38,7 @@
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Verifikasi</h4>
 												<p>Setelah melakukan registrasi, tunggu hingga panitia melakukan
-													verifikasi ke akun anda.</p> <span
-													class="vertical-timeline-element-date"><i
+													verifikasi ke akun anda.</p> <span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
 											</div>
 										</div>
@@ -80,9 +80,8 @@
 		</div>
 	</div>
 </div>
-
 {{-- modal tutor --}}
-
+@endif
 
 {{-- modal Hasil --}}
 <div class="modal fade" id="hasil-sementara" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -344,8 +343,7 @@
 						<span>
 							<div class="button p-0 m-0">
 								<p class="font-weight-bold p-2 m-0 text-4">{{$item->nama_panggilan}}</p>
-								<button class="btn-visiMisi btn btn-primary" type="button" id=""
-									data-id="{{$item->id}}">Lihat
+								<button class="btn-visiMisi btn btn-primary" type="button" id="" data-id="{{$item->id}}">Lihat
 									Visi Misi</button>
 							</div>
 						</span>
@@ -378,8 +376,7 @@
 						<span>
 							<div class="button p-0 m-0">
 								<p class="font-weight-bold p-2 m-0 text-4">{{$item->nama_panggilan}}</p>
-								<button class="btn-visiMisi btn btn-primary" type="button" id=""
-									data-id="{{$item->id}}">Lihat
+								<button class="btn-visiMisi btn btn-primary" type="button" id="" data-id="{{$item->id}}">Lihat
 									Visi
 									Misi</button>
 							</div>
@@ -393,17 +390,13 @@
 				<div
 					class="result mt-3 @guest d-none @endguest @auth  @if($mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
 					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
-						type="button" id="btn-submit" data-toggle="modal"
-						data-target="#exampleModalalert">Submit</button>
+						type="button" id="btn-submit" data-toggle="modal" data-target="#exampleModalalert">Submit</button>
 					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth"
 						type="button" id="btn-See">Lihat Hasil Sementara</button>
 				</div>
 			</form>
 		</div>
 	</section>
-
-
-
 
 	<section id="contact" class="section bg-color-grey-scale-5 border-0 m-0 p-0"
 		data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="200">
@@ -415,8 +408,8 @@
 					<div id="googlemaps" class="google-ma h-100 mb-0 p-0" style="min-height: 500px;">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63114.03314524725!2d115.21000524619285!3d-8.631753311983303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd241ea9986cc09%3A0xefdc9ad9df39e8f4!2sSEKBER%20FT%20UNUD*21!5e0!3m2!1sid!2sid!4v1604911691204!5m2!1sid!2sid"
-							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%"
-							allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%" allowfullscreen=""
+							aria-hidden="false" tabindex="0"></iframe>
 					</div>
 
 				</div>
@@ -469,10 +462,10 @@
 							<h5 class="font-weight-light text-color-light opacity-7 mb-0">SOCIAL MEDIA</h5>
 							<p class="mb-0">
 								<span class="social-icons-Instagram pl-3"><a href="https://www.instagram.com/smft_unud/"
-										target="_blank" class="text-color-light font-weight-semibold"
-										title="Instagram"><i class="mr-1 fab fa-instagram"></i> INSTAGRAM</a></span>
-								<span class="social-icons-twitter pl-3"><a href="https://smft.unud.ac.id/"
-										target="_blank" class="text-color-light font-weight-semibold" title="Website"><i
+										target="_blank" class="text-color-light font-weight-semibold" title="Instagram"><i
+											class="mr-1 fab fa-instagram"></i> INSTAGRAM</a></span>
+								<span class="social-icons-twitter pl-3"><a href="https://smft.unud.ac.id/" target="_blank"
+										class="text-color-light font-weight-semibold" title="Website"><i
 											class="mr-1 fa fa-globe"></i> www.smft.unud.ac.id</a></span>
 							</p>
 						</div>

@@ -32,7 +32,7 @@ class MainController extends Controller
             $suara = Suara::where('mahasiswa_id', $mahasiswa->id)->get();
             return view('index', ['smft' => $smft, 'bpmft' => $bpmft, 'suara' => $suara, 'mahasiswa' => $mahasiswa]);
         } else {
-            return view('index', ['smft' => $smft, 'bpmft' => $bpmft,  'mahasiswa' => $mahasiswa]);
+            return view('index', ['smft' => $smft, 'bpmft' => $bpmft]);
         }
     }
 
