@@ -126,10 +126,10 @@ $date = date("Y-m-d");
 						@elseif($mahasiswa->status != 'terverifikasi' && $mahasiswa->status !='voted' )
 						Akun Anda Belum Terverifikasi. silahkan tunggu hingga admin memverifikasi
 						@else
-						Akun Terverifikasi! @if ($date < '2021-01-08' ) Silahkan Login kembali pada tanggal 08 Januari
-							2021 untuk melakukan pemilihan @else Silahkan Pilih salah satu calon ketua SMFT dan BPMFT
-							dengan cara mengklik foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan
-							pilihan. @endif @endif @endauth </p> </div> </div> </div> <br>
+						Akun Terverifikasi! @if ($date < '2021-01-08' ) Silahkan Login kembali pada tanggal 08 Januari 2021
+							untuk melakukan pemilihan @else Silahkan Pilih salah satu calon ketua SMFT dan BPMFT dengan cara
+							mengklik foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan. @endif @endif
+							@endauth </p> </div> </div> </div> <br>
 							<div class="row pb-5 mb-5">
 
 								<form action="/vote" class="radio-buttons" id="#create-form" method="POST">
@@ -140,8 +140,7 @@ $date = date("Y-m-d");
 											<div class="modal-content">
 												<div class="modal-header">
 													<h5 class="modal-title" id="exampleModalLabel">Alert!</h5>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
@@ -152,8 +151,7 @@ $date = date("Y-m-d");
 													<button type="button" class="btn btn-secondary"
 														data-dismiss="modal">Close</button>
 													<button class="btn btn-primary" type="button" id="btn-submit-modal"
-														data-toggle="modal"
-														data-target="#exampleModalalert">Submit</button>
+														data-toggle="modal" data-target="#exampleModalalert">Submit</button>
 												</div>
 											</div>
 										</div>
@@ -168,8 +166,8 @@ $date = date("Y-m-d");
 										@foreach ($smft as $item)
 
 										<label class="custom-radio">
-											<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08'
-												|| $mahasiswa->status =='terdaftar' ||
+											<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08' ||
+												$mahasiswa->status =='terdaftar' ||
 											$mahasiswa->status == 'voted' ) disabled
 											@endif @foreach ($suara as
 											$item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
@@ -206,8 +204,8 @@ $date = date("Y-m-d");
 										@foreach ($bpmft as $item)
 
 										<label class="custom-radio">
-											<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08'
-												|| $mahasiswa->status =='terdaftar' ||
+											<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08' ||
+												$mahasiswa->status =='terdaftar' ||
 											$mahasiswa->status == 'voted') disabled
 											@endif @foreach ($suara as
 											$item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
@@ -260,8 +258,8 @@ $date = date("Y-m-d");
 					<div id="googlemaps" class="google-ma h-100 mb-0 p-0" style="min-height: 500px;">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63114.03314524725!2d115.21000524619285!3d-8.631753311983303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd241ea9986cc09%3A0xefdc9ad9df39e8f4!2sSEKBER%20FT%20UNUD*21!5e0!3m2!1sid!2sid!4v1604911691204!5m2!1sid!2sid"
-							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%"
-							allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+							class="img-fluids" height="550" frameborder="0" style="border:0;width:100%" allowfullscreen=""
+							aria-hidden="false" tabindex="0"></iframe>
 					</div>
 
 				</div>
@@ -294,8 +292,8 @@ $date = date("Y-m-d");
 							<h5 class="font-weight-light text-color-light opacity-7 mb-0">NARAHUBUNG</h5>
 							<p class="mb-0">
 								<span class="social-icons-Instagram"><a href="https://www.instagram.com/smft_unud/"
-										target="_blank" class="text-color-light font-weight-semibold"
-										title="Instagram"><i class="mr-1 fab fa-instagram"></i> dayucahyanid</a></span>
+										target="_blank" class="text-color-light font-weight-semibold" title="Instagram"><i
+											class="mr-1 fab fa-instagram"></i> dayucahyanid</a></span>
 								<span class="social-icons-twitter pl-1"><a href="https://line.me/ti/p/~deyaachan"
 										target="_blank" class="text-color-light font-weight-semibold" title="Line"><i
 											class="mr-1 fab fa-line"></i> deyaachan</a></span>
@@ -315,10 +313,10 @@ $date = date("Y-m-d");
 							<h5 class="font-weight-light text-color-light opacity-7 mb-0">SOCIAL MEDIA</h5>
 							<p class="mb-0">
 								<span class="social-icons-Instagram"><a href="https://www.instagram.com/smft_unud/"
-										target="_blank" class="text-color-light font-weight-semibold"
-										title="SMFT UNUD"><i class="mr-1 fab fa-instagram"></i> INSTAGRAM</a></span>
-								<span class="social-icons-twitter pl-1"><a href="https://smft.unud.ac.id/"
-										target="_blank" class="text-color-light font-weight-semibold" title="Website"><i
+										target="_blank" class="text-color-light font-weight-semibold" title="SMFT UNUD"><i
+											class="mr-1 fab fa-instagram"></i> INSTAGRAM</a></span>
+								<span class="social-icons-twitter pl-1"><a href="https://smft.unud.ac.id/" target="_blank"
+										class="text-color-light font-weight-semibold" title="Website"><i
 											class="mr-1 fa fa-globe"></i> www.smft.unud.ac.id</a></span>
 							</p>
 						</div>
@@ -353,8 +351,11 @@ $date = date("Y-m-d");
 													class="badge badge-dot badge-dot-xl badge-dark"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Registrasi</h4>
-												<p class="text-justify">Masuk ke web Pemira teknik lalu klik <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('register')}} @endif" data-abc="true">Daftar</a> jika belum memiliki
-													akun untuk melakukan registrasi atau klik <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('auth')}} @endif"
+												<p class="text-justify">Masuk ke web Pemira teknik lalu klik <a href="@if (date("
+														Y-m-d") < '2021-01-02' ) {{route('comingsoon')}} @else {{route('register')}}
+														@endif" data-abc="true">Daftar</a> jika belum memiliki
+													akun untuk melakukan registrasi atau klik <a href="@if (date(" Y-m-d")
+														< '2021-01-02' ) {{route('comingsoon')}} @else {{route('auth')}} @endif"
 														data-abc="true">Login</a> jika sudah memiliki akun atau sudah
 													melakukan registrasi sebelumnya. Registrasi dapat dilakukan dari
 													tanggal 2 sampai dengan 6 Januari 2021
@@ -370,8 +371,7 @@ $date = date("Y-m-d");
 												<h4 class="timeline-title">Verifikasi</h4>
 												<p class="text-justify">Setelah melakukan registrasi, tunggu hingga
 													panitia melakukan
-													verifikasi ke akun anda.</p> <span
-													class="vertical-timeline-element-date"><i
+													verifikasi ke akun anda.</p> <span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
 											</div>
 										</div>
@@ -630,7 +630,6 @@ $date = date("Y-m-d");
 			data: {id: id},
 			success: function(data){
 				$('.modal-body-visimisi').html(data);
-				console.log(id);
 				$('#modalVisiMisi').modal('show'); 
 			}
 		});
