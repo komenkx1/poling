@@ -17,7 +17,7 @@
         </div> --}}
       </div>
       <hr>
-      <div class="p-3">
+      <div class="p-3 table-responsive">
         <table id="calon" class="table table-striped table-bordered dt-responsive nowrap">
           <thead>
             <tr>

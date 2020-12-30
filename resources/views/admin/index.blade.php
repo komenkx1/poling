@@ -138,7 +138,7 @@
    	for(var k in data.SMFT) smft_calons.push(k);
 
 		var prodis = data.SMFT[smft_calons[0]].prodis;
-		var datasmft = {
+    var datasmft = {
 			labels: prodis,
 			datasets: [
 			{
@@ -147,19 +147,13 @@
 				borderColor: 'rgba(255, 99, 132, 1)',
 				borderWidth: 1,
 				data: data.SMFT[smft_calons[0]].prodi_value
-			} , {
+			}, {
 				label: smft_calons[1],
 				backgroundColor: 'rgba(54, 162, 235, 0.2)',
 				borderColor: 'rgba(54, 162, 235, 1)',
 				borderWidth: 1,
 				data: data.SMFT[smft_calons[1]].prodi_value
-			} , {
-				label: smft_calons[2],
-				backgroundColor: 'rgba(14, 255, 108, 0.2)',
-				borderColor: 'rgba(54, 235, 65)',
-				borderWidth: 1,
-				data: data.SMFT[smft_calons[2]].prodi_value
-			} ]
+			}]
 		};
 
 		var bpmft_calons = [];
@@ -173,14 +167,20 @@
 				borderColor: 'rgba(255, 99, 132, 1)',
 				borderWidth: 1,
 				data: data.BPMFT[bpmft_calons[0]].prodi_value
-			} , {
+			}, {
 				label: bpmft_calons[1],
 				backgroundColor: 'rgba(54, 162, 235, 0.2)',
 				borderColor: 'rgba(54, 162, 235, 1)',
 				borderWidth: 1,
 				data: data.BPMFT[bpmft_calons[1]].prodi_value
-			} ]
-		};
+			}, {
+				label: bpmft_calons[2],
+				backgroundColor: 'rgba(14, 255, 108, 0.2)',
+				borderColor: 'rgba(54, 235, 65)',
+				borderWidth: 1,
+				data: data.BPMFT[bpmft_calons[2]].prodi_value
+			}]
+		};  
 
 		var chartSMFT = new Chart(cSmft, {
 			type: 'bar',

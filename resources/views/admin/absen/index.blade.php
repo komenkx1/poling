@@ -16,6 +16,7 @@
                             <th>Nim</th>
                             <th>Program Studi</th>
                             <th class="text-center">Status Absen</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,7 +27,9 @@
                             <td>{{$item->nim}}</td>
                             <td>{{$item->nama_prodi}}</td>
                             <td class="text-center"> <span>&#10004;</span> </td>
-
+                            <td class="text-center"><a href="#myModal"
+                                class="reset btn btn-danger" data-id="{{$item->mahasiswa_id}}" data-nama="{{$item->name}}"
+                                role="button" data-toggle="modal">Reset Suara</a></td>
                         </tr>
 
                         @endforeach
@@ -36,12 +39,43 @@
         </div>
     </div>
 </div>
-
+<div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="myModalLabel">Reset Confirmation</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="error-text">
+          <i class="fa fa-warning modal-icon"></i>
+          apakah anda yakin ingin mereset suara dari user ini?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <form id="modalReset" action="#" method="post">
+          @method('delete')
+          @csrf
+          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+          <button type="submit" class="btn btn-danger">reset</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('footer')
 <script>
     $(document).ready(function() {
+        var currentDate = new Date();
+      var day = currentDate.getDate();
+      var month = currentDate.getMonth() + 1;
+      var year = currentDate.getFullYear();
+
+      var d = day + "-" + month + "-" + year;
+
         $('#absen').DataTable({
             order : false,
             dom: 'Bfrtip',
@@ -63,6 +97,14 @@
             }
             }],
         });
+
+        $(".dataTable").on('click','.reset', function () { 
+      var id = $(this).data('id');
+      var nama = $(this).data('nama');
+      var title = document.getElementById("myModalLabel");
+      title.innerHTML = "Data : "+ nama;
+      $('#modalReset').attr('action', '/admin/absen/reset/' + id);
+    });
     });
 </script>
 @endsection

@@ -1,5 +1,8 @@
 @extends('layouts/master',["title"=>"Musma Teknik 2020"])
 @section('content')
+@php
+$date = date("Y-m-d");
+@endphp
 <div role="main" class="main" id="home">
 	<section class="slider-container rev_slider_wrapper" style="height: 100vh;">
 		<div id="revolutionSlider" class="slider rev_slider" data-version="5.4.8" data-plugin-revolution-slider
@@ -113,7 +116,7 @@
 					<p class="mb-4"> PEMILIHAN KETUA SMFT & BPMFT</p>
 				</div>
 				<div class="warning bg-danger" style="border: 1px solid black; border-radius: 5px;">
-					<p class="warning-start pt-3 text-light appear-animation font-weight-bold p-2"
+					<p class="warning-start pt-4 text-light appear-animation font-weight-bold pl-2 pr-2"
 						data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200"> @guest Silahkan login
 						terlebih dahulu dengan akun yang sudah
 						terverifikasi untuk melakukan voting @endguest
@@ -123,9 +126,10 @@
 						@elseif($mahasiswa->status != 'terverifikasi' && $mahasiswa->status !='voted' )
 						Akun Anda Belum Terverifikasi. silahkan tunggu hingga admin memverifikasi
 						@else
-						Akun Terverifikasi! Silahkan Pilih salah satu calon ketua SMFT dan
+						Akun Terverifikasi! @if ($date < '2021-01-08') Silahkan Login kembali pada tanggal 08 Januari 2021 untuk melakukan pemilihan @else Silahkan Pilih salah satu calon ketua SMFT dan
 						BPMFT dengan cara
 						mengklik foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan.
+						@endif 
 						@endif
 						@endauth
 					</p>
@@ -168,10 +172,10 @@
 					@foreach ($smft as $item)
 
 					<label class="custom-radio">
-						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='terdaftar' ||
+						<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08' || $mahasiswa->status =='terdaftar' ||
 						$mahasiswa->status == 'voted' ) disabled
 						@endif @foreach ($suara as $item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
-						@endauth required id="smft"
+						@endauth required
 						name="smft"
 						value="{{$item->id}}" />
 						<span class="radio-btn"
@@ -202,10 +206,10 @@
 					@foreach ($bpmft as $item)
 
 					<label class="custom-radio">
-						<input type="radio" @guest disabled @endguest @auth @if($mahasiswa->status =='terdaftar' ||
+						<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08' || $mahasiswa->status =='terdaftar' ||
 						$mahasiswa->status == 'voted') disabled
 						@endif @foreach ($suara as $item2){{$item->id == $item2->calon_id ? 'checked' : ''}}@endforeach
-						@endauth required id="bpmft"
+						@endauth required
 						name="bpmft" value="{{$item->id}}" />
 						<span class="radio-btn"
 							style=" background: url({{$item->takeimage}});background-size: cover;background-repeat-y: no-repeat;background-position: center;"><i
@@ -229,7 +233,7 @@
 
 				<div class="clearfix"></div>
 				<div
-					class="result mt-3 @guest d-none @endguest @auth  @if($mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
+					class="result mt-3 @guest d-none @endguest @auth  @if($date < '2021-01-08' || $mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
 					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
 						type="button" id="btn-submit" data-toggle="modal" data-target="#exampleModalalert">Submit</button>
 					<button class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth"
@@ -335,14 +339,15 @@
 						<div class="main-card mb-3">
 							<div class="card-body">
 								<div class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+								
 									<div class="vertical-timeline-item vertical-timeline-element">
 										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
-													class="badge badge-dot badge-dot-xl badge-success"></i> </span>
+													class="badge badge-dot badge-dot-xl badge-dark"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Registrasi</h4>
-												<p>Masuk ke web Pemira teknik lalu klik <a href="/register"
-														data-abc="true">Daftar</a> jika belum memiliki akun dan klik <a href="/auth"
-														data-abc="true">Login</a> jika sudah memiliki akun
+												<p class="text-justify" >Masuk ke web Pemira teknik lalu klik <a href="/register"
+														data-abc="true">Daftar</a> jika belum memiliki akun untuk melakukan registrasi atau klik <a href="/auth"
+														data-abc="true">Login</a> jika sudah memiliki akun atau sudah melakukan registrasi sebelumnya. Registrasi dapat dilakukan dari tanggal 2 sampai dengan 6 Januari 2021
 												</p> <span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
 											</div>
@@ -353,7 +358,7 @@
 													class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Verifikasi</h4>
-												<p>Setelah melakukan registrasi, tunggu hingga panitia melakukan
+												<p class="text-justify">Setelah melakukan registrasi, tunggu hingga panitia melakukan
 													verifikasi ke akun anda.</p> <span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
 											</div>
@@ -364,7 +369,7 @@
 													class="badge badge-dot badge-dot-xl badge-danger"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Status</h4>
-												<p>Untuk mengetahui status verifikasi, silahkan login menggunakan akun
+												<p class="text-justify">Untuk mengetahui status verifikasi, silahkan login menggunakan akun
 													yang sudah di registrasi lalu cek status akun pada bagian poling.
 												</p> <span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
@@ -375,9 +380,9 @@
 										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
 													class="badge badge-dot badge-dot-xl badge-success"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
-												<h4 class="timeline-title text-success">Pemilihan</h4>
-												<p>Ketika akun sudah terverifikasi, maka akun anda siap digunakan untuk
-													memilih secara serempak pada tanggal <b>08 Januari 2020</b>.</p>
+												<h4 class="timeline-title">Pemilihan</h4>
+												<p class="text-justify">Ketika akun sudah terverifikasi, maka akun anda siap digunakan untuk
+													memilih secara serempak pada tanggal <b>08 Januari 2021</b>.</p>
 												<span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
 											</div>

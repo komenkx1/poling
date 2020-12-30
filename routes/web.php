@@ -77,12 +77,12 @@ Route::middleware(['role:admin|sekre'])->group(function () {
     Route::get("admin/mahasiswa", 'MahasiswaController@index');
     Route::get("admin/mahasiswa/data", 'MahasiswaController@data');
     Route::put("admin/mahasiswa/verif/{mahasiswa:id}", 'MahasiswaController@verif');
-    // Route::delete("admin/mahasiswa/delete/{mahasiswa:id}", 'MahasiswaController@destroy');
-
+    Route::delete("admin/mahasiswa/delete/{mahasiswa:id}", 'MahasiswaController@destroy');
     Route::get("admin/absen", [AbsenController::class, 'index']);
+    Route::delete("admin/absen/reset/{absen:id}", [AbsenController::class, 'destroy']);
     // Route::get("admin/absen/edit/{absen:id}", [AbsenController::class, 'edit']);
     // Route::put("admin/absen/update/{absen:id}", [AbsenController::class, 'update']);
-    Route::delete("admin/absen/delete/{absen:id}", [AbsenController::class, 'destroy']);
+    // Route::delete("admin/absen/delete/{absen:id}", [AbsenController::class, 'destroy']);
 });
 
 

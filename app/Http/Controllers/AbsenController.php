@@ -18,6 +18,7 @@ class AbsenController extends Controller
     public function index()
     {
         $absen = DB::table('mahasiswas')
+            ->select('*','mahasiswas.id as mahasiswa_id')
             ->where('status', 'voted')
             ->join('users', 'mahasiswas.user_id', '=', 'users.id')
             ->join('prodis', 'users.prodi_id', '=', 'prodis.id')
@@ -95,8 +96,10 @@ class AbsenController extends Controller
             Suara::where('mahasiswa_id', $id)->delete();
 
             $mahasiswa = Mahasiswa::find($id);
+            // dd($id);
             $mahasiswa->status = 'terverifikasi';
-            $mahasiswa->save();
+            $mahasiswa->update();
+            return redirect('admin/absen');
         }
     }
 }

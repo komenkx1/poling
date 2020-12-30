@@ -33,7 +33,7 @@
               <td><img src="{{$item->takeimage}}" alt="avatar" style="width: 100px"></td>
               <td><a class="btn btn-primary" href="/admin/calon/edit/{{$item->id}}">Edit</a> | <a href="#myModal"
                   class="trash btn btn-danger" data-id="{{$item->id}}" data-nama="{{$item->nama_panggilan}}"
-                  role="button" data-toggle="modal">Hapus</a>
+                  role="button" data-toggle="modal">Hapus</a></td>
             </tr>
             @endforeach
           </tbody>
