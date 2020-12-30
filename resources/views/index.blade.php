@@ -1,164 +1,5 @@
 @extends('layouts/master',["title"=>"Musma Teknik 2020"])
 @section('content')
-
-@if (!Auth::user() or $mahasiswa->status != 'voted')
-{{-- modal tutor --}}
-<div class="modal fade " id="modaltutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Alur Pemilihan</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body-tutor">
-				<div class="row d-flex justify-content-center">
-					<div class="col-md-12">
-						<div class="main-card mb-3">
-							<div class="card-body">
-								<div class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
-									<div class="vertical-timeline-item vertical-timeline-element">
-										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
-													class="badge badge-dot badge-dot-xl badge-success"></i> </span>
-											<div class="vertical-timeline-element-content bounce-in">
-												<h4 class="timeline-title">Registrasi</h4>
-												<p>Masuk ke web Pemira teknik lalu klik <a href="/register"
-														data-abc="true">Daftar</a> jika belum memiliki akun dan klik <a href="/auth"
-														data-abc="true">Login</a> jika sudah memiliki akun
-												</p> <span class="vertical-timeline-element-date"><i
-														class="fas fa-arrow-down"></i></span>
-											</div>
-										</div>
-									</div>
-									<div class="vertical-timeline-item vertical-timeline-element">
-										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
-													class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
-											<div class="vertical-timeline-element-content bounce-in">
-												<h4 class="timeline-title">Verifikasi</h4>
-												<p>Setelah melakukan registrasi, tunggu hingga panitia melakukan
-													verifikasi ke akun anda.</p> <span class="vertical-timeline-element-date"><i
-														class="fas fa-arrow-down"></i></span>
-											</div>
-										</div>
-									</div>
-									<div class="vertical-timeline-item vertical-timeline-element">
-										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
-													class="badge badge-dot badge-dot-xl badge-danger"> </i> </span>
-											<div class="vertical-timeline-element-content bounce-in">
-												<h4 class="timeline-title">Status</h4>
-												<p>Untuk mengetahui status verifikasi, silahkan login menggunakan akun
-													yang sudah di registrasi lalu cek status akun pada bagian poling.
-												</p> <span class="vertical-timeline-element-date"><i
-														class="fas fa-arrow-down"></i></span>
-											</div>
-										</div>
-									</div>
-									<div class="vertical-timeline-item vertical-timeline-element">
-										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
-													class="badge badge-dot badge-dot-xl badge-success"> </i> </span>
-											<div class="vertical-timeline-element-content bounce-in">
-												<h4 class="timeline-title text-success">Pemilihan</h4>
-												<p>Ketika akun sudah terverifikasi, maka akun anda siap digunakan untuk
-													memilih secara serempak pada tanggal <b>08 Januari 2020</b>.</p>
-												<span class="vertical-timeline-element-date"><i
-														class="fas fa-arrow-down"></i></span>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-{{-- modal tutor --}}
-@endif
-
-{{-- modal Hasil --}}
-<div class="modal fade" id="hasil-sementara" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Hasil Sementara</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div class="alert alert-success" style="display:none">
-					{{ Session::get('success') }}
-				</div>
-				<div class="chart">
-					<div class="item m-3">
-						<p class="text-center font-weight-bold"># Vote SMFT</p>
-						<canvas id="smft" width="250" height="180"></canvas>
-					</div>
-					<div class="item m-3">
-						<p class="text-center font-weight-bold"># Vote BPMFT</p>
-						<canvas id="bpmft" width="250" height="180"></canvas>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-<div class="modal fade" id="modalVisiMisi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Visi Misi</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body-visimisi container">
-
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="alert-vote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Peringatan!</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div id="text-modal"></div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-
 <div role="main" class="main" id="home">
 	<section class="slider-container rev_slider_wrapper" style="height: 100vh;">
 		<div id="revolutionSlider" class="slider rev_slider" data-version="5.4.8" data-plugin-revolution-slider
@@ -474,6 +315,162 @@
 			</div>
 		</div>
 	</section>
+</div>
+
+@if (!Auth::user() or $mahasiswa->status != 'voted')
+{{-- modal tutor --}}
+<div class="modal fade " id="modaltutor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Alur Pemilihan</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body-tutor">
+				<div class="row d-flex justify-content-center">
+					<div class="col-md-12">
+						<div class="main-card mb-3">
+							<div class="card-body">
+								<div class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+									<div class="vertical-timeline-item vertical-timeline-element">
+										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
+													class="badge badge-dot badge-dot-xl badge-success"></i> </span>
+											<div class="vertical-timeline-element-content bounce-in">
+												<h4 class="timeline-title">Registrasi</h4>
+												<p>Masuk ke web Pemira teknik lalu klik <a href="/register"
+														data-abc="true">Daftar</a> jika belum memiliki akun dan klik <a href="/auth"
+														data-abc="true">Login</a> jika sudah memiliki akun
+												</p> <span class="vertical-timeline-element-date"><i
+														class="fas fa-arrow-down"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="vertical-timeline-item vertical-timeline-element">
+										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
+													class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
+											<div class="vertical-timeline-element-content bounce-in">
+												<h4 class="timeline-title">Verifikasi</h4>
+												<p>Setelah melakukan registrasi, tunggu hingga panitia melakukan
+													verifikasi ke akun anda.</p> <span class="vertical-timeline-element-date"><i
+														class="fas fa-arrow-down"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="vertical-timeline-item vertical-timeline-element">
+										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
+													class="badge badge-dot badge-dot-xl badge-danger"> </i> </span>
+											<div class="vertical-timeline-element-content bounce-in">
+												<h4 class="timeline-title">Status</h4>
+												<p>Untuk mengetahui status verifikasi, silahkan login menggunakan akun
+													yang sudah di registrasi lalu cek status akun pada bagian poling.
+												</p> <span class="vertical-timeline-element-date"><i
+														class="fas fa-arrow-down"></i></span>
+											</div>
+										</div>
+									</div>
+									<div class="vertical-timeline-item vertical-timeline-element">
+										<div> <span class="vertical-timeline-element-icon bounce-in"> <i
+													class="badge badge-dot badge-dot-xl badge-success"> </i> </span>
+											<div class="vertical-timeline-element-content bounce-in">
+												<h4 class="timeline-title text-success">Pemilihan</h4>
+												<p>Ketika akun sudah terverifikasi, maka akun anda siap digunakan untuk
+													memilih secara serempak pada tanggal <b>08 Januari 2020</b>.</p>
+												<span class="vertical-timeline-element-date"><i
+														class="fas fa-arrow-down"></i></span>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+{{-- modal tutor --}}
+@endif
+
+{{-- modal Hasil --}}
+<div class="modal fade" id="hasil-sementara" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Hasil Sementara</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-success" style="display:none">
+					{{ Session::get('success') }}
+				</div>
+				<div class="chart">
+					<div class="item m-3">
+						<p class="text-center font-weight-bold"># Vote SMFT</p>
+						<canvas id="smft" width="250" height="180"></canvas>
+					</div>
+					<div class="item m-3">
+						<p class="text-center font-weight-bold"># Vote BPMFT</p>
+						<canvas id="bpmft" width="250" height="180"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="modalVisiMisi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Visi Misi</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body-visimisi container">
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="alert-vote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Peringatan!</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="text-modal"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
 </div>
 @endsection
 
