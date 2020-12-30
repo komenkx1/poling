@@ -58,9 +58,9 @@ $user_role = $user->getRoleNames()[0];
 
                                         @guest
                                         <li class="d-block d-lg-none">
-                                            <a  class="dropdown-item active" href="{{ route('register') }}">
-                                                Daftar
-                                            </a>
+                                            <a href="{{route('register')}}" class="text-light"> Daftar</a> <span
+                                                class="text-light"> / </span> <a href="{{route('auth')}}"
+                                                class="text-light">Login</a>
                                         </li>
                                         @endguest
                                         <li>
@@ -70,18 +70,18 @@ $user_role = $user->getRoleNames()[0];
                                         </li>
                                         <li>
                                             <a class="dropdown-item" data-hash data-hash-offset="75"
-                                            href="#smft">SMFT</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" data-hash data-hash-offset="75"
-                                        href="#bpmft">BPMFT</a>
-                                </li>
+                                                href="#smft">SMFT</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" data-hash data-hash-offset="75"
+                                                href="#bpmft">BPMFT</a>
+                                        </li>
                                         {{-- logined --}}
-                                      
-                                                
 
-                                            </ul>
-                                    
+
+
+                                    </ul>
+
                                 </nav>
                                 @else
                                 <nav class="collapse">
@@ -112,9 +112,9 @@ $user_role = $user->getRoleNames()[0];
 
                                         @guest
                                         <li class="d-block d-lg-none">
-                                            <a  class="dropdown-item active" href="{{ route('register') }}">
-                                                Daftar / Login
-                                            </a>
+                                            <a href="{{route('register')}}" class="text-light"> Daftar</a> <span
+                                                class="text-light"> / </span> <a href="{{route('auth')}}"
+                                                class="text-light">Login</a>
                                         </li>
                                         @endguest
                                         <li>
@@ -159,11 +159,11 @@ $user_role = $user->getRoleNames()[0];
                 <ul class="nav nav-pills">
                     @guest
                     <li class="nav-item dropdown nav-item-left-border  border-black">
-                    <a class="nav-link" href="{{route('register')}}" role="button" id="dropdownLanguage"
-                            aria-haspopup="true" aria-expanded="false">
-                            Daftar / Login
-                           
-                        </a>
+                        <div class="border p-2 nav-link" role="button" id="dropdownLanguage" aria-haspopup="true"
+                            aria-expanded="false">
+                            <a href="{{route('register')}}" class=" text-light"> Daftar</a> <span class="text-light"> /
+                            </span> <a href="{{route('auth')}}" class="text-light">Login</a>
+                        </div>
                     </li>
                     @endguest
                     @auth
@@ -176,12 +176,12 @@ $user_role = $user->getRoleNames()[0];
                         </a>
                         <div class="dropdown-menu" style="background-color:#212529!important;">
                             @if ($user->hasRole('admin') || $user->hasRole('sekre'))
-                                           
-                                                    <a class="dropdown-item" href="/admin">
-                                                        Admin
-                                                    </a>
-                                               
-                                                @endif
+
+                            <a class="dropdown-item" href="/admin">
+                                Admin
+                            </a>
+
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                         </div>
                     </li>

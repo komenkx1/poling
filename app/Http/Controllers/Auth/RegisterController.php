@@ -144,9 +144,8 @@ class RegisterController extends Controller
             $mahasiswa->save()
         ) {
             $user->assignRole('mahasiswa');
-            $credentials = $request->only('register_nim', 'register_password');
-
-            if (Auth::attempt($credentials)) {
+            // $credentials = $request->only('register_nim', 'register_password');
+            if (Auth::attempt(array('nim' => $request->register_nim, 'password' => $request->register_password))) {
                 return redirect()->route('home');
             }
         }

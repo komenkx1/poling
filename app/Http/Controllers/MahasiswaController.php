@@ -17,35 +17,34 @@ class MahasiswaController extends Controller
     {
         $mahasiswa = Mahasiswa::all();
         $user = User::with('mahasiswa')->get();
-        return view('admin/mahasiswa/index', ['mahasiswa' => $mahasiswa,'user'=>$user]);
+        return view('admin/mahasiswa/index', ['mahasiswa' => $mahasiswa, 'user' => $user]);
     }
 
     public function data()
     {
-        $mahasiswa = Mahasiswa::orderBy('id','DESC')->get();
+        $mahasiswa = Mahasiswa::orderBy('id', 'DESC')->get();
         $user = User::with('mahasiswa')->get();
-        $no =1;
-         
-       foreach ($mahasiswa as $item){
-         $output='<tr >
-             <td>'.$no++.'</td>
-             <td>'.$item->user->name.'</td>
-             <td>'.$item->user->nim.'</td>
-             <td> <a href='.$item->takeimage.' data-fancybox="gallery" data-caption='.$item->name.' ><img src='.$item->takeimage.' alt="avatar" style="max-width: 100px"></a></td>
-             <td>'.$item->status.'</td>
-             <td>'.$item->verified_at.'</td>
+        $no = 1;
+
+        foreach ($mahasiswa as $item) {
+            $output = '<tr >
+             <td>' . $no++ . '</td>
+             <td>' . $item->user->name . '</td>
+             <td>' . $item->user->nim . '</td>
+             <td> <a href=' . $item->takeimage . ' data-fancybox="gallery" data-caption=' . $item->name . ' ><img src=' . $item->takeimage . ' alt="avatar" style="max-width: 100px"></a></td>
+             <td>' . $item->status . '</td>
+             <td>' . $item->verified_at . '</td>
              <td>';
-             if($item->status == 'terverifikasi' || $item->status == 'voted'){
-                $output.='<div class=" text-center"><i class="fa fa-check"></i></div></td>';
-             }else{
-                $output.='
-                <div class=" text-center"><button class="btn-verif btn btn-primary" type="button" data-id='.$item->id.'>Verif</button>
-                <button class="btn-delete btn btn-danger" type="button" data-id='.$item->id.'>Hapus</button></div>
+            if ($item->status == 'terverifikasi' || $item->status == 'voted') {
+                $output .= '<div class=" text-center"><i class="fa fa-check"></i></div></td>';
+            } else {
+                $output .= '
+                <div class=" text-center"><button class="btn-verif btn btn-primary" type="button" data-id=' . $item->id . '>Verif</button>
+                <button class="btn-delete btn btn-danger" type="button" data-id=' . $item->id . '>Hapus</button></div>
                 </td>';
-             };
-             echo $output;
+            };
+            echo $output;
         };
-        
     }
 
     public function verif(Request $request, Mahasiswa $mahasiswa)
@@ -54,7 +53,7 @@ class MahasiswaController extends Controller
         $mahasiswa->verified_at = date('Y-m-d');
         $mahasiswa->update();
         // dd($mahasiswa);
-       
+
     }
     /**
      * Show the form for creating a new resource.
@@ -120,5 +119,6 @@ class MahasiswaController extends Controller
     public function destroy(Mahasiswa $mahasiswa)
     {
         $mahasiswa->delete();
+        \Storage::delete($mahasiswa->file_url);
     }
 }
