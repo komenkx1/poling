@@ -116,7 +116,11 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        $mahasiswa->delete();
+        $user = User::find($mahasiswa->user_id);
+        $user->password = null;
+        $user->save();
         Storage::delete($mahasiswa->file_url);
+
+        $mahasiswa->delete();
     }
 }
