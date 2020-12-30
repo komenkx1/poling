@@ -32,8 +32,12 @@ Route::auth();
 
 // Route::get("/register", 'RegisterController@index');
 // Route::get('register', 'RegisterController@index')->name('search');
-Route::get('register', [RegisterController::class, 'index'])->name('register');
-Route::get('auth', [RegisterController::class, 'index'])->name('auth');
+if (date("Y-m-d") < '2021-01-02') {
+    Route::view('comingsoon', 'comingsoon')->name('comingsoon');
+    }else{
+    Route::get('register', [RegisterController::class, 'index'])->name('register');
+    Route::get('auth', [RegisterController::class, 'index'])->name('auth');
+}
 Route::view('visi-misi', 'visi-misi');
 // Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('register/fetch', [RegisterController::class, 'fetch'])->name('autocomplete.fetch');

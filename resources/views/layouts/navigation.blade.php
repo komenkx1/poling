@@ -58,8 +58,8 @@ $user_role = $user->getRoleNames()[0];
 
                                         @guest
                                         <li class="d-block d-lg-none">
-                                            <a href="{{route('register')}}" class="text-light"> Daftar</a> <span
-                                                class="text-light"> / </span> <a href="{{route('auth')}}"
+                                            <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('register')}} @endif" class="text-light"> Daftar</a> <span
+                                                class="text-light"> / </span> <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('auth')}} @endif"
                                                 class="text-light">Login</a>
                                         </li>
                                         @endguest
@@ -112,8 +112,8 @@ $user_role = $user->getRoleNames()[0];
 
                                         @guest
                                         <li class="d-block d-lg-none">
-                                            <a href="{{route('register')}}" class="text-light"> Daftar</a> <span
-                                                class="text-light"> / </span> <a href="{{route('auth')}}"
+                                            <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('register')}} @endif" class="text-light"> Daftar</a> <span
+                                                class="text-light"> / </span> <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('auth')}} @endif"
                                                 class="text-light">Login</a>
                                         </li>
                                         @endguest
@@ -161,8 +161,9 @@ $user_role = $user->getRoleNames()[0];
                     <li class="nav-item dropdown nav-item-left-border  border-black">
                         <div class="border p-2 nav-link" role="button" id="dropdownLanguage" aria-haspopup="true"
                             aria-expanded="false">
-                            <a href="{{route('register')}}" class=" text-light"> Daftar</a> <span class="text-light"> /
-                            </span> <a href="{{route('auth')}}" class="text-light">Login</a>
+                            <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('register')}} @endif" class="text-light"> Daftar</a> <span
+                            class="text-light"> / </span> <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('auth')}} @endif"
+                            class="text-light">Login</a>
                         </div>
                     </li>
                     @endguest
