@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Calon;
-use App\Models\Prodi;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CalonController extends Controller
 {
@@ -65,7 +64,6 @@ class CalonController extends Controller
             $urlgambar = $gambar->storeAs("img/calon", "{$slug}.{$gambar->extension()}");
             $calon->photo_url = $urlgambar;
         }
-        // echo($userid);
         $calon->save();
 
         return redirect('admin/calon');
@@ -80,9 +78,7 @@ class CalonController extends Controller
                 ->get();
             $output = '<span>Mahasiswa : </span> <ul class="ids" style="display:block;width:100%;background-color:#f0f0f0;padding:5px;border-radius:5px;margin-bottom:10px;">';
             foreach ($data as $row) {
-                $output .= '
-                <li class="p-2 d-block"><a href="#" class="text-danger">' . $row->nim . " - " . $row->name . '</a></li>
-                ';
+                $output .= '<li class="p-2 d-block"><a href="#" class="text-danger">' . $row->nim . " - " . $row->name . '</a></li>';
             }
             $output .= '</ul>';
             echo $output;
@@ -132,28 +128,22 @@ class CalonController extends Controller
             'photo_url' => 'max:2000'
         ]);
 
-
         $slug = Str::slug($request->nama_panggilan);
         if ($request->file('photo_url')) {
-            \Storage::delete($calon->photo_url); // menghapus gambar atau file
+            Storage::delete($calon->photo_url); // menghapus gambar atau file
             $gambar = $request->file('photo_url');
             $urlgambar = $gambar->storeAs("img/calon", "{$slug}.{$gambar->extension()}");
             $calon->photo_url = $urlgambar;
-        }else{
-            null;
         }
+
         $calon->user_id = $request->user_id;
         $calon->nama_panggilan = $request->nama_panggilan;
         $calon->visi = $request->visi;
         $calon->misi = $request->misi;
         $calon->jenis_calon = $request->jenis_calon;
-        
+
         $calon->update();
         return redirect('admin/calon');
-        // dd($calon);
-
-
-
     }
 
     /**
@@ -164,7 +154,7 @@ class CalonController extends Controller
      */
     public function destroy(Calon $calon)
     {
-        \Storage::delete($calon->photo_url);
+        Storage::delete($calon->photo_url);
         $calon->delete();
         return redirect('/admin/calon');
     }

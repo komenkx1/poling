@@ -50,8 +50,6 @@ class MahasiswaController extends Controller
         $mahasiswa->status = 'terverifikasi';
         $mahasiswa->verified_at = date('Y-m-d');
         $mahasiswa->update();
-        // dd($mahasiswa);
-
     }
     /**
      * Show the form for creating a new resource.

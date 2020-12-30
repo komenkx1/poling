@@ -82,7 +82,6 @@ class MainController extends Controller
                 </div>
             </div>';
             echo ($output);
-            // return \json_encode($visi);
         }
     }
 
