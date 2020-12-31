@@ -277,7 +277,7 @@ $voteDate = '2021-01-08';
 						</div>
 						<div class="feature-box-info pl-1">
 							<h5 class="font-weight-light text-color-light opacity-7 mb-0">Tanggal Pemilihan</h5>
-							<p class="text-color-light font-weight-semibold mb-0">08 / Januari / 2020</p>
+							<p class="text-color-light font-weight-semibold mb-0">08 / Januari / 2021</p>
 						</div>
 					</div>
 				</div>
@@ -290,9 +290,9 @@ $voteDate = '2021-01-08';
 						<div class="feature-box-info pl-1">
 							<h5 class="font-weight-light text-color-light opacity-7 mb-0">NARAHUBUNG</h5>
 							<p class="mb-0">
-								<span class="social-icons-Instagram"><a href="https://www.instagram.com/smft_unud/"
-										target="_blank" class="text-color-light font-weight-semibold" title="Instagram"><i
-											class="mr-1 fab fa-instagram"></i> dayucahyanid</a></span>
+								<span class="social-icons-Instagram"><a href="https://bit.ly/2L6nYLe"
+										target="_blank" class="text-color-light font-weight-semibold" title="Whatsapp"><i
+											class="mr-1 fab fa-whatsapp"></i> +6282146403929</a></span>
 								<span class="social-icons-twitter pl-1"><a href="https://line.me/ti/p/~deyaachan"
 										target="_blank" class="text-color-light font-weight-semibold" title="Line"><i
 											class="mr-1 fab fa-line"></i> deyaachan</a></span>
@@ -376,7 +376,7 @@ $voteDate = '2021-01-08';
 													class="badge badge-dot badge-dot-xl badge-warning"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Verifikasi</h4>
-												<p class="text-justify">Setelah melakukan registrasi, tunggu hingga
+												<p class="text-justify">Harap lengkapi data diri serta siapkan foto Krm untuk persyaratan verifikasi, dan setelah melakukan registrasi, tunggu hingga
 													panitia melakukan
 													verifikasi ke akun anda.</p> <span class="vertical-timeline-element-date"><i
 														class="fas fa-arrow-down"></i></span>
