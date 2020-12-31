@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 // Route::auth();
 Route::get('/', [MainController::class, 'index'])->name('home');
 
-if (date("Y-m-d") < '2020-01-02') {
+if (date("Y-m-d") < '2021-01-02') {
     Route::view('comingsoon', 'comingsoon')->name('comingsoon');
 } else {
     Route::get('register', [RegisterController::class, 'index'])->name('register');

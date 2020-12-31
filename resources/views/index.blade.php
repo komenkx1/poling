@@ -2,8 +2,8 @@
 @section('content')
 @php
 $date = date("Y-m-d");
-$regisDate = '2020-01-02';
-$voteDate = '2020-01-08';
+$regisDate = '2021-01-02';
+$voteDate = '2021-01-08';
 @endphp
 <div role="main" class="main" id="home">
 	<section class="slider-container rev_slider_wrapper" style="height: 100vh;">
@@ -469,7 +469,7 @@ $voteDate = '2020-01-08';
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body-visimisi container">
+			<div class="modal-body-visimisi container pt-3">
 
 			</div>
 			<div class="modal-footer">

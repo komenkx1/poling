@@ -65,7 +65,7 @@ class MainController extends Controller
                 </div>
                 <div class="feature-box-info">
                     <h4 class="font-weight-bold  text-4 mb-2">VISI</h4>
-                    <div id="text-misi" class=" opacity-7 text-justify">'
+                    <div id="text-misi" class=" opacity-7 text-justify" >'
                 . $item->visi .
                 '</div>
                 </div>
@@ -76,7 +76,7 @@ class MainController extends Controller
                 </div>
                 <div class="feature-box-info">
                     <h4 class="font-weight-bold  text-4 mb-2">MISI</h4>
-                    <div class=" opacity-7 text-justify">'
+                    <div class=" opacity-7 text-justify" style="margin-left: 1.2em;">'
                 . $item->misi .
                 '</div>
                 </div>
