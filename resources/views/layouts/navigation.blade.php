@@ -46,20 +46,23 @@ $user_role = $user->getRoleNames()[0];
                                                     </a>
                                                 </li>
                                                 @endif
+                                                @if (Route::has('logout'))
                                                 <li>
                                                     <a class="dropdown-item" href="{{ route('logout') }}">
                                                         Logout
                                                     </a>
                                                 </li>
-
+                                                @endif
                                             </ul>
                                         </li>
                                         @endauth
 
                                         @guest
                                         <li class="d-block d-lg-none">
-                                            <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('register')}} @endif" class="text-light"> Daftar</a> <span
-                                                class="text-light"> / </span> <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('auth')}} @endif"
+                                            <a href="@if (Route::has('register')) {{route('register')}} @else
+                                                {{route('comingsoon')}} @endif" class="text-light"> Daftar</a> <span
+                                                class="text-light"> / </span> <a href="@if (Route::has('auth'))
+                                                {{route('auth')}} @else {{route('comingsoon')}} @endif"
                                                 class="text-light">Login</a>
                                         </li>
                                         @endguest
@@ -76,12 +79,7 @@ $user_role = $user->getRoleNames()[0];
                                             <a class="dropdown-item" data-hash data-hash-offset="75"
                                                 href="#bpmft">BPMFT</a>
                                         </li>
-                                        {{-- logined --}}
-
-
-
                                     </ul>
-
                                 </nav>
                                 @else
                                 <nav class="collapse">
@@ -100,20 +98,23 @@ $user_role = $user->getRoleNames()[0];
                                                     </a>
                                                 </li>
                                                 @endif
+                                                @if (Route::has('logout'))
                                                 <li>
                                                     <a class="dropdown-item" href="{{ route('logout') }}">
                                                         Logout
                                                     </a>
                                                 </li>
-
+                                                @endif
                                             </ul>
                                         </li>
                                         @endauth
 
                                         @guest
                                         <li class="d-block d-lg-none">
-                                            <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('register')}} @endif" class="text-light"> Daftar</a> <span
-                                                class="text-light"> / </span> <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('auth')}} @endif"
+                                            <a href="@if (Route::has('register')) {{route('register')}} @else
+                                                {{route('comingsoon')}} @endif" class="text-light"> Daftar</a> <span
+                                                class="text-light"> / </span> <a href="@if (Route::has('auth'))
+                                                {{route('auth')}} @else {{route('comingsoon')}} @endif"
                                                 class="text-light">Login</a>
                                         </li>
                                         @endguest
@@ -161,9 +162,12 @@ $user_role = $user->getRoleNames()[0];
                     <li class="nav-item dropdown nav-item-left-border  border-black">
                         <div class="border p-2 nav-link" role="button" id="dropdownLanguage" aria-haspopup="true"
                             aria-expanded="false">
-                            <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('register')}} @endif" class="text-light"> Daftar</a> <span
-                            class="text-light"> / </span> <a href="@if (date("Y-m-d") < '2021-01-02') {{route('comingsoon')}} @else {{route('auth')}} @endif"
-                            class="text-light">Login</a>
+                            <a href="@if (Route::has('register')) {{route('register')}} @else
+                                {{route('comingsoon')}} @endif" class="text-light"> Daftar</a> <span
+                                class="text-light">
+                                /
+                            </span> <a href="@if (Route::has('auth')) {{route('auth')}} @else
+                                {{route('comingsoon')}} @endif" class="text-light">Login</a>
                         </div>
                     </li>
                     @endguest
@@ -177,13 +181,14 @@ $user_role = $user->getRoleNames()[0];
                         </a>
                         <div class="dropdown-menu" style="background-color:#212529!important;">
                             @if ($user->hasRole('admin') || $user->hasRole('sekre'))
-
                             <a class="dropdown-item" href="/admin">
                                 Admin
                             </a>
-
                             @endif
+
+                            @if (Route::has('logout'))
                             <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                            @endif
                         </div>
                     </li>
                     @endauth

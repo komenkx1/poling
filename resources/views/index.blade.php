@@ -2,6 +2,8 @@
 @section('content')
 @php
 $date = date("Y-m-d");
+$regisDate = '2020-01-02';
+$voteDate = '2020-01-08';
 @endphp
 <div role="main" class="main" id="home">
 	<section class="slider-container rev_slider_wrapper" style="height: 100vh;">
@@ -33,15 +35,12 @@ $date = date("Y-m-d");
 						data-fontsize="['145','145','145','250']" data-lineheight="['150','150','150','260']">MUSMA
 					</div>
 
-
-
 					<div class="tp-caption font-weight-light text-color-light"
 						data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2300,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
 						data-x="center" data-y="center" data-voffset="['85','85','85','140']"
 						data-fontsize="['18','18','18','40']" data-lineheight="['26','26','26','45']">TEKNIK 2020</div>
 
 				</li>
-
 			</ul>
 		</div>
 	</section>
@@ -126,10 +125,10 @@ $date = date("Y-m-d");
 						@elseif($mahasiswa->status != 'terverifikasi' && $mahasiswa->status !='voted' )
 						Akun Anda Belum Terverifikasi. silahkan tunggu hingga admin memverifikasi
 						@else
-						Akun Terverifikasi! @if ($date < '2021-01-08' ) Silahkan Login kembali pada tanggal 08 Januari 2021
-							untuk melakukan pemilihan @else Silahkan Pilih salah satu calon ketua SMFT dan BPMFT dengan cara
-							mengklik foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan. @endif @endif
-							@endauth </p> </div> </div> </div> <br>
+						Akun Terverifikasi! @if ($date < $voteDate ) Silahkan Login kembali pada tanggal 08 Januari 2021 untuk
+							melakukan pemilihan @else Silahkan Pilih salah satu calon ketua SMFT dan BPMFT dengan cara mengklik
+							foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan. @endif @endif @endauth
+							</p> </div> </div> </div> <br>
 							<div class="row pb-5 mb-5">
 
 								<form action="/vote" class="radio-buttons" id="#create-form" method="POST">
@@ -166,7 +165,7 @@ $date = date("Y-m-d");
 										@foreach ($smft as $item)
 
 										<label class="custom-radio">
-											<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08' ||
+											<input type="radio" @guest disabled @endguest @auth @if($date < $voteDate ||
 												$mahasiswa->status =='terdaftar' ||
 											$mahasiswa->status == 'voted' ) disabled
 											@endif @foreach ($suara as
@@ -204,7 +203,7 @@ $date = date("Y-m-d");
 										@foreach ($bpmft as $item)
 
 										<label class="custom-radio">
-											<input type="radio" @guest disabled @endguest @auth @if($date < '2021-01-08' ||
+											<input type="radio" @guest disabled @endguest @auth @if($date < $voteDate ||
 												$mahasiswa->status =='terdaftar' ||
 											$mahasiswa->status == 'voted') disabled
 											@endif @foreach ($suara as
@@ -235,7 +234,7 @@ $date = date("Y-m-d");
 
 									<div class="clearfix"></div>
 									<div
-										class="result mt-3 @guest d-none @endguest @auth  @if($date < '2021-01-08' || $mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
+										class="result mt-3 @guest d-none @endguest @auth  @if($date < $voteDate || $mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
 										<button
 											class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
 											type="button" id="btn-submit" data-toggle="modal"
@@ -351,16 +350,24 @@ $date = date("Y-m-d");
 													class="badge badge-dot badge-dot-xl badge-dark"> </i> </span>
 											<div class="vertical-timeline-element-content bounce-in">
 												<h4 class="timeline-title">Registrasi</h4>
-												<p class="text-justify">Masuk ke web Pemira teknik lalu klik <a href="@if (date("
-														Y-m-d") < '2021-01-02' ) {{route('comingsoon')}} @else {{route('register')}}
-														@endif" data-abc="true">Daftar</a> jika belum memiliki
-													akun untuk melakukan registrasi atau klik <a href="@if (date(" Y-m-d")
-														< '2021-01-02' ) {{route('comingsoon')}} @else {{route('auth')}} @endif"
-														data-abc="true">Login</a> jika sudah memiliki akun atau sudah
+												<p class="text-justify">
+													Masuk ke web Pemira teknik lalu klik
+													<a href="@if (Route::has('register')) {{route('register')}} @else {{route('comingsoon')}}
+														@endif" data-abc="true">Daftar
+													</a>
+													jika belum memiliki
+													akun untuk melakukan registrasi atau klik
+													<a href="@if (Route::has('auth')) {{route('auth')}} @else {{route('comingsoon')}} @endif"
+														data-abc="true">Login
+													</a>
+													jika sudah
+													memiliki akun atau sudah
 													melakukan registrasi sebelumnya. Registrasi dapat dilakukan dari
 													tanggal 2 sampai dengan 6 Januari 2021
-												</p> <span class="vertical-timeline-element-date"><i
-														class="fas fa-arrow-down"></i></span>
+												</p>
+												<span class="vertical-timeline-element-date">
+													<i class="fas fa-arrow-down"></i>
+												</span>
 											</div>
 										</div>
 									</div>

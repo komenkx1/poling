@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CalonController;
 use App\Http\Controllers\MahasiswaController;
@@ -18,29 +19,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('kirimemail', function(){
-//     for ($i=0; $i <100; $i++){
-//         \Mail::raw('Selamat Akun Telah Di Verifikasi', function ($message) {
-//             $message->to('nowytp@gmail.com');
-//             $message->subject('Pemberitahuan Verifikasi Musma');
 
-//         });
-//     }
-
-// });
-Route::auth();
-
-// Route::get("/register", 'RegisterController@index');
-// Route::get('register', 'RegisterController@index')->name('search');
+// Route::auth();
 Route::get('/', [MainController::class, 'index'])->name('home');
 
-if (date("Y-m-d") < '2021-01-02') {
+if (date("Y-m-d") < '2020-01-02') {
     Route::view('comingsoon', 'comingsoon')->name('comingsoon');
 } else {
     Route::get('register', [RegisterController::class, 'index'])->name('register');
     Route::post('register', [RegisterController::class, 'create'])->name('register.create');
     Route::post('register/fetch', [RegisterController::class, 'fetch'])->name('autocomplete.fetch');
     Route::get('auth', [RegisterController::class, 'index'])->name('auth');
+    Route::post('login', 'Auth\LoginController@login')->name('login');
 }
 
 Route::post('calon/fetch', [CalonController::class, 'fetch'])->name('calon.fetch');
@@ -52,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('vote', [MainController::class, 'vote'])->name('vote');
 
     Route::get('logout', [MainController::class, 'logout']);
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 });
 
 Route::middleware(['role:admin|sekre'])->group(function () {
