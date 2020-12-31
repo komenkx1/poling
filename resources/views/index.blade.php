@@ -54,29 +54,14 @@ $voteDate = '2021-01-08';
 					<h2 class="font-weight-bold text-color-light mb-2">Apa Itu Musma?</h2>
 					<p class="text-color-light opacity-7">MUSMA merupakan kegiatan Musyawarah Mahasiswa yang
 						dilaksanakan rutin setiap tahun (1 periode) masa kepemimpinan Senat Mahasiswa (SMFT) dan Badan
-						Perwakilan Mahasiswa (BPM) Fakultas Teknik Unud dengan tujuan Menetapkan Anggaran Dasar,
+						Perwakilan Mahasiswa (BPMFT) Fakultas Teknik Unud dengan tujuan Menetapkan Anggaran Dasar,
 						Anggaran Rumah Tangga, Program Kerja Organisasi dan Mengevaluasi keberadaan SMFT dan BPMFT UNUD
 						dalam totalitas kehidupan kemahasiswaan serta, menetapkan mekanisme pemilihan pengurus BPMFT dan
 						SMFT UNUD.</p>
 				</div>
 			</div>
-			<div class="row mb-lg-4">
-				<div class="col-lg-4 appear-animation" data-appear-animation="fadeInLeftShorter"
-					data-appear-animation-delay="300">
-					<div class="feature-box feature-box-style-2">
-						<div class="feature-box-icon">
-							<i class="icons icon-support text-color-light"></i>
-						</div>
-						<div class="feature-box-info">
-							<h4 class="font-weight-bold text-color-light text-4 mb-2">MUSYAWARAH BERSAMA</h4>
-							<p class="text-color-light opacity-7 text-justify">Kegiatan Musyawarah bersama adalah
-								kegiatan untuk menetapkan peraturan Anggaran Dasar, Anggaran Rumah Tangga, Program Kerja
-								Organisasi dan Mengevaluasi keberadaan SMFT dan BPMFT UNUD untuk periode 1 tahun kedepan
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 appear-animation" data-appear-animation="fadeInUpShorter">
+			<div class="row mb-lg-4 ">
+				<div class="col-lg-6 appear-animation" data-appear-animation="fadeInLeftShorter">
 					<div class="feature-box feature-box-style-2">
 						<div class="feature-box-icon">
 							<i class="icons icon-layers text-color-light"></i>
@@ -89,7 +74,7 @@ $voteDate = '2021-01-08';
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 appear-animation" data-appear-animation="fadeInRightShorter"
+				<div class="col-lg-6 appear-animation" data-appear-animation="fadeInRightShorter"
 					data-appear-animation-delay="300">
 					<div class="feature-box feature-box-style-2">
 						<div class="feature-box-icon">
