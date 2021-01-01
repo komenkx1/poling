@@ -102,8 +102,7 @@ $voteDate = '2021-01-08';
 				<div class="warning bg-danger" style="border: 1px solid black; border-radius: 5px;">
 					<p class="warning-start pt-4 text-light appear-animation font-weight-bold pl-2 pr-2"
 						data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200"> @guest Silahkan login
-						terlebih dahulu dengan akun yang sudah
-						terverifikasi untuk melakukan voting @endguest
+						terlebih dahulu untuk melihat status akun @endguest
 						@auth
 						@if ($mahasiswa->status == 'voted')
 						Anda Sudah Melakukan Vote
