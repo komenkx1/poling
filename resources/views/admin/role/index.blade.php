@@ -18,7 +18,7 @@
       </div>
       <hr>
       <div class="p-3 table-responsive">
-        <table id="role-table" class="table table-striped table-bordered dt-responsive nowrap">
+        <table id="role-table" class="dataTable table table-striped table-bordered dt-responsive nowrap">
           <thead>
             <tr>
               <th>Nama</th>
@@ -72,7 +72,7 @@
       order : false,
     });
 
-  $('.roleSelect').on("change",function(){
+    $(".dataTable").on('change','.roleSelect', function () { 
         event.preventDefault()
         var model_id = $(this).attr('data-id');
         var role_id = $(this).val();
