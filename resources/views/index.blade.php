@@ -108,8 +108,9 @@ $voteDate = '2021-01-08';
 						Anda Sudah Melakukan Vote
 						@elseif($mahasiswa->status != 'terverifikasi' && $mahasiswa->status !='voted' )
 						Akun Anda Belum Terverifikasi. silahkan tunggu hingga admin memverifikasi
+						@elseif ($date > $voteDate) Masa Vote Telah Berakhir!
 						@else
-						Akun Terverifikasi! @if ($date < $voteDate ) Silahkan Login kembali pada tanggal 08 Januari 2021 untuk
+						Akun Terverifikasi! @if ($date != $voteDate ) Silahkan Login kembali pada tanggal 08 Januari 2021 untuk
 							melakukan pemilihan @else Silahkan Pilih salah satu calon ketua SMFT dan BPMFT dengan cara mengklik
 							foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan. @endif @endif @endauth
 							</p> </div> </div> </div> <br>
@@ -149,7 +150,7 @@ $voteDate = '2021-01-08';
 										@foreach ($smft as $item)
 
 										<label class="custom-radio">
-											<input type="radio" @guest disabled @endguest @auth @if($date < $voteDate ||
+											<input type="radio" @guest disabled @endguest @auth @if($date != $voteDate ||
 												$mahasiswa->status =='terdaftar' ||
 											$mahasiswa->status == 'voted' ) disabled
 											@endif @foreach ($suara as
@@ -187,7 +188,7 @@ $voteDate = '2021-01-08';
 										@foreach ($bpmft as $item)
 
 										<label class="custom-radio">
-											<input type="radio" @guest disabled @endguest @auth @if($date < $voteDate ||
+											<input type="radio" @guest disabled @endguest @auth @if($date != $voteDate ||
 												$mahasiswa->status =='terdaftar' ||
 											$mahasiswa->status == 'voted') disabled
 											@endif @foreach ($suara as
@@ -218,7 +219,7 @@ $voteDate = '2021-01-08';
 
 									<div class="clearfix"></div>
 									<div
-										class="result mt-3 @guest d-none @endguest @auth  @if($date < $voteDate || $mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
+										class="result mt-3 @guest d-none @endguest @auth  @if($date != $voteDate || $mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
 										<button
 											class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
 											type="button" id="btn-submit" data-toggle="modal"

@@ -22,7 +22,7 @@ class MahasiswaController extends Controller
 
     public function data()
     {
-        $mahasiswa = Mahasiswa::orderBy('id', 'DESC')->get();
+        $mahasiswa = Mahasiswa::orderByRaw('FIELD(status, "terdaftar")DESC')->orderBy('id', 'DESC')->get();
         $no = 1;
         foreach ($mahasiswa as $item) {
             $output = '<tr >
