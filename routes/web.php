@@ -35,7 +35,7 @@ if (date("Y-m-d") < '2021-01-02') {
 
 Route::post('calon/fetch', [CalonController::class, 'fetch'])->name('calon.fetch');
 Route::post('visi-misi', [MainController::class, 'misi'])->name('visimisi');
-Route::get('rekapitulasi', [MainController::class, 'rekap'])->name('rekap');
+// Route::get('rekapitulasi', [MainController::class, 'rekap'])->name('rekap');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('chart', [MainController::class, 'chart'])->name('chart');

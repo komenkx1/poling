@@ -123,11 +123,13 @@ $user_role = $user->getRoleNames()[0];
                                                 Home
                                             </a>
                                         </li>
+                                        @if (Route::has('rekap'))
                                         <li>
-                                            <a class="dropdown-item active" href="/rekapitulasi">
+                                            <a class="dropdown-item active" href="{{ route('rekap') }}">
                                                 Rekapitulasi
                                             </a>
                                         </li>
+                                        @endif
                                         <li>
                                             <a class="dropdown-item" data-hash data-hash-offset="68"
                                                 href="#tentang">tentang</a>
