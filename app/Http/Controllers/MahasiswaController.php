@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\Role_model;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,7 @@ class MahasiswaController extends Controller
 
     public function data()
     {
-        $mahasiswa = Mahasiswa::orderBy('id', 'DESC')->get();
+        $mahasiswa = Mahasiswa::orderByRaw('FIELD(status, "terdaftar")DESC')->orderBy('id', 'DESC')->get();
         $no = 1;
         foreach ($mahasiswa as $item) {
             $output = '<tr >
@@ -115,10 +116,12 @@ class MahasiswaController extends Controller
     public function destroy(Mahasiswa $mahasiswa)
     {
         $user = User::find($mahasiswa->user_id);
+        $role = Role_model::find($mahasiswa->user_id);
+        // dd($role);
         $user->password = null;
         $user->save();
         Storage::delete($mahasiswa->file_url);
-
         $mahasiswa->delete();
+        $role->delete();
     }
 }

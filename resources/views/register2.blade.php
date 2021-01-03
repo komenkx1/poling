@@ -115,7 +115,7 @@
             <small class="maks-size-file text-danger mb-5">*maks file 2Mb</small>
             @error('file_url')
             <p class="text-danger" role="alert">
-              <strong>{{ $message }}</strong>
+              <strong>{{$message}}</strong>
             </p>
             @enderror
           </div>

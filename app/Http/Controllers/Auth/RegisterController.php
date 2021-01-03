@@ -95,11 +95,18 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
 
-        $this->validate($request, [
-            'register_nim' => 'required|min:10|max:10',
-            'register_password' => 'required|min:2|max:30',
-            'file_url' => 'required|max:2000|image'
-        ]);
+        $this->validate(
+            $request,
+            [
+                'register_nim' => 'required|min:10|max:10',
+                'register_password' => 'required|min:2|max:30',
+                'file_url' => 'mimes:jpeg,jpg,png,gif|required|max:2000'
+            ],
+            [
+                'file_url.mimes' => 'format fil tidak didukung, silahkan masukan format gambar : jpeg,jpg atau png',
+                'file_url.max' => 'Ukuran file tidak boleh lebih dari 2Mb'
+            ]
+        );
 
         //buat dapetin user dari nim yang di input
         $user = User::where('nim', $request->register_nim)->first();

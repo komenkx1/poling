@@ -91,7 +91,7 @@ class MainController extends Controller
             return "Vote gagal, Silahkan Login Dengan Akun Terverifikasi";
         } else {
             if (date('d-m-Y') != '08-01-2021') {
-                return "Belum waktunya vote, Vote dapat dilakukan pada 8 Januari 2021";
+                return "Vote Hanya dapat dilakukan pada 8 Januari 2021";
             } else {
                 if (isset($request->smft) && isset($request->bpmft)) {
                     $id_user = Auth::id();

@@ -102,15 +102,15 @@ $voteDate = '2021-01-08';
 				<div class="warning bg-danger" style="border: 1px solid black; border-radius: 5px;">
 					<p class="warning-start pt-4 text-light appear-animation font-weight-bold pl-2 pr-2"
 						data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200"> @guest Silahkan login
-						terlebih dahulu dengan akun yang sudah
-						terverifikasi untuk melakukan voting @endguest
+						terlebih dahulu untuk melihat status akun @endguest
 						@auth
 						@if ($mahasiswa->status == 'voted')
 						Anda Sudah Melakukan Vote
 						@elseif($mahasiswa->status != 'terverifikasi' && $mahasiswa->status !='voted' )
 						Akun Anda Belum Terverifikasi. silahkan tunggu hingga admin memverifikasi
+						@elseif ($date > $voteDate) Masa Vote Telah Berakhir!
 						@else
-						Akun Terverifikasi! @if ($date < $voteDate ) Silahkan Login kembali pada tanggal 08 Januari 2021 untuk
+						Akun Terverifikasi! @if ($date != $voteDate ) Silahkan Login kembali pada tanggal 08 Januari 2021 untuk
 							melakukan pemilihan @else Silahkan Pilih salah satu calon ketua SMFT dan BPMFT dengan cara mengklik
 							foto calon yang ingin dipilih kemudian klik Submit untuk menyimpan pilihan. @endif @endif @endauth
 							</p> </div> </div> </div> <br>
@@ -150,7 +150,7 @@ $voteDate = '2021-01-08';
 										@foreach ($smft as $item)
 
 										<label class="custom-radio">
-											<input type="radio" @guest disabled @endguest @auth @if($date < $voteDate ||
+											<input type="radio" @guest disabled @endguest @auth @if($date != $voteDate ||
 												$mahasiswa->status =='terdaftar' ||
 											$mahasiswa->status == 'voted' ) disabled
 											@endif @foreach ($suara as
@@ -188,7 +188,7 @@ $voteDate = '2021-01-08';
 										@foreach ($bpmft as $item)
 
 										<label class="custom-radio">
-											<input type="radio" @guest disabled @endguest @auth @if($date < $voteDate ||
+											<input type="radio" @guest disabled @endguest @auth @if($date != $voteDate ||
 												$mahasiswa->status =='terdaftar' ||
 											$mahasiswa->status == 'voted') disabled
 											@endif @foreach ($suara as
@@ -218,16 +218,24 @@ $voteDate = '2021-01-08';
 									</div>
 
 									<div class="clearfix"></div>
+									@auth
+									@if($date == $voteDate) 
 									<div
-										class="result mt-3 @guest d-none @endguest @auth  @if($date < $voteDate || $mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
+										class="result mt-3  d-flex justify-content-center">
+										@if($mahasiswa->status != 'voted' && $mahasiswa->status == 'terverifikasi' )
 										<button
-											class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
+											class="btn btn-primary"
 											type="button" id="btn-submit" data-toggle="modal"
 											data-target="#exampleModalalert">Submit</button>
+											@endif
+										@if($mahasiswa->status == 'voted') 
 										<button
-											class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth"
+											class="btn btn-primary d-block"
 											type="button" id="btn-See">Lihat Hasil Sementara</button>
+											@endif
 									</div>
+									@endif
+									@endauth
 								</form>
 							</div>
 	</section>
@@ -519,6 +527,8 @@ $voteDate = '2021-01-08';
 				$(".warning").append("<strong class='text-center text-light'>"+data+"</strong");
 				$(".warning-start").hide();
 				$(".alert-success").append("<strong class='text-center'>"+data+"</strong");
+				$(".result").append("<button class='btn btn-primary d-block' type='button' id='btn-See'>Lihat Hasil Sementara</button>")
+				$("#btn-submit").remove()
 					window.setTimeout(function() {
 					$(".alert").fadeTo(300, 0).slideUp(300, function(){
 							$(this).remove();
@@ -627,7 +637,7 @@ $voteDate = '2021-01-08';
 		});
 	});
 
-	$('#btn-See').click(function(){
+	$(document).on("click",'#btn-See',function(){
 		loadDataChart();
 		$('#hasil-sementara').modal('show');
 	});

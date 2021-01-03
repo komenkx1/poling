@@ -16,7 +16,9 @@
                             <th>Nim</th>
                             <th>Program Studi</th>
                             <th class="text-center">Status Absen</th>
+                            @if ( Auth::user()->hasRole('admin'))
                             <th class="text-center">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -27,9 +29,11 @@
                             <td>{{$item->nim}}</td>
                             <td>{{$item->nama_prodi}}</td>
                             <td class="text-center"> <span>&#10004;</span> </td>
+                            @if ( Auth::user()->hasRole('admin'))
                             <td class="text-center"><a href="#myModal"
                                 class="reset btn btn-danger" data-id="{{$item->mahasiswa_id}}" data-nama="{{$item->name}}"
                                 role="button" data-toggle="modal">Reset Suara</a></td>
+                                @endif
                         </tr>
 
                         @endforeach
