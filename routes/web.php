@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 });
 
-Route::middleware(['role:admin|sekre'])->group(function () {
+Route::middleware(['auth', 'role:admin|sekre'])->group(function () {
     Route::get("admin", 'DashboardController@index');
 
     Route::get("admin/role/", 'RoleController@index');

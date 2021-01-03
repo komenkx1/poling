@@ -98,7 +98,7 @@ class RegisterController extends Controller
         $this->validate($request, [
             'register_nim' => 'required|min:10|max:10',
             'register_password' => 'required|min:2|max:30',
-            'file_url' => 'required|max:2000'
+            'file_url' => 'required|max:2000|image'
         ]);
 
         //buat dapetin user dari nim yang di input
