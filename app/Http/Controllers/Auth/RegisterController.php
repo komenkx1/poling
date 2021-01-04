@@ -94,6 +94,7 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
+        $request->session()->put('is-sign-up', 'sign-up-mode');
 
         $this->validate(
             $request,
@@ -153,6 +154,8 @@ class RegisterController extends Controller
             $user->assignRole('mahasiswa');
             // $credentials = $request->only('register_nim', 'register_password');
             if (Auth::attempt(array('nim' => $request->register_nim, 'password' => $request->register_password))) {
+                $request->session()->forget('sign-up-mode');
+
                 return redirect()->route('home');
             }
         }

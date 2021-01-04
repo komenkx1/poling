@@ -15,7 +15,18 @@
 </head>
 
 <body>
-  <div class="containers @if (Route::currentRouteName() == 'register') sign-up-mode @endif">
+  @php
+  $isSignUp = '';
+  if(Route::currentRouteName() == 'register'){
+  $isSignUp = 'sign-up-mode';
+  }
+
+  if(session('is-sign-up')){
+  $isSignUp = session('is-sign-up');
+  }
+  @endphp
+
+  <div class="containers {{ $isSignUp?? '' }}">
     <div class="signin-signup">
       <form method="POST" action="{{ route('login') }}" class="sign-in-form">
         @csrf
@@ -50,10 +61,9 @@
           </div>
         </div>
         <input type="submit" value="Login" class="bton" />
-        <p class="d-block d-lg-none d-md-none text-center"> belum memiliki akun? silahkan daftar <a class=" "
-            id="sign-up-btpn">
-            disini
-          </a></p>
+        <p class="d-block d-lg-none d-md-none text-center"> belum memiliki akun? silahkan daftar
+          <a id="sign-up-btpn">disini</a>
+        </p>
       </form>
       <form method="POST" action="{{ route('register.create') }}" class="sign-up-form" enctype="multipart/form-data"
         id="myForm1" autocomplete="off">
@@ -71,8 +81,7 @@
               <strong>{{ $message }}</strong>
             </p>
             @enderror
-            <div class="" id="nimList">
-            </div>
+            <div id="nimList"></div>
           </div>
           <div class="input-field col-lg-6 col-md-12">
             <label>Password</label>
@@ -121,13 +130,10 @@
           </div>
         </div>
         <input type="submit" value="Submit" id="submitBtn" class="bton justify-content-center gx-auto">
-        <p class="d-block d-lg-none d-md-none text-center"> belum memiliki akun? silahkan daftar <a class=""
-            id="sign-in-btpn">
-            disini
-          </a></p>
-
+        <p class="d-block d-lg-none d-md-none text-center"> sudah memiliki akun? silahkan sign-in
+          <a id="sign-in-btpn" onclick="{{ session(['is-sign-up' => '']) }}">disini</a>
+        </p>
     </div>
-
     </form>
 
     <div class="panels-container">
@@ -167,65 +173,53 @@
   <script>
     $(document).ready(function(){
       
-        $('#nim').keyup(function(){ 
-    var query = $(this).val();
-    if(query != '')
-    {
-     var _token = $('input[name="_token"]').val();
-     $.ajax({
-      url:"{{ route('autocomplete.fetch') }}",
-      method:"POST",
-      data:{query:query, _token:_token},
-      success:function(data){
-       $('#nimList').fadeIn();  
-                $('#nimList').html(data);
-      }
-     });
-    }
-});
-
-$(document).on('click', 'li', function(){  
-    $('#nim').val($(this).text().replace(/[^0-9\.]/g, ''));  
-    $('#nimList').fadeOut();  
-});
-      
-      });
-  </script>
-  <script>
-    (function($) {
-    $.fn.inputFilter = function(inputFilter) {
-      return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
-        if (inputFilter(this.value)) {
-          this.oldValue = this.value;
-          this.oldSelectionStart = this.selectionStart;
-          this.oldSelectionEnd = this.selectionEnd;
-        } else if (this.hasOwnProperty("oldValue")) {
-          this.value = this.oldValue;
-          this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-        } else {
-          this.value = "";
+      $('#nim').keyup(function(){ 
+        var query = $(this).val();
+        if(query != ''){
+          var _token = $('input[name="_token"]').val();
+          $.ajax({
+            url:"{{ route('autocomplete.fetch') }}",
+            method:"POST",
+            data:{query:query, _token:_token},
+            success:function(data){
+              $('#nimList').fadeIn();  
+              $('#nimList').html(data);
+            }
+          });
         }
       });
-    };
-  }(jQuery));
-  
+
+      $(document).on('click', 'li', function(){  
+        $('#nim').val($(this).text().replace(/[^0-9\.]/g, ''));  
+        $('#nimList').fadeOut();  
+      });
+      
+    });
+
+    (function($) {
+      $.fn.inputFilter = function(inputFilter) {
+        return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+          if (inputFilter(this.value)) {
+            this.oldValue = this.value;
+            this.oldSelectionStart = this.selectionStart;
+            this.oldSelectionEnd = this.selectionEnd;
+          } else if (this.hasOwnProperty("oldValue")) {
+            this.value = this.oldValue;
+            this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+          } else {
+            this.value = "";
+          }
+        });
+      };
+    }(jQuery));
   
   // Install input filters.
   $("#nim").inputFilter(function(value) {
-    return /^-?\d*$/.test(value); });
+    return /^-?\d*$/.test(value); 
+  });
     $("#nim2").inputFilter(function(value) {
-    return /^-?\d*$/.test(value); });
-  </script>
-
-  <script>
-    $('#customFile').on("change",function() {
-        console.log("change fire");
-       var i = $(this).prev('label').clone();
-        var file = $('#customFile')[0].files[0].name;
-     console.log(file);
-        $(this).prev('label').text(file);
-     
-      });
+    return /^-?\d*$/.test(value); 
+  });
   </script>
 </body>
 
