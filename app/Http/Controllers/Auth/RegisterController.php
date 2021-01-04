@@ -103,7 +103,7 @@ class RegisterController extends Controller
                 'file_url' => 'mimes:jpeg,jpg,png,gif|required|max:2000'
             ],
             [
-                'file_url.mimes' => 'format fil tidak didukung, silahkan masukan format gambar : jpeg,jpg atau png',
+                'file_url.mimes' => 'format file tidak didukung, silahkan masukan format gambar : jpeg,jpg atau png',
                 'file_url.max' => 'Ukuran file tidak boleh lebih dari 2Mb'
             ]
         );

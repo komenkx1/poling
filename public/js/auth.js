@@ -4,23 +4,33 @@ $(document).ready(function(){
     var sign_in_btpn = document.querySelector("#sign-in-btpn");
     var sign_up_btpn = document.querySelector("#sign-up-btpn");
     const container = document.querySelector(".containers");
+    if(sessionStorage.getItem("test1")) {
+      container.classList.add(sessionStorage.getItem("test1"));
+  }
     
     sign_up_btn.addEventListener("click", () => {
-      container.classList.add("sign-up-mode");
+     sessionStorage.setItem("test1", 'sign-up-mode');
+     container.classList.add(sessionStorage.getItem("test1"));
     });
     
     sign_in_btn.addEventListener("click", () => {
+      sessionStorage.clear();
       container.classList.remove("sign-up-mode");
     });
     
     sign_up_btpn.addEventListener("click", () => {
+     sessionStorage.setItem("test1", 'sign-up-mode');
       container.classList.add("sign-up-mode");
     });
     
     sign_in_btpn.addEventListener("click", () => {
+      sessionStorage.clear();
       container.classList.remove("sign-up-mode");
     });
     
+    $('input[type="submit"]').on("click",function(){
+      sessionStorage.clear();
+    });
     
     $('#customFile').on("change",function() {
       console.log("change fire");
