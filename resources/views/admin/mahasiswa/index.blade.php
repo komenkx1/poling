@@ -75,7 +75,7 @@
               <th>Nim</th>
               <th>File</th>
               <th>Status</th>
-              <th>Verified At</th>
+              <th>Registered At</th>
               <th class="text-center">Action</th>
             </tr>
           </thead>

@@ -15,7 +15,7 @@
 </head>
 <body>
   @php
-  $endregist = '2021-01-08';
+  $endregist = '2021-01-07';
   $isSignUp = '';
   if(Route::currentRouteName() == 'register'){
   $isSignUp = 'sign-up-mode';

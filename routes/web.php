@@ -1,5 +1,6 @@
 <?php
-
+define('TIMEZONE', 'Asia/Makassar');
+date_default_timezone_set(TIMEZONE);
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;

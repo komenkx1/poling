@@ -31,7 +31,7 @@ class MahasiswaController extends Controller
              <td>' . $item->user->nim . '</td>
              <td> <a href=' . $item->takeimage . ' data-fancybox="gallery" data-caption=' . $item->name . ' ><img src=' . $item->takeimage . ' alt="avatar" style="max-width: 100px"></a></td>
              <td>' . $item->status . '</td>
-             <td>' . $item->verified_at . '</td>
+             <td>' . $item->created_at . '</td>
              <td>';
 
             if ($item->status == 'terverifikasi' || $item->status == 'voted') {
