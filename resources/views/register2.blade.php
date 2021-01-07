@@ -13,9 +13,10 @@
   {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --}}
   <title>Sign in & Sign up Form</title>
 </head>
+
 <body>
   @php
-  $endregist = '2021-01-08';
+  $isRegis = Route::has('register');
   $isSignUp = '';
   if(Route::currentRouteName() == 'register'){
   $isSignUp = 'sign-up-mode';
@@ -25,18 +26,18 @@
   $isSignUp = session('is-sign-up');
   }
   @endphp
-@if(date('Y-m-d') >= $endregist)
-<style>
-  @media (max-width: 870px) {
-    .containers {
+  @if($isRegis)
+  <style>
+    @media (max-width: 870px) {
+      .containers {
         min-height: 800px;
         height: 100vh;
         transform: translate(0%, -10%);
+      }
     }
-  }
-</style>
-@endif
-  <div class="containers {{ $isSignUp?? '' }}" >
+  </style>
+  @endif
+  <div class="containers {{ $isSignUp?? '' }}">
     <div class="signin-signup">
       <form method="POST" action="{{ route('login') }}" class="sign-in-form">
         @csrf
@@ -71,8 +72,9 @@
           </div>
         </div>
         <input type="submit" value="Login" class="bton" />
-        @if(date('Y-m-d') >= $endregist)
-        <p class="d-block d-lg-none d-md-none text-center"> Masa Registrasi Telah Berakhir. Silahkan Login dengan form di atas!
+        @if($isRegis)
+        <p class="d-block d-lg-none d-md-none text-center"> Masa Registrasi Telah Berakhir. Silahkan Login dengan form
+          di atas!
         </p>
         @else
         <p class="d-block d-lg-none d-md-none text-center"> belum memiliki akun? silahkan daftar
@@ -80,7 +82,7 @@
         </p>
         @endif
       </form>
-      @if(date('Y-m-d') < $endregist)
+      @if($isRegis)
       <form method="POST" action="{{ route('register.create') }} " class="sign-up-form" enctype="multipart/form-data"
         id="myForm1" autocomplete="off">
         @csrf
@@ -155,7 +157,7 @@
     <div class="panels-container">
       <div class="panel left-panel">
         <div class="content">
-          @if(date('Y-m-d') >= $endregist)
+          @if(!$isRegis)
           <h3>LOGIN</h3>
           <p>
             Masa Registrasi Telah Berakhir. Silahkan Melakukan Login Melalui Form Di Bawah Ini!
