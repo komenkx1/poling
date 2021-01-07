@@ -26,7 +26,7 @@
   $isSignUp = session('is-sign-up');
   }
   @endphp
-@if($isRegis)
+@if(!$isRegis)
 <style>
   @media (max-width: 870px) {
     .containers {
