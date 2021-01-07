@@ -105,7 +105,6 @@
         data: data,
         success: function(data){
           loaddata();
-
         },
         error: function(data) {
           var errors = data.responseJSON;

@@ -25,19 +25,24 @@ class MahasiswaController extends Controller
         $mahasiswa = Mahasiswa::orderByRaw('FIELD(status, "terdaftar")DESC')->orderBy('id', 'DESC')->get();
         $no = 1;
         foreach ($mahasiswa as $item) {
-            $output = '<tr >
+            $output = '<tr>
              <td>' . $no++ . '</td>
              <td>' . $item->user->name . '</td>
-             <td>' . $item->user->nim . '</td>
-             <td> <a href=' . $item->takeimage . ' data-fancybox="gallery" data-caption=' . $item->name . ' ><img src=' . $item->takeimage . ' alt="avatar" style="max-width: 100px"></a></td>
-             <td>' . $item->status . '</td>
-             <td>' . $item->created_at . '</td>
-             <td>';
+             <td>' . $item->user->nim . '</td>';
 
             if ($item->status == 'terverifikasi' || $item->status == 'voted') {
-                $output .= '<div class=" text-center"><i class="fa fa-check"></i></div></td>';
+                $output .= '<td> <div class="text-center"><i class="fa fa-check"></i></div></td>';
             } else {
-                $output .= '
+                $output .= '<td> <a href=' . $item->takeimage . ' data-fancybox="gallery" data-caption=' . $item->name . ' ><img src=' . $item->takeimage . ' alt="avatar" style="max-width: 100px"></a></td>';
+            }
+
+            $output .= '<td>' . $item->status . '</td>
+             <td>' . $item->created_at . '</td>';
+
+            if ($item->status == 'terverifikasi' || $item->status == 'voted') {
+                $output .= '<td> <div class=" text-center"><i class="fa fa-check"></i></div></td>';
+            } else {
+                $output .= '<td>
                 <div class=" text-center"><button class="btn-verif btn btn-primary" type="button" data-id=' . $item->id . '>Verif</button>
                 <button class="btn-delete btn btn-danger" type="button" data-id=' . $item->id . '>Hapus</button></div>
                 </td>';
