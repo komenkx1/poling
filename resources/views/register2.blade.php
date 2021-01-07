@@ -13,6 +13,7 @@
   {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --}}
   <title>Sign in & Sign up Form</title>
 </head>
+
 <body>
   @php
    $isRegis = Route::has('register');
@@ -32,11 +33,11 @@
         min-height: 800px;
         height: 100vh;
         transform: translate(0%, -10%);
+      }
     }
-  }
-</style>
-@endif
-  <div class="containers {{ $isSignUp?? '' }}" >
+  </style>
+  @endif
+  <div class="containers {{ $isSignUp?? '' }}">
     <div class="signin-signup">
       <form method="POST" action="{{ route('login') }}" class="sign-in-form">
         @csrf

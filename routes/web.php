@@ -39,7 +39,6 @@ Route::post('register/fetch', [RegisterController::class, 'fetch'])->name('autoc
 Route::get('auth', [RegisterController::class, 'index'])->name('auth');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 
-
 Route::post('calon/fetch', [CalonController::class, 'fetch'])->name('calon.fetch');
 Route::post('visi-misi', [MainController::class, 'misi'])->name('visimisi');
 // Route::get('rekapitulasi', [MainController::class, 'rekap'])->name('rekap');
