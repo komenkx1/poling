@@ -15,7 +15,7 @@
 </head>
 <body>
   @php
-  $endregist = '2021-01-07';
+   $isRegis = Route::has('register');
   $isSignUp = '';
   if(Route::currentRouteName() == 'register'){
   $isSignUp = 'sign-up-mode';
@@ -25,7 +25,7 @@
   $isSignUp = session('is-sign-up');
   }
   @endphp
-@if(date('Y-m-d') >= $endregist)
+@if($isRegis)
 <style>
   @media (max-width: 870px) {
     .containers {
@@ -71,7 +71,7 @@
           </div>
         </div>
         <input type="submit" value="Login" class="bton" />
-        @if(date('Y-m-d') >= $endregist)
+        @if(!$isRegis)
         <p class="d-block d-lg-none d-md-none text-center"> Masa Registrasi Telah Berakhir. Silahkan Login dengan form di atas!
         </p>
         @else
@@ -80,7 +80,7 @@
         </p>
         @endif
       </form>
-      @if(date('Y-m-d') < $endregist)
+      @if($isRegis)
       <form method="POST" action="{{ route('register.create') }} " class="sign-up-form" enctype="multipart/form-data"
         id="myForm1" autocomplete="off">
         @csrf
@@ -155,7 +155,7 @@
     <div class="panels-container">
       <div class="panel left-panel">
         <div class="content">
-          @if(date('Y-m-d') >= $endregist)
+          @if(!$isRegis)
           <h3>LOGIN</h3>
           <p>
             Masa Registrasi Telah Berakhir. Silahkan Melakukan Login Melalui Form Di Bawah Ini!

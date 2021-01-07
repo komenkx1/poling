@@ -23,21 +23,27 @@ use Illuminate\Support\Facades\Route;
 
 // Route::auth();
 Route::get('/', [MainController::class, 'index'])->name('home');
+
+Route::get("/storage-link", function () {
+    $targetFolder = storage_path("app/public");
+    $linkFolder = $_SERVER['DOCUMENT_ROOT'] . '/storage';
+    symlink($targetFolder, $linkFolder);
+});
+
 if (date("Y-m-d") < '2021-01-08') {
     Route::get('register', [RegisterController::class, 'index'])->name('register');
     Route::post('register', [RegisterController::class, 'create'])->name('register.create');
-    Route::post('register/fetch', [RegisterController::class, 'fetch'])->name('autocomplete.fetch');
-    Route::get('auth', [RegisterController::class, 'index'])->name('auth');
-    Route::post('login', 'Auth\LoginController@login')->name('login');
-} else {
-    Route::post('register/fetch', [RegisterController::class, 'fetch'])->name('autocomplete.fetch');
-    Route::get('auth', [RegisterController::class, 'index'])->name('auth');
-    Route::post('login', 'Auth\LoginController@login')->name('login');
 }
+
+Route::post('register/fetch', [RegisterController::class, 'fetch'])->name('autocomplete.fetch');
+Route::get('auth', [RegisterController::class, 'index'])->name('auth');
+Route::post('login', 'Auth\LoginController@login')->name('login');
+
 
 Route::post('calon/fetch', [CalonController::class, 'fetch'])->name('calon.fetch');
 Route::post('visi-misi', [MainController::class, 'misi'])->name('visimisi');
 // Route::get('rekapitulasi', [MainController::class, 'rekap'])->name('rekap');
+// Route::view('comingsoon','comingsoon')->name('comingsoon');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('chart', [MainController::class, 'chart'])->name('chart');
