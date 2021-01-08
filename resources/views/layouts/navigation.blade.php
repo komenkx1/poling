@@ -60,9 +60,9 @@ $user_role = $user->getRoleNames()[0];
                                         @guest
                                         <li class="d-block d-lg-none">
                                             <a href="@if (Route::has('register')) {{route('register')}} @else
-                                                {{route('comingsoon')}} @endif" class="text-light"> Daftar</a> <span
+                                                # @endif" class="text-light"> Daftar</a> <span
                                                 class="text-light"> / </span> <a href="@if (Route::has('auth'))
-                                                {{route('auth')}} @else {{route('comingsoon')}} @endif"
+                                                {{route('auth')}} @else # @endif"
                                                 class="text-light">Login</a>
                                         </li>
                                         @endguest
@@ -112,9 +112,9 @@ $user_role = $user->getRoleNames()[0];
                                         @guest
                                         <li class="d-block d-lg-none">
                                             <a href="@if (Route::has('register')) {{route('register')}} @else
-                                                {{route('comingsoon')}} @endif" class="text-light"> Daftar</a> <span
+                                                # @endif" class="text-light"> Daftar</a> <span
                                                 class="text-light"> / </span> <a href="@if (Route::has('auth'))
-                                                {{route('auth')}} @else {{route('comingsoon')}} @endif"
+                                                {{route('auth')}} @else # @endif"
                                                 class="text-light">Login</a>
                                         </li>
                                         @endguest
@@ -165,11 +165,11 @@ $user_role = $user->getRoleNames()[0];
                         <div class="border p-2 nav-link" role="button" id="dropdownLanguage" aria-haspopup="true"
                             aria-expanded="false">
                             <a href="@if (Route::has('register')) {{route('register')}} @else
-                                {{route('comingsoon')}} @endif" class="text-light"> Daftar</a> <span
+                                # @endif" class="text-light"> Daftar</a> <span
                                 class="text-light">
                                 /
                             </span> <a href="@if (Route::has('auth')) {{route('auth')}} @else
-                                {{route('comingsoon')}} @endif" class="text-light">Login</a>
+                                # @endif" class="text-light">Login</a>
                         </div>
                     </li>
                     @endguest

@@ -345,12 +345,12 @@ $voteDate = '2021-01-08';
 												<h4 class="timeline-title">Registrasi</h4>
 												<p class="text-justify">
 													Masuk ke web Pemira teknik lalu klik
-													<a href="@if (Route::has('register')) {{route('register')}} @else {{route('comingsoon')}}
+													<a href="@if (Route::has('register')) {{route('register')}} @else #
 														@endif" data-abc="true">Daftar
 													</a>
 													jika belum memiliki
 													akun untuk melakukan registrasi atau klik
-													<a href="@if (Route::has('auth')) {{route('auth')}} @else {{route('comingsoon')}} @endif"
+													<a href="@if (Route::has('auth')) {{route('auth')}} @else # @endif"
 														data-abc="true">Login
 													</a>
 													jika sudah

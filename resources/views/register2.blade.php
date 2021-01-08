@@ -13,9 +13,9 @@
   {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --}}
   <title>Sign in & Sign up Form</title>
 </head>
-
 <body>
   @php
+  $endregist = '2021-01-08';
   $isSignUp = '';
   if(Route::currentRouteName() == 'register'){
   $isSignUp = 'sign-up-mode';
@@ -25,8 +25,18 @@
   $isSignUp = session('is-sign-up');
   }
   @endphp
-
-  <div class="containers {{ $isSignUp?? '' }}">
+@if(date('Y-m-d') >= $endregist)
+<style>
+  @media (max-width: 870px) {
+    .containers {
+        min-height: 800px;
+        height: 100vh;
+        transform: translate(0%, -10%);
+    }
+  }
+</style>
+@endif
+  <div class="containers {{ $isSignUp?? '' }}" >
     <div class="signin-signup">
       <form method="POST" action="{{ route('login') }}" class="sign-in-form">
         @csrf
@@ -61,11 +71,17 @@
           </div>
         </div>
         <input type="submit" value="Login" class="bton" />
+        @if(date('Y-m-d') >= $endregist)
+        <p class="d-block d-lg-none d-md-none text-center"> Masa Registrasi Telah Berakhir. Silahkan Login dengan form di atas!
+        </p>
+        @else
         <p class="d-block d-lg-none d-md-none text-center"> belum memiliki akun? silahkan daftar
           <a id="sign-up-btpn">disini</a>
         </p>
+        @endif
       </form>
-      <form method="POST" action="{{ route('register.create') }}" class="sign-up-form" enctype="multipart/form-data"
+      @if(date('Y-m-d') < $endregist)
+      <form method="POST" action="{{ route('register.create') }} " class="sign-up-form" enctype="multipart/form-data"
         id="myForm1" autocomplete="off">
         @csrf
         <h2 class="title">Sign Up</h2>
@@ -133,12 +149,18 @@
         <p class="d-block d-lg-none d-md-none text-center"> sudah memiliki akun? silahkan sign-in
           <a id="sign-in-btpn" onclick="{{ session(['is-sign-up' => '']) }}">disini</a>
         </p>
+      </form>
+      @endif
     </div>
-    </form>
-
     <div class="panels-container">
       <div class="panel left-panel">
         <div class="content">
+          @if(date('Y-m-d') >= $endregist)
+          <h3>LOGIN</h3>
+          <p>
+            Masa Registrasi Telah Berakhir. Silahkan Melakukan Login Melalui Form Di Bawah Ini!
+          </p>
+          @else
           <h3>Belum Meiliki Akun ?</h3>
           <p>
             Silahkan Daftar Terlebih Dahulu Melalui Tombol Di Bawah Ini
@@ -146,6 +168,7 @@
           <button class="bton transparent" id="sign-up-bton">
             Sign up
           </button>
+          @endif
         </div>
         <img src="/img/log.svg" class="image" alt="" />
       </div>

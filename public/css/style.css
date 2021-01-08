@@ -377,7 +377,6 @@ form.sign-in-form {
     .containers {
         min-height: 800px;
         height: 100vh;
-        transform: translate(0%, 10%);
     }
 
     .signin-signup {
