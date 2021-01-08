@@ -218,16 +218,24 @@ $voteDate = '2021-01-08';
 									</div>
 
 									<div class="clearfix"></div>
+									@auth
+									@if($date == $voteDate) 
 									<div
-										class="result mt-3 @guest d-none @endguest @auth  @if($date != $voteDate || $mahasiswa->status =='terdaftar')  d-none @else d-flex justify-content-center @endif @endauth">
+										class="result mt-3  d-flex justify-content-center">
+										@if($mahasiswa->status != 'voted' && $mahasiswa->status == 'terverifikasi' )
 										<button
-											class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-none @endif @endauth"
+											class="btn btn-primary"
 											type="button" id="btn-submit" data-toggle="modal"
 											data-target="#exampleModalalert">Submit</button>
+											@endif
+										@if($mahasiswa->status == 'voted') 
 										<button
-											class="btn btn-primary @auth @if($mahasiswa->status == 'voted') d-block  @endif @endauth"
+											class="btn btn-primary d-block"
 											type="button" id="btn-See">Lihat Hasil Sementara</button>
+											@endif
 									</div>
+									@endif
+									@endauth
 								</form>
 							</div>
 	</section>
@@ -519,6 +527,8 @@ $voteDate = '2021-01-08';
 				$(".warning").append("<strong class='text-center text-light'>"+data+"</strong");
 				$(".warning-start").hide();
 				$(".alert-success").append("<strong class='text-center'>"+data+"</strong");
+				$(".result").append("<button class='btn btn-primary d-block' type='button' id='btn-See'>Lihat Hasil Sementara</button>")
+				$("#btn-submit").remove()
 					window.setTimeout(function() {
 					$(".alert").fadeTo(300, 0).slideUp(300, function(){
 							$(this).remove();
@@ -627,7 +637,7 @@ $voteDate = '2021-01-08';
 		});
 	});
 
-	$('#btn-See').click(function(){
+	$(document).on("click",'#btn-See',function(){
 		loadDataChart();
 		$('#hasil-sementara').modal('show');
 	});
